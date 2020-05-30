@@ -10,5 +10,5 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 Use `git status` to list all new or modified 
 
-
+[Contribution guidelines for this project](docs/CONTRIBUTING.md)
 
