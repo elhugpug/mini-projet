@@ -4,9 +4,11 @@ Ce mini-projet à pour but d'explorer quelques possibilités de classification d
 
 Voici le plan suivi tout au long de ce mini-projet :
 * Classification des images optiques
-* Classification des images radar
+* Classification des images RADAR
 * Complémentarité des deux méthodes
 * Conclusion
+
+Use `git status` to list all new or modified 
 
 
 
