@@ -8,7 +8,7 @@ Voici le plan suivi tout au long de ce mini-projet :
 * Complémentarité des deux méthodes
 * Conclusion
 
-Use `git status` to list all new or modified 
+On utilise `library(raster)` pour travailler sur des raster
 
-[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+[code de téléchargement des images S2](docs/CONTRIBUTING.md)
 
