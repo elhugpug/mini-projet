@@ -10,5 +10,17 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 On utilise `library(raster)` pour travailler sur des raster
 
+`fun_gcc <- function(limage){
+  img <- velox(limage)
+  test1 <- mclapply(seq_along(1), function(x){
+    img$extract(ROI, fun=function(t) mean(t,na.rm=T))
+  })
+  tab <- as.data.frame(do.call(rbind, test1))
+  roi_gcc <- tab[,2]/(tab[,1]+tab[,2]+tab[,3])
+  
+  return(roi_gcc)
+}
+`
+
 [code de téléchargement des images S2](docs/CONTRIBUTING.md)
 
