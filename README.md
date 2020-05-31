@@ -28,5 +28,4 @@ fun_gcc <- function(limage){
 ![image S2](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
 
 ![](images/Rplot.jpeg)
-
-<img src="images/Rplot.jpeg"
+<img src="img_girl.jpg">
