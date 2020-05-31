@@ -38,11 +38,11 @@ Voici le plan suivi tout au long de ce mini-projet :
 #### Random Forest
 
 Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments : 
-1. ** les sols nus ** 
-2. ** les sols agricoles ** (blé, alfalfa, jachères, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre
-3. ** les forêts ** 
-4. ** les espaces urbains ** 
-5. ** les espaces en eau ** 
+1. **les sols nus** 
+2. **les sols agricoles** (blé, alfalfa, jachères, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre)
+3. **les forêts** 
+4. **les espaces artificialisés** (zones urbaine, serres)
+5. **les espaces en eau** 
 
 
 
