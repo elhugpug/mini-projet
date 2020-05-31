@@ -27,5 +27,5 @@ fun_gcc <- function(limage){
 
 ![alt text](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
 
-![](mini-projet/images/Rplot.jpeg)
+![](images/Rplot.jpeg)
 
