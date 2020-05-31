@@ -23,9 +23,10 @@ fun_gcc <- function(limage){
 }
 ```
 
-[code de téléchargement des images S2](docs/CONTRIBUTING.md)
 
-![alt text](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
+
+![image S2](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
 
 ![](images/Rplot.jpeg)
 
+<img src="images/Rplot.jpeg"
