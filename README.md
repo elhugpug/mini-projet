@@ -39,11 +39,12 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments : 
 1. **les sols nus** 
-2. **les sols agricoles** (blé, alfalfa, jachères, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre)
+2. **les sols agricoles** (blé, alfalfa, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre, jachères)
 3. **les forêts** 
 4. **les espaces artificialisés** (zones urbaine, serres)
 5. **les espaces en eau** 
 
+> Selon Hale Hage Hassan & all (Les changements d’occupation des sols dans la Béqaa Ouest (Liban) : le rôle des actions anthropiques, 2019) d'autres éléments tel que les broussailles sont présents dans la région mais il semble que cela puisse être confondus avec les espaces en jachères.
 
 
 
