@@ -27,5 +27,5 @@ fun_gcc <- function(limage){
 
 ![alt text](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
 
-![](https://github.com/elhugpug/mini-projet/issues/1#issue-627919211)
+
 
