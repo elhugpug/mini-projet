@@ -25,5 +25,7 @@ fun_gcc <- function(limage){
 
 [code de téléchargement des images S2](docs/CONTRIBUTING.md)
 
-[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+![alt text](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
+
+
 
