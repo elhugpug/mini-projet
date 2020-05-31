@@ -15,9 +15,10 @@ Voici le plan suivi tout au long de ce mini-projet :
 * Complémentarité des deux méthodes
 * Conclusion
 
-/n
-/n
+
 ## Classification de la Bekaa par images optiques
+
+
 
 
 
