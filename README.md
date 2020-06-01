@@ -1,4 +1,4 @@
-# Mini-projet
+# Classification de l'occupation du sol 
 
 Ce mini-projet à pour but d'explorer quelques possibilités de classification d'occupation du sol de la zone de Bekaa au Liban avec des images optiques et RADAR. Dans ce fichier README, seront expliquées les démarches suivies, avec quelques explications de codes présents dans les liens au-dessus.
 
@@ -37,24 +37,43 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 #### Random Forest
 
-Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments : 
-1. **les sols nus** 
+Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments (étape 1). Nous procéderons ensuite à la classification précise de chaque type d'occuation  du sol (étape 2).
+
+##### Etape 1
+ Plusieurs méthodes ont été tenté pour séparer les grands types d'occupation du sol. 
+ 
+###### Essaie 1
+Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
+
+1. **les sols agricoles** caractérisés par un NDVI fluctuant 
+2. **les forêts** caractérisées par un NVDI élevé et plutôt constant
+3. **les espaces en eau** caractérisés par un NDVI très faible 
+4. **les sols nus et artificialisés** caractérisés par un NDVI moyen et plutôt constant
+
+A l'aide d'image sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts sur Qgis (5 par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
+
+Cependant, cette méthode à échoué et ne séparait que partiellement ces espaces (avec une erreur out of bag (OOB) de 21%)
+Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cela mais le code du test se trouve ici
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. **les sols nus et artificialisés ** 
 2. **les sols agricoles** (blé, alfalfa, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre, jachères)
 3. **les forêts** 
 4. **les espaces artificialisés** (zones urbaine, serres)
 5. **les espaces en eau** 
 
 > Selon Hale Hage Hassan & all (Les changements d’occupation des sols dans la Béqaa Ouest (Liban) : le rôle des actions anthropiques, 2019) d'autres éléments tel que les broussailles sont présents dans la région mais il semble que cela puisse être confondus avec les espaces en jachères.
-
-
-
-
-
-
-
-
-
-
 
 
 
