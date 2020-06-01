@@ -53,7 +53,7 @@ Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leur
 A l'aide d'image sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts sur Qgis (5 par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
 
 Cependant, cette méthode à échoué et ne séparait que partiellement ces espaces (avec une erreur out of bag (OOB) de 21%)
-Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cela mais le code du test se trouve ici
+Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cela mais le code du test se trouve ![ici](optique_RF_1_1.R) (code : optique_RF_1_1)
 
 
 
@@ -75,7 +75,7 @@ Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cel
 
 > Selon Hale Hage Hassan & all (Les changements d’occupation des sols dans la Béqaa Ouest (Liban) : le rôle des actions anthropiques, 2019) d'autres éléments tel que les broussailles sont présents dans la région mais il semble que cela puisse être confondus avec les espaces en jachères.
 
-![optique_RF_1_1](optique_RF_1_1.R)
+
 
 
 
