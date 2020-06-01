@@ -75,7 +75,7 @@ Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cel
 
 > Selon Hale Hage Hassan & all (Les changements d’occupation des sols dans la Béqaa Ouest (Liban) : le rôle des actions anthropiques, 2019) d'autres éléments tel que les broussailles sont présents dans la région mais il semble que cela puisse être confondus avec les espaces en jachères.
 
-![image S2](file:optique_RF_1_1.R)
+![optique_RF_1_1](optique_RF_1_1.R)
 
 
 
