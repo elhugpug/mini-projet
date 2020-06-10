@@ -34,6 +34,25 @@ amplitude <- NDVImax - NDVImin
 stack_max_min_amp <- stack(NDVImin, NDVImax, amplitude)
 names(stack_max_min_amp) <- c('Min', 'Max', 'Amplitude')
 
+#####
+# Si l'on souahite ne pas prendre les min/max mais plutôt les quartiles (pour enlever les valeurs extrêmes)
+
+# 1- il est possible de créer une fonction :
+fonction_1er_q <- function(mon_vecteur){
+  le_1er_q <- quantile(mon_vecteur, 0.25,names=FALSE) # ici 0.25 pour le premier quartile mais n'importe quelle valeur entre 0 et 1 fonctionne
+  return(le_1er_q)
+}
+# 2- on modifie également la boucle for vu plus haut en remplacant le stack par une vectorisation des images que l'on place les unes en dessous des autres :
+NDVIvec <- as.vector(NDVI)
+if (compteur==1) NDVItab <- NDVIvec else NDVItab <- rbind(NDVItab, NDVIvec)
+
+# 3- on applique ensuite la fonction au vecteur créé puis on rasterize l'image de nouveau
+resultat <- apply(NDVItab, 2, fonction_1er_q)
+resultat_matrice <- matrix(resultat, nrow=nrow(NDVI), ncol=ncol(NDVI))
+quantile_20 <- raster(t(resultat_matrice), template=NDVI)
+
+#####
+
 # on importe le fichier SHP contenant les ROI des types d'occupation du sol
 entrainement <- readOGR(dsn = '/Users/hugotreuildussouet/Desktop/mini_projet/données_liban/OS_Liban/',layer = 'grands_ensembles')
 # on reprojette le raster pour qu'il corresponde aux ROI
