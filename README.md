@@ -67,7 +67,7 @@ Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cel
 
 
 
-1. **les sols nus et artificialisés ** 
+1. **les sols nus et artificialisés** 
 2. **les sols agricoles** (blé, alfalfa, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre, jachères)
 3. **les forêts** 
 4. **les espaces artificialisés** (zones urbaine, serres)
