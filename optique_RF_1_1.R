@@ -50,7 +50,6 @@ if (compteur==1) NDVItab <- NDVIvec else NDVItab <- rbind(NDVItab, NDVIvec)
 resultat <- apply(NDVItab, 2, fonction_1er_q)
 resultat_matrice <- matrix(resultat, nrow=nrow(NDVI), ncol=ncol(NDVI))
 quantile_20 <- raster(t(resultat_matrice), template=NDVI)
-
 #####
 
 # on importe le fichier SHP contenant les ROI des types d'occupation du sol
