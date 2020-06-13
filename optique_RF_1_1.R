@@ -9,7 +9,7 @@
 
 library(raster) # raster permet le travail avec les données raster
 library(rgdal) # rgdal permet le travail avec des  vecteurs
-library(velox) # velox permet de travailler beaucoup plus vite que raster (notamment pour les extractions)
+library(velox) # velox permet de travailler de manière efficace sur la manipulation et l'extraction de données raster (https://www.rdocumentation.org/packages/velox/versions/0.2.0)
 library(randomForest) # randomForest permet de classifier avec la méthode du Random Forest
 
 les_dates <- list.files("/Users/hugotreuildussouet/Desktop/Bekaa", full.names = TRUE)
