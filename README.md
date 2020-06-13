@@ -13,6 +13,7 @@ C’est dans ce contexte que s’inscrit ce mini-projet qui a pour objectif la r
 
 Voici le plan suivi tout au long de ce mini-projet :
 
+je suis meilleur dans le premier, plus facile a comparer ensuite
 * Classification des images optiques
 * Classification des images RADAR
 * Complémentarité des deux méthodes
@@ -43,7 +44,7 @@ Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier
  Plusieurs méthodes ont été tenté pour séparer les grands types d'occupation du sol. 
  
 ###### Essaie 1
-Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
+Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest (avec le package `randomForest`)qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
 
 1. **les sols agricoles** caractérisés par un NDVI fluctuant 
 2. **les forêts** caractérisées par un NVDI élevé et plutôt constant
@@ -52,12 +53,21 @@ Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leur
 
 A l'aide d'image sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts sur Qgis (5 par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
 
-Cependant, cette méthode à échoué et ne séparait que partiellement ces espaces (avec une erreur out of bag (OOB) de 21%)
+Cependant, cette méthode n'a pas porté ces preuves et ne séparait que partiellement ces espaces. L'erreur out of bag (OOB) s'élevait à 21% mais surtout la validation du Random Forest semblaient déterminé par les polygones tests, ce qui, après plusieurs essais pouvait déboucher à une classification avec 1% d'OOB alors que celle-ci n'était clairement pas satisfaisante... Il est fort probable qu'une donnée nous ai échappé dans la préparation de ce code.  
 Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cela mais ![le code du test se trouve ici](optique_RF_1_1.R) (code : optique_RF_1_1)
 
 
+###### Essaie 2
 
+J'ai donc pensé dans un premier temps que le Random Forest avait surement quelques difficultés avec les sols nus, dans la mesures ou la matrice de confusion du premier essai montrait que ce type d'espace était rarement classé correctement (plus de la moitié des pixels).
+Cependant, dans la mesure ou le premier essai a donné des résutats pour le moins étrange et que cette méthode de classification avait déjà été testé avec succès dans d'autres travaux, il a été jugé nécessaire de persisté dans cette voie. 
 
+Au gré des recherches effectuées pour comprendre quelle aurait été l'erreur commise, une autre bibliothèque de classification a semblé intéressante à explorer. 
+La package `RStoolbox` s'appuie sur le package `raster`. Il permet d'intervenir sur différents aspects du travail sur les images raster : l'importation de donnée, la préparation des images, la classification... 
+Le code R de la classification est simple, compact et assez rapide. 
+
+Le package est sur le CRAN et peu être installé de la manière suivante :
+`install.packages("RStoolbox")` 
 
 
 
