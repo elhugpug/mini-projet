@@ -80,7 +80,8 @@ On importe les bibliothèques nécessaire au bon fonctionnement de la classifica
 
 `library(rgdal)`    #  permet le travail avec des  données vecteurs
 
-`library(velox)`    #  package 
+`library(velox)`    #  package qui permet la manipulation et l'extraction de données raster de manière très efficace (100 fois       plus rapide que raster pour l'extraction par exemple) (https://www.rdocumentation.org/packages/velox/versions/0.2.0)
+
 
 
 
