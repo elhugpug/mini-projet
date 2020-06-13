@@ -67,6 +67,7 @@ La package `RStoolbox` s'appuie sur le package `raster`. Il permet d'intervenir 
 Le code R de la classification est simple, compact et assez rapide. 
 
 Le package est sur le CRAN et peu être installé de la manière suivante :
+
 `install.packages("RStoolbox")` 
 
 
