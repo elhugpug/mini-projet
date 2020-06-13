@@ -64,7 +64,7 @@ Cependant, dans la mesure ou le premier essai a donné des résutats pour le moi
 
 Au gré des recherches effectuées pour comprendre quelle aurait été l'erreur commise, une autre bibliothèque de classification a semblé intéressante à explorer. 
 La package `RStoolbox` s'appuie sur le package `raster`. Il permet d'intervenir sur différents aspects du travail effectué sur des images raster : l'importation de donnée, la préparation des images, la classification... 
-Le code R de la classification issu de ce package est simple, compact et assez rapide. 
+Le code R de la classification issu de ce package est simple, compact et assez rapide (https://bleutner.github.io/RStoolbox/)
 
 Le package est sur le CRAN et peut être installé de la manière suivante :
 
@@ -72,12 +72,16 @@ Le package est sur le CRAN et peut être installé de la manière suivante :
 
 Ici va être détaillé certains morceaux du code de cette classification que l'on peut également retrouver ici. Il reprend des éléments du code du premier essai. 
 
-On importe les bibliothèques nécessaire 
+On importe les bibliothèques nécessaire au bon fonctionnement de la classification
 
-`library("RStoolbox")`
-`library(raster)`
-`library(rgdal)`
-`library(velox)`
+`library("RStoolbox")` 
+
+`library(raster)`   #  permet le travail avec des données raster
+
+`library(rgdal)`    #  permet le travail avec des  données vecteurs
+
+`library(velox)`    #  package 
+
 
 
 
