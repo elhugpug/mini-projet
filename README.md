@@ -85,20 +85,20 @@ On importe les bibliothèques nécessaire au bon fonctionnement de la classifica
 
 Le code ci-dessous permet de récupérer les images des bandes 4 et 8 pour chacune des dates (en excluant les 10 premières dates ou la neige présente apportait une confusion) et de créer un NDVI que l'on place ensuite dans un stack. 
 
-`
-les_dates <- list.files("/Volumes/Treuil Data/Bekaa/", full.names = TRUE)
-le_stack <- stack() 
 
-for (dates in les_dates[11:31]){
-  setwd(dates)
-  b <- list.files(".", pattern='B0[4;8]')
-  b4 <- raster(b[1])
-  b8 <- raster(b[2])
+- les_dates <- list.files("/Volumes/Treuil Data/Bekaa/", full.names = TRUE)
+- le_stack <- stack() 
+
+- for (dates in les_dates[11:31]){
+-   setwd(dates)
+-   b <- list.files(".", pattern='B0[4;8]')
+-   b4 <- raster(b[1])
+-   b8 <- raster(b[2])
   
-  NDVI <- (b8-b4)/(b8+b4)
-  le_stack <- stack(le_stack, NDVI)
-}
-`
+-   NDVI <- (b8-b4)/(b8+b4)
+-   le_stack <- stack(le_stack, NDVI)
+- }
+
 
 
 
