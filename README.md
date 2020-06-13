@@ -83,9 +83,10 @@ On importe les bibliothèques nécessaire au bon fonctionnement de la classifica
 
 
 Le code ci-dessous permet de récupérer les images des bandes 4 et 8 pour chacune des dates (en excluant les 10 premières dates ou la neige présente apportait une confusion) et de créer un NDVI que l'on place ensuite dans un stack. 
+On importe également les fichiers vecteurs des quatres types d'occupation du sol décrit dans l'essai 1. 
 
 ```
- les_dates <- list.files("/Volumes/Treuil Data/Bekaa/", full.names = TRUE)
+ les_dates <- list.files("chemins vers les dossiers des images", full.names = TRUE)
  le_stack <- stack() 
 
  for (dates in les_dates[11:31]){
@@ -97,6 +98,9 @@ Le code ci-dessous permet de récupérer les images des bandes 4 et 8 pour chacu
    NDVI <- (b8-b4)/(b8+b4)
    le_stack <- stack(le_stack, NDVI)
  }
+ 
+ entrainement <- readOGR(dsn = 'chemin ves le fichier shp',layer = 'nom du fichier')
+
 ```
 
 Tout comme lors du premier essai, on créé des rasters avec les valeurs minimum, maximum et l'amplitude que l'on met dans un stack. 
@@ -109,7 +113,18 @@ stack_max_min_amp <- stack(NDVImin, NDVImax, amplitude)
 names(stack_max_min_amp) <- c('Min', 'Max', 'Amplitude')
 ```
 
-C'est à partir d'ici que les choses changes 
+C'est à partir de là que les choses se modifient par rapport à la classification de la bibliothèques randomForest. 
+Le random forest est effectué avec la fonction `superClass()`. On lui spécifie les rasters d'entrées, les polygones de tests, la colonne des polygones a prendre en compte (ici l'id permet de séparer les 4 types de polygones), le nombre d'itération, le pourcentage de polygone à utiliser pour l'entrainement (ici 70% des polygones, chiffre que l'on trouve régulièrement dans la littérature)...
+
+```
+test <-   superClass(stack_max_min_amp, entrainement, valData = NULL, responseCol = "id",
+                     nSamples = 1000, polygonBasedCV = FALSE, trainPartition = 0.7,
+                     model = "rf", tuneLength = 3, kfold = 5, minDist = 2,
+                     mode = "classification", predict = TRUE, predType = "raw")
+plot(test$map)
+test
+```
+
 
 
 
