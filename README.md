@@ -80,7 +80,6 @@ On importe les bibliothèques nécessaire au bon fonctionnement de la classifica
 
 `library(rgdal)`    #  permet le travail avec des  données vecteurs
 
-`library(velox)`    #  package qui permet la manipulation et l'extraction de données raster de manière très efficace (122 fois       plus rapide que `raster` pour l'extraction par exemple) (https://www.rdocumentation.org/packages/velox/versions/0.2.0)
 
 
 Le code ci-dessous permet de récupérer les images des bandes 4 et 8 pour chacune des dates (en excluant les 10 premières dates ou la neige présente apportait une confusion) et de créer un NDVI que l'on place ensuite dans un stack. 
@@ -99,6 +98,18 @@ Le code ci-dessous permet de récupérer les images des bandes 4 et 8 pour chacu
    le_stack <- stack(le_stack, NDVI)
  }
 ```
+
+Tout comme lors du premier essai, on créé des rasters avec les valeurs minimum, maximum et l'amplitude que l'on met dans un stack. 
+
+```
+NDVImin <- min(stack_NDVI)
+NDVImax <- max(stack_NDVI)
+amplitude <- NDVImax - NDVImin
+stack_max_min_amp <- stack(NDVImin, NDVImax, amplitude)
+names(stack_max_min_amp) <- c('Min', 'Max', 'Amplitude')
+```
+
+C'est à partir d'ici que les choses changes 
 
 
 
