@@ -63,16 +63,21 @@ J'ai donc pensé dans un premier temps que le Random Forest avait surement quelq
 Cependant, dans la mesure ou le premier essai a donné des résutats pour le moins étrange et que cette méthode de classification avait déjà été testé avec succès dans d'autres travaux, il a été jugé nécessaire de persisté dans cette voie. 
 
 Au gré des recherches effectuées pour comprendre quelle aurait été l'erreur commise, une autre bibliothèque de classification a semblé intéressante à explorer. 
-La package `RStoolbox` s'appuie sur le package `raster`. Il permet d'intervenir sur différents aspects du travail sur les images raster : l'importation de donnée, la préparation des images, la classification... 
-Le code R de la classification est simple, compact et assez rapide. 
+La package `RStoolbox` s'appuie sur le package `raster`. Il permet d'intervenir sur différents aspects du travail effectué sur des images raster : l'importation de donnée, la préparation des images, la classification... 
+Le code R de la classification issu de ce package est simple, compact et assez rapide. 
 
-Le package est sur le CRAN et peu être installé de la manière suivante :
+Le package est sur le CRAN et peut être installé de la manière suivante :
 
 `install.packages("RStoolbox")` 
 
+Ici va être détaillé certains morceaux du code de cette classification que l'on peut également retrouver ici. Il reprend des éléments du code du premier essai. 
 
+On importe les bibliothèques nécessaire 
 
-
+`library("RStoolbox")`
+`library(raster)`
+`library(rgdal)`
+`library(velox)`
 
 
 
