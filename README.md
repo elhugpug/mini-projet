@@ -186,4 +186,4 @@ fun_gcc <- function(limage){
 ![image S2](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
 
 
-<img src="images/Rplot.jpeg" width="500">
+
