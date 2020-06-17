@@ -53,10 +53,9 @@ En effet, quatre sortes de sols peuvent être discernées :
 Après avoir créer une série temporelle de NDVI, nous allons lancé un Random Forest qui prendra en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max qui permettront de bien différencié chacuns des types de sols. 
 
 Derrière ces principes, se pose cependant quelques probèmes : 
-- Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier qui puisse les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image d'un verger de cerisier ci-dessous. 
+- Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier qui puisse les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image google map d'un verger de cerisier ci-dessous. 
 
-<img src="images/RF_4_classes.jpeg" width="1500">
-
+<img src="images/verger_cerisier_GM.png" width="500">
 
  
  
