@@ -126,7 +126,7 @@ test
 ```
 
 Voici la carte de classification : 
-<img src="images/RF_4_classes.jpeg" width="500">
+<img src="images/RF_4_classes.jpeg" width="1500">
 
 
 Les résultats sont ici très encourageant. En effet l'overall accuracy qui calcul le pourcentage de pixel bien placé est de 0,961 (sur 1) et l'indice de Kappa qui calcul la part de hasard dans cette classification est de 0,947 (sur 1).  Enfin, les résultats sont significatif dans la mesure ou la p-value est inferieur à 2.2e-16. 
