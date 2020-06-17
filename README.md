@@ -124,7 +124,15 @@ test <-   superClass(stack_max_min_amp, entrainement, valData = NULL, responseCo
 plot(test$map)
 test
 ```
-
+Les résultats sont ici très encourageant. En effet comme le montre l'accuracy de 0,961 et l'indice de Kappa de 0,947
+```
+          Reference
+Prediction    1    2    3    4
+         1 1001    1    0    0
+         2    0  965   43    0
+         3    0   24  910    0
+         4    0   12   49  358
+```
 
 
 
