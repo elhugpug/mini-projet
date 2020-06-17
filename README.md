@@ -52,12 +52,13 @@ En effet, quatre sortes de sols peuvent être discernées :
 4. **les sols nus et artificialisés** caractérisés par un NDVI moyen et plutôt constant
 Après avoir créer une série temporelle de NDVI, nous allons lancé un Random Forest qui prendra en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max qui permettront de bien différencié chacuns des types de sols. 
 
-Derrière ces principes, se pose cependant quelques probèmes : 
+Derrière ces principes, se pose cependant quelques probèmes :
+
+- Plusieurs classes du fichier de vecteurs n'ont pas d'identité précise et indique plusieurs possibilités, tel que *"29-fallow land could be potato"* ou encore *"onion and potato before"*
 - Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier qui puisse les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image google map d'un verger de cerisier ci-dessous. 
 
 <img src="images/verger_cerisier_GM.png" width="500">
 
- 
  
 ###### Essaie 1
 Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest (avec le package `randomForest`)qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
