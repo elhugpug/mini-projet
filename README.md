@@ -124,8 +124,18 @@ test <-   superClass(stack_max_min_amp, entrainement, valData = NULL, responseCo
 plot(test$map)
 test
 ```
-Les résultats sont ici très encourageant. En effet comme le montre l'accuracy de 0,961 et l'indice de Kappa de 0,947
+Voici la carte de classification : 
+
+Les résultats sont ici très encourageant. En effet l'overall accuracy qui calcul le pourcentage de pixel bien placé est de 0,961 (sur 1) et l'indice de Kappa qui calcul la part de hasard dans cette classification est de 0,947 (sur 1).  Enfin, les résultats sont significatif dans la mesure ou la p-value est inferieur à 2.2e-16. 
+La matrice de confusion quant à elle nous révèle d'intéressantes informations. 
+La classe 1 (l'eau) a été systématiquement bien prédite (tous les pixels de référence eau sont bien placé dans l'eau). Il y a quelques faux-positifs dans la mesure ou des pixels de sols ont été classé en eau. 
+La classe 2 (sol/urbain) rencontre plus de problème. En effet 3,7% de ces pixels ont été classés en zone agricole ou forestière et plusieurs pixels agricoles ont été classé comme du sol nu/urbain. 
+La classe 3 (agriculture) est la moins bien classé. 10% de ces pixels ont été classé dans une autre catégorie et quelques pixels ont été classé en tant que sol nu/urbain.
+La classe 4 (forêt) est très bien classé (avec cependant le plus grand pourcentage de faux-positifs). 
+
 ```
+Confusion Matrix
+
           Reference
 Prediction    1    2    3    4
          1 1001    1    0    0
