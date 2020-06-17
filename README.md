@@ -38,18 +38,31 @@ je suis meilleur dans le premier, plus facile a comparer ensuite
 
 #### Random Forest
 
-Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments (étape 1). Nous procéderons ensuite à la classification précise de chaque type d'occuation  du sol (étape 2).
+Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. L'expérience à tout de même été tenté et a donné raison à cette supposition (l'overall accuracy, qui décrit la fiabilité du modèle était de 0.5). 
+Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments (étape 1). L'idée étant de procéder ensuite à une classification précise de chaque type d'occuation  du sol (étape 2).
+
 
 ##### Etape 1
- Plusieurs méthodes ont été tenté pour séparer les grands types d'occupation du sol. 
+
+Établir une classification générale de cette vingtaine de type d'occupation du sol peut paraitre simple de premier abord. Il s'agit de les rassembler par ressemblance d'évolutions temporelles de NDVI.
+En effet, quatre sortes de sols peuvent être discernées :
+1. **les sols agricoles** caractérisés par un NDVI fluctuant entre fort et faible 
+2. **les forêts** caractérisées par un NVDI élevé et plutôt constant (ce sont des feuillus)
+3. **les espaces en eau** caractérisés par un NDVI très faible 
+4. **les sols nus et artificialisés** caractérisés par un NDVI moyen et plutôt constant
+Après avoir créer une série temporelle de NDVI, nous allons lancé un Random Forest qui prendra en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max qui permettront de bien différencié chacuns des types de sols. 
+
+Derrière ces principes, se pose cependant quelques probèmes : 
+- Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier qui puisse les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image d'un verger de cerisier ci-dessous. 
+
+<img src="images/RF_4_classes.jpeg" width="1500">
+
+
+ 
  
 ###### Essaie 1
 Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest (avec le package `randomForest`)qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
 
-1. **les sols agricoles** caractérisés par un NDVI fluctuant 
-2. **les forêts** caractérisées par un NVDI élevé et plutôt constant
-3. **les espaces en eau** caractérisés par un NDVI très faible 
-4. **les sols nus et artificialisés** caractérisés par un NDVI moyen et plutôt constant
 
 A l'aide d'image sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts sur Qgis (5 par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
 
