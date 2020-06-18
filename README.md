@@ -109,7 +109,7 @@ test1 <- mclapply(seq_along(1), function(x){
 })
 tab <- as.data.frame(do.call(rbind, test1)) # transforme le resultat de lapply en dataframe 
 ```
-Après avoir transformer le tableau de sortie pour le rendre exploitable, on peut créer les graphiques ![(voir le code détaillé)](grands_ensemble.R) (code : graphique_ensemble) .
+Après avoir transformer le tableau de sortie pour le rendre exploitable, on peut créer les graphiques ![(voir le code détaillé)](graphique_grands_ensemble.R) (code : graphique_grands_ensemble).
   
 
 <img src="images/eau.jpeg" width="300"><img src="images/nus.jpeg" width="300">
