@@ -201,6 +201,7 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 <p align="center">
 <img src="images/googlemap_gene_polygone_1.png" height="250"> <img src="images/googlemap_gene_polygone_2.png" height="250">
 
+<p align="center">
 <img src="images/RF_gene_polygone_1.png" height="250"> <img src="images/RF_gene_polygone_2.png" height="250">
 </p>
 
