@@ -63,6 +63,8 @@ Afin de répondre à ces questions, nous avons décidé de classifier la région
 
 A l'aide d'image Sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts, sur Qgis (plus de 10 ROI par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
 Afin de vérifier que les ROI dessinés correspondent bien à la classe por laquelle nous l'avons dessiné, nous en avont dressé leur profil temporelle sur R. Le code se trouve ici. (mettre code) (mettre photo)
+<img src="eau.jpeg" width="500"> <img src="nus.jpeg" width="500">
+<img src="agri.jpeg" width="500"> <img src="foret.jpeg" width="500">
 
 Après quelques vérifications et suppressions de ROI qui ne correspondaient pas à la classe que nous pensions, il a été possible de passé aux essais de classification.  
  
