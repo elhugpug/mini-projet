@@ -67,15 +67,10 @@ On importe les bibliothèques nécessaire
 
 
 `library(raster)` # permet le travail avec des données raster
-
 `library(rgdal)` # permet le travail avec des données vecteur
-
 `library(ggplot2)` # permet de créer des graphiques 
-
 `library(reshape2)` # permet de travailler sur les dataframe et de les modifier
-
 `library(parallel)` # permet de paralléliser les processus pour en augmenter la vitesse
-
 `library(velox)`    # permet l'extraction raster de manière très rapide 
 
 
@@ -100,7 +95,7 @@ On importe également les fichiers vecteurs des quatres types d'occupation du so
  entrainement <- readOGR(dsn = 'chemin ves le fichier shp',layer = 'nom du fichier')
 
 ```
-Après avoir séparer les différents type d'occupation du sols (voir le code détaillé), on extrait les valeurs du stack. Il s'agit d'utiliser la fonction `$extract()` de `velox` qui va prendre la moyenne de chaque polygone et la fonction `mclapply` de `parallel` qui va agire colle la fonction `lapply` en exécutant cette extraction pour tous les polygones. 
+Après avoir séparer les différents type d'occupation du sols (![voir le code détaillé](graphique_grands_ensemble.R)) (code : graphique_grands_ensemble)., on extrait les valeurs du stack. Il s'agit d'utiliser la fonction `$extract()` de `velox` qui va prendre la moyenne de chaque polygone et la fonction `mclapply` de `parallel` qui va agire colle la fonction `lapply` en exécutant cette extraction pour tous les polygones. 
 
 ```
 img <- velox(le_stack)
@@ -109,7 +104,7 @@ test1 <- mclapply(seq_along(1), function(x){
 })
 tab <- as.data.frame(do.call(rbind, test1)) # transforme le resultat de lapply en dataframe 
 ```
-Après avoir transformer le tableau de sortie pour le rendre exploitable, on peut créer les graphiques ![(voir le code détaillé)](graphique_grands_ensemble.R) (code : graphique_grands_ensemble).
+Après avoir transformer le tableau de sortie pour le rendre exploitable, on peut créer les graphiques (![voir le code détaillé](graphique_grands_ensemble.R)) (code : graphique_grands_ensemble).
   
 
 <img src="images/eau.jpeg" width="300"><img src="images/nus.jpeg" width="300">
