@@ -208,7 +208,7 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 - Une troisième remarque peut être ajoutée. En effet, comme on peut le voir ci-dessous, certains polygones du fichier de base  chevauchent plusieurs type d'occupation du sols (ici les sols nus et la forêt) et il pourrait être intéressant de les réajuster pour avoir un résultat plus juste. 
 <p align="center">
-<img src="images/RF_foret_precis_polygone_1.png" height="450"> <img src="images/googlemap_foret_precis_polygone_1.png" height="450">
+<img src="images/googlemap_foret_precis_polygone_1.png" height="450"> <img src="images/RF_foret_precis_polygone_1.png" height="450"> 
 </p>
 
 ###### Essaie 3
