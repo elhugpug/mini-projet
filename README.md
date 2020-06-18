@@ -191,7 +191,8 @@ Prediction    1    2    3    4
 Cette classification nous apporte également des informations sur la manière dont ont été traités les pixels et les polygones de la classification de base (la vingtaine de classes). 
 Sur Qgis la classification a été importé et par statistique zonale, nous avons extrait la moyenne des polygones (Qgis étant un meilleur support que R pour la visualisation). 
 Ainsi comme on peut le voir sur le tableau ci-contre  <img align="right" src="images/table_attributaire_qgis.png" width="200">
-issu de la table attributaire
+issu de la table attributaire fnjirhuogrhuvejpfvujgrjnck,; effvdbkhjnl,m;mvebhnjk,mlevf
+v gjbknl,m;gfchgvjbknl,gf jkn,l;xgfchgvjbknl,mgvbknuijlk,vk,jferjhbkj
 
 
 
