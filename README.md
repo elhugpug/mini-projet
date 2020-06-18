@@ -38,33 +38,34 @@ je suis meilleur dans le premier, plus facile a comparer ensuite
 
 #### Random Forest
 
-Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. L'expérience à tout de même été tenté et a donné raison à cette supposition (l'overall accuracy, qui décrit la fiabilité du modèle était de 0.5). 
+Comme nous l'avons vu, il y a plus de 20 types d'occupation du sol à classifier et il semble difficile d'obtenir un resultat précis en un seul calcul. L'expérience à tout de même été tenté et a donné raison à cette supposition (l'overall accuracy, qui calcul l'exactitude du modèle était de 0.5 soit une  prédiction très mauvaise). 
 Aussi dans un premier temps, il est préférable d'établir une classification plus grossière pour séparer les grands types d'éléments (étape 1). L'idée étant de procéder ensuite à une classification précise de chaque type d'occuation  du sol (étape 2).
 
 
 ##### Etape 1
 
-Établir une classification générale de cette vingtaine de type d'occupation du sol peut paraitre simple de premier abord. Il s'agit de les rassembler par ressemblance d'évolutions temporelles de NDVI.
+Rassembler cette vingtaine de type d'occupation du sol en qulques classes plus identifiable peut paraitre simple au premier abord. Il s'agit de les rassembler par ressemblance d'évolutions temporelles de NDVI.
 En effet, quatre sortes de sols peuvent être discernées :
 1. **les sols agricoles** caractérisés par un NDVI fluctuant entre fort et faible 
 2. **les forêts** caractérisées par un NVDI élevé et plutôt constant (ce sont des feuillus)
 3. **les espaces en eau** caractérisés par un NDVI très faible 
 4. **les sols nus et artificialisés** caractérisés par un NDVI moyen et plutôt constant
-Après avoir créer une série temporelle de NDVI, nous allons lancé un Random Forest qui prendra en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max qui permettront de bien différencié chacuns des types de sols. 
+
+Après avoir créer une série temporelle de NDVI, nous allons lancé un Random Forest qui prendra en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max qui permettront de bien différencier chacuns des types de sols. 
 
 Derrière ces principes, se pose cependant quelques probèmes :
 
-- Plusieurs classes du fichier de vecteurs n'ont pas d'identité précise et indiquent plusieurs possibilités, tel que *"fallow land could be potato"* ou encore *"onion and potato before"*.
+- Plusieurs classes du fichier de vecteurs n'ont pas d'identité précise et indiquent plusieurs possibilités, tel que *"fallow land could be potato"* ou encore *"onion and potato before"*. Que représenteent elles exactement ?
 - Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier du fait de leur culture, et qui peut amener à les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image google map d'un verger de cerisier ci-dessous. 
 
 <img src="images/verger_cerisier_GM.png" width="500">
 
-Afin de répondre à ces questions, nous avons décidé de classifier la région en 4 classes (eau, sols nus/artificialisés, sols agricoles, forêts) avec de nouveaux polygones non-issus du fichier shp de base. L'idée étant que la classifiaction issu de ces polygones nous donnera un bon apercus et une meilleur compréhension de la manière dont seront classés les différents ROI du fichier de base.  
+Afin d'éclaissir ces interrogations, nous avons décidé de classifier la région en 4 classes (eau, sols nus/artificialisés, sols agricoles, forêts) avec de nouveaux polygones non-issus du fichier shp de base. L'idée étant que la classifiaction issu de ces polygones nous donnera un bon apercus et une meilleur compréhension de la manière dont seront classés les différents ROI du fichier de base.  
 
 A l'aide d'image Sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts, sur Qgis (plus de 10 ROI par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
-Afin de vérifier que les ROI dessinés correspondent bien à la classe por laquelle nous l'avons dessiné, nous en avont dressé leur profil temporelle sur R. 
-On importe les bibliothèques nécessaire
+Afin de vérifier que les ROI créés correspondent bien à la classe por laquelle nous les avons dessinés, nous en avont dressé leur profil temporelle sur R. 
 
+On importe les bibliothèques nécessaire
 
 `library(raster)` # permet le travail avec des données raster
 `library(rgdal)` # permet le travail avec des données vecteur
@@ -111,13 +112,11 @@ Après avoir transformer le tableau de sortie pour le rendre exploitable, on peu
 <img src="images/agri.jpeg" width="300"><img src="images/foret.jpeg" width="300">
 
 
-Après quelques vérifications et suppressions de ROI qui ne correspondent pas à la classe que nous pensions, il est possible  de passé aux essais de classification.  
+Après quelques vérifications et suppressions de ROI qui ne correspondent pas aux classes prévues, il est possible  de passé aux essais de classification.  
  
 ###### Essaie 1
-Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest (avec le package `randomForest`)qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
 
-
-
+Nous avons lancé tout d'abords lancé un Random Forest avec le package `randomForest` en prenant en le NDVI minimum, le NDVI maximum et l'amplitude min/max. 
 
 Cependant, cette méthode n'a pas porté ces preuves et ne séparait que partiellement ces espaces. L'erreur out of bag (OOB) s'élevait à 21% mais surtout la validation du Random Forest semblaient déterminé par les polygones tests, ce qui, après plusieurs essais pouvait déboucher à une classification avec 1% d'OOB alors que celle-ci n'était clairement pas satisfaisante... Il est fort probable qu'une donnée nous ai échappé dans la préparation de ce code.  
 Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cela mais ![le code du test se trouve ici](optique_RF_1_1.R) (code : optique_RF_1_1)
@@ -125,10 +124,10 @@ Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cel
 
 ###### Essaie 2
 
-J'ai donc pensé dans un premier temps que le Random Forest avait surement quelques difficultés avec les sols nus, dans la mesures ou la matrice de confusion du premier essai montrait que ce type d'espace était rarement classé correctement (plus de la moitié des pixels).
-Cependant, dans la mesure ou le premier essai a donné des résutats pour le moins étrange et que cette méthode de classification avait déjà été testé avec succès dans d'autres travaux, il a été jugé nécessaire de persisté dans cette voie. 
+Il a donc été pensé dans un premier temps que le Random Forest avait surement quelques difficultés avec les sols nus, dans la mesures ou la matrice de confusion du premier essai montrait que ce type d'espace était rarement classé correctement (plus de la moitié des pixels).
+Cependant, comme le premier essai avait donné des résutats pour le moins étrange et que cette méthode de classification avait déjà été testé avec succès dans d'autres travaux, il a été jugé nécessaire de persisté dans cette voie. 
 
-Au gré des recherches effectuées pour comprendre quelle aurait été l'erreur commise, une autre bibliothèque de classification a semblé intéressante à explorer. 
+Au gré des recherches effectuées pour comprendre quelle aurait été l'erreur commise, une autre bibliothèque de classification en Random Forest a semblé intéressante à explorer. 
 La package `RStoolbox` s'appuie sur le package `raster`. Il permet d'intervenir sur différents aspects du travail effectué sur des images raster : l'importation de donnée, la préparation des images, la classification... 
 Le code R de la classification issu de ce package est simple, compact et assez rapide (https://bleutner.github.io/RStoolbox/)
 
@@ -138,38 +137,13 @@ Le package est sur le CRAN et peut être installé de la manière suivante :
 
 Ici va être détaillé certains morceaux du code de cette classification que l'on peut également retrouver ici. Il reprend des éléments du code du premier essai. 
 
-On importe les bibliothèques nécessaire au bon fonctionnement de la classification
+On importe les bibliothèques nécessaire au bon fonctionnement de la classification 
 
 `library("RStoolbox")` 
+`library(raster)`   
+`library(rgdal)`  
 
-`library(raster)`   #  permet le travail avec des données raster
-
-`library(rgdal)`    #  permet le travail avec des  données vecteurs
-
-
-
-Le code ci-dessous permet de récupérer les images des bandes 4 et 8 pour chacune des dates (en excluant les 10 premières dates ou la neige présente apportait une confusion) et de créer un NDVI que l'on place ensuite dans un stack. 
-On importe également les fichiers vecteurs des quatres types d'occupation du sol décrit dans l'essai 1. 
-
-```
- les_dates <- list.files("chemins vers les dossiers des images", full.names = TRUE)
- le_stack <- stack() 
-
- for (dates in les_dates[11:31]){
-   setwd(dates)
-   b <- list.files(".", pattern='B0[4;8]')
-   b4 <- raster(b[1])
-   b8 <- raster(b[2])
-  
-   NDVI <- (b8-b4)/(b8+b4)
-   le_stack <- stack(le_stack, NDVI)
- }
- 
- entrainement <- readOGR(dsn = 'chemin ves le fichier shp',layer = 'nom du fichier')
-
-```
-
-Tout comme lors du premier essai, on créé des rasters avec les valeurs minimum, maximum et l'amplitude que l'on met dans un stack. 
+On créé unstack de NDVI issu des 21 images sans neige comme cela à été vu plus haut et on importe le fichier shp. Ensuite, tout comme lors du premier essai, on créé des rasters avec les valeurs minimum, maximum et l'amplitude du stack que l'on met dans un autre stack. 
 
 ```
 NDVImin <- min(stack_NDVI)
@@ -180,7 +154,7 @@ names(stack_max_min_amp) <- c('Min', 'Max', 'Amplitude')
 ```
 
 C'est à partir de là que les choses se modifient par rapport à la classification de la bibliothèques randomForest. 
-Le random forest est effectué avec la fonction `superClass()`. On lui spécifie les rasters d'entrées, les polygones de tests, la colonne des polygones a prendre en compte (ici l'id permet de séparer les 4 types de polygones), le nombre d'itération, le pourcentage de polygone à utiliser pour l'entrainement (ici 70% des polygones, chiffre que l'on trouve régulièrement dans la littérature)...
+Le random forest est effectué avec la fonction `superClass()`. On lui spécifie les rasters d'entrées, les polygones de tests, la colonne des polygones a prendre en compte (ici l'id permet de séparer les 4 types de polygones), le nombre d'itération, le pourcentage de polygone à utiliser pour l'entrainement (ici 70% des polygones, chiffre que l'on trouve régulièrement dans la littérature...)
 
 ```
 test <-   superClass(stack_max_min_amp, entrainement, valData = NULL, responseCol = "id",
@@ -196,11 +170,12 @@ Voici la carte de classification :
 
 
 Les résultats sont ici très encourageant. En effet l'overall accuracy qui calcul le pourcentage de pixel bien placé est de 0,961 (sur 1) et l'indice de Kappa qui calcul la part de hasard dans cette classification est de 0,947 (sur 1).  Enfin, les résultats sont significatif dans la mesure ou la p-value est inferieur à 2.2e-16. 
+
 La matrice de confusion quant à elle nous révèle d'intéressantes informations. 
-La classe 1 (l'eau) a été systématiquement bien prédite (tous les pixels de référence eau sont bien placé dans l'eau). Il y a quelques faux-positifs dans la mesure ou des pixels de sols ont été classé en eau. 
-La classe 2 (sol/urbain) rencontre plus de problème. En effet 3,7% de ces pixels ont été classés en zone agricole ou forestière et plusieurs pixels agricoles ont été classé comme du sol nu/urbain. 
-La classe 3 (agriculture) est la moins bien classé. 10% de ces pixels ont été classé dans une autre catégorie et quelques pixels ont été classé en tant que sol nu/urbain.
-La classe 4 (forêt) est très bien classé (avec cependant le plus grand pourcentage de faux-positifs). 
+- La classe 1 (l'eau) a été systématiquement bien prédite (tous les pixels de référence eau sont bien placé dans l'eau). Il y a quelques faux-positifs dans la mesure ou des pixels de sols ont été classé en eau. 
+- La classe 2 (sol/urbain) rencontre plus de problème. En effet 3,7% de ces pixels ont été classés en zone agricole ou forestière et plusieurs pixels agricoles ont été classé comme du sol nu/urbain. 
+- La classe 3 (agriculture) est la moins bien classé. 10% de ces pixels ont été classé dans une autre catégorie et quelques pixels ont été classé en tant que sol nu/urbain.
+- La classe 4 (forêt) est très bien classé (avec cependant le plus grand pourcentage de faux-positifs). 
 
 ```
 Confusion Matrix
