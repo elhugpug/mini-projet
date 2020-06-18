@@ -62,12 +62,60 @@ Derrière ces principes, se pose cependant quelques probèmes :
 Afin de répondre à ces questions, nous avons décidé de classifier la région en 4 classes (eau, sols nus/artificialisés, sols agricoles, forêts) avec de nouveaux polygones non-issus du fichier shp de base. L'idée étant que la classifiaction issu de ces polygones nous donnera un bon apercus et une meilleur compréhension de la manière dont seront classés les différents ROI du fichier de base.  
 
 A l'aide d'image Sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts, sur Qgis (plus de 10 ROI par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
-Afin de vérifier que les ROI dessinés correspondent bien à la classe por laquelle nous l'avons dessiné, nous en avont dressé leur profil temporelle sur R. Le code se trouve ici. (mettre code) (mettre photo)
+Afin de vérifier que les ROI dessinés correspondent bien à la classe por laquelle nous l'avons dessiné, nous en avont dressé leur profil temporelle sur R. 
+On importe les bibliothèques nécessaire
+
+
+`library(raster)` # permet le travail avec des données raster
+
+`library(rgdal)` # permet le travail avec des données vecteur
+
+`library(ggplot2)` # permet de créer des graphiques 
+
+`library(reshape2)` # permet de travailler sur les dataframe et de les modifier
+
+`library(parallel)` # permet de paralléliser les processus pour en augmenter la vitesse
+
+`library(velox)`    # permet l'extraction raster de manière très rapide 
+
+
+le code ci-dessous permet ensuite de récupérer les images des bandes 4 et 8 pour chacune des dates (en excluant les 10 premières dates ou la neige présente apportait une confusion) et de créer un NDVI que l'on place ensuite dans un stack. 
+On importe également les fichiers vecteurs des quatres types d'occupation du sol.
+
+
+```
+ les_dates <- list.files("chemins vers les dossiers des images", full.names = TRUE)
+ le_stack <- stack() 
+
+ for (dates in les_dates[11:31]){
+   setwd(dates)
+   b <- list.files(".", pattern='B0[4;8]')
+   b4 <- raster(b[1])
+   b8 <- raster(b[2])
+  
+   NDVI <- (b8-b4)/(b8+b4)
+   le_stack <- stack(le_stack, NDVI)
+ }
+ 
+ entrainement <- readOGR(dsn = 'chemin ves le fichier shp',layer = 'nom du fichier')
+
+```
+Après avoir séparer les différents type d'occupation du sols (voir le code détaillé), on extrait les valeurs du stack. Il s'agit d'utiliser la fonction `$extract()` de `velox` qui va prendre la moyenne de chaque polygone et la fonction `mclapply` de `parallel` qui va agire colle la fonction `lapply` en exécutant cette extraction pour tous les polygones. 
+
+```
+img <- velox(le_stack)
+test1 <- mclapply(seq_along(1), function(x){
+  img$extract(part, fun=function(t) mean(t,na.rm=T))
+})
+tab <- as.data.frame(do.call(rbind, test1)) # transforme le resultat de lapply en dataframe 
+```
+Après avoir transformer le tableau de sortie pour le rendre exploitable, on peut créer les graphiques (voir le code détaillé).
+
 <img src="images/eau.jpeg" width="300"><img src="images/nus.jpeg" width="300">
 <img src="images/agri.jpeg" width="300"><img src="images/foret.jpeg" width="300">
 
 
-Après quelques vérifications et suppressions de ROI qui ne correspondaient pas à la classe que nous pensions, il a été possible de passé aux essais de classification.  
+Après quelques vérifications et suppressions de ROI qui ne correspondent pas à la classe que nous pensions, il est possible  de passé aux essais de classification.  
  
 ###### Essaie 1
 Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest (avec le package `randomForest`)qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
