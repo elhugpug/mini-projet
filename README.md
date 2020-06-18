@@ -206,10 +206,23 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 <img src="images/RF_gene_polygone_1.png" height="250"> <img src="images/RF_gene_polygone_2.png" height="250">
 </p>
 
-- Une troisième remarque peut être ajoutée. En effet, comme on peut le voir ci-dessous, certains polygones du fichier de base  chevauchent plusieurs type d'occupation du sols (ici les sols nus et la forêt). 
+- Une troisième remarque peut être ajoutée. En effet, comme on peut le voir ci-dessous, certains polygones du fichier de base  chevauchent plusieurs type d'occupation du sols (ici les sols nus et la forêt) et il pourrait être intéressant de les réajuster pour avoir un résultat plus juste. 
 <p align="center">
 <img src="images/RF_foret_precis_polygone_1.png" height="450"> <img src="images/googlemap_foret_precis_polygone_1.png" height="450">
 </p>
+
+###### Essaie 3
+
+A partir des trois constats vu au-dessus, il a été décidé de :
+
+- Procéder à une segentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
+- Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
+
+D'autres modifications utiles pour plus tard peuvent être faites :
+- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+- Inclure certains de ces polygones à la classification 
+
 
 
 1. **les sols nus et artificialisés** 
