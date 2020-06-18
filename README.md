@@ -188,6 +188,16 @@ Prediction    1    2    3    4
          4    0   12   49  358
 ```
 
+Cette classification nous apporte également des informations sur la manière dont ont été traités les pixels et les polygones de la classification de base (la vingtaine de classes). 
+Sur Qgis la classification a été importé et par statistique zonale, nous avons extrait la moyenne des polygones (Qgis étant un meilleur support que R pour la visualisation). 
+Ainsi comme on peut le voir sur le tableau ci-contre  <img align="left" src="images/RF_4_classes.jpeg" width="200">
+issu de la table attributaire
+
+
+
+
+
+
 
 
 
@@ -201,30 +211,6 @@ Prediction    1    2    3    4
 5. **les espaces en eau** 
 
 > Selon Hale Hage Hassan & all (Les changements d’occupation des sols dans la Béqaa Ouest (Liban) : le rôle des actions anthropiques, 2019) d'autres éléments tel que les broussailles sont présents dans la région mais il semble que cela puisse être confondus avec les espaces en jachères.
-
-
-
-
-
-
-On utilise `library(raster)` pour travailler sur des raster
-
-```
-fun_gcc <- function(limage){
-  img <- velox(limage)
-  test1 <- mclapply(seq_along(1), function(x){
-    img$extract(ROI, fun=function(t) mean(t,na.rm=T))
-  })
-  tab <- as.data.frame(do.call(rbind, test1))
-  roi_gcc <- tab[,2]/(tab[,1]+tab[,2]+tab[,3])
-  
-  return(roi_gcc)
-}
-```
-
-
-
-![image S2](file:///Users/hugotreuildussouet/Desktop/IMG_4363.jpg)
 
 
 
