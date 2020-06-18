@@ -187,8 +187,9 @@ Prediction    1    2    3    4
          3    0   24  910    0
          4    0   12   49  358
 ```
+Cette classification nous donne elle des résultats assez satisfaisant ? La partie la plus importante de ce travail consiste à discriminer les espaces agricoles. Or, avec 10% d'erreur dans cette catégorie, il serait dommage de s'ateller directement à une classification plus précise. Nous allons analyser cette classification pour en tirer des conclusions sur la marche à suivre. 
 
-Cette classification nous apporte également des informations sur la manière dont ont été traités les pixels et les polygones de la classification de base (la vingtaine de classes). 
+En effet, cette classification nous apporte des informations sur la manière dont ont été traités les pixels et les polygones de la classification de base (la vingtaine de classes). 
 Sur Qgis la classification a été importé et par statistique zonale, nous avons extrait la moyenne des polygones (Qgis étant un meilleur support que R pour la visualisation). 
 
 Ainsi comme on peut le voir sur le tableau ci-contre  <img align="right" src="images/table_attributaire_qgis.png" width="200">
@@ -196,13 +197,18 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 - La classification des classes aux identités trouble comme *"fallow land could be potato"* est plus enclins aux doutes et les moyennes de 2,60 ou 2,90 témoignent du fait que tout les pixels no'ont pas été catégorisés de la même manière. Dans certaines situation il est tout de même possible de statuer sur leur cas. En effet, si tous les pixels d'un de ces polygones sont classés dans une catégorie, alors il y a de forte chance que le poylgone appartienne à cette catégorie. Il ne reste qu'a vérifier leur évolution temporelle sur l'année pour se l'assurer complétement. Dans l'exemple *"fallow land could be potato"* tout en haut de l'image, les pixels de ce dernier ont été classé totalement dans la classe 3 et corrobore avec un NDVI évoluant comme une culture. On peut donc changer le nom de ce polygone en  *"potato"*. 
 
-- De la même manière la classification des arbres fruitiers est délicate. En effet, dans le cas des arbres pêchers, la moitié des polygones ont l'intégralité de leur pixels classé dans la classe forêt (classe 4), mais l'autre moitié a une partie de leur pixel classé dans une autre catégorie. 
+- De la même manière la classification des arbres fruitiers est délicate. En effet, dans le cas des arbres pêchers, la moitié des polygones ont l'intégralité de leur pixels classé dans la classe forêt (classe 4), mais l'autre moitié a une partie de leur pixel classé dans une autre catégorie. Cela est bien illustré dans l'exemple ci-dessous (foret = vert foncé, sols agricoles = vert clair, sols nus = orange)
 
 <p align="center">
 <img src="images/googlemap_gene_polygone_1.png" height="250"> <img src="images/googlemap_gene_polygone_2.png" height="250">
-
+</p>
 <p align="center">
 <img src="images/RF_gene_polygone_1.png" height="250"> <img src="images/RF_gene_polygone_2.png" height="250">
+</p>
+
+- Une troisième remarque peut être ajoutée. En effet, comme on peut le voir ci-dessous, il pourrait être intéressant de modifier certains polygones de bases afin d'empécher certains chevauchement entre classes (ici sol nus et forêt). 
+<p align="center">
+<img src="images/googlemap_gene_polygone_1.png" height="250"> <img src="images/googlemap_gene_polygone_2.png" height="250">
 </p>
 
 
