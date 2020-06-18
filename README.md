@@ -190,15 +190,18 @@ Prediction    1    2    3    4
 
 Cette classification nous apporte également des informations sur la manière dont ont été traités les pixels et les polygones de la classification de base (la vingtaine de classes). 
 Sur Qgis la classification a été importé et par statistique zonale, nous avons extrait la moyenne des polygones (Qgis étant un meilleur support que R pour la visualisation). 
+
 Ainsi comme on peut le voir sur le tableau ci-contre  <img align="right" src="images/table_attributaire_qgis.png" width="200">
-issu de la table attributaire fnjirhuogrhuvejpfvujgrjnck,; effvdbkhjnl,m;mvebhnjk,mlevf
-v gjbknl,m;gfchgvjbknl,gf jkn,l;xgfchgvjbknl,mgvbknuijlk,vk,jferjhbkj
+issu de la table attributaire, on peut comprendre dans quelle catégorie ont été classé chaque type (par exemple, les oignons et pommes de terre dans la classe 3 (agricole)). 
+Comme il a été soulevé dans le questionnement vu plus haut, la classification des arbres fruitiers est plus enclins aux doutes. En effet, dans le cas des pêches on peut voir que la moitié des polygones ont l'intégralité de leur pixels classé dans   la classe forêt (classe 4), mais que l'autre moitié a une partie de leur pixel classé dans une autre catégorie. 
 
 
 
 
 
 
+- Plusieurs classes du fichier de vecteurs n'ont pas d'identité précise et indiquent plusieurs possibilités, tel que *"fallow land could be potato"* ou encore *"onion and potato before"*. Que représenteent elles exactement ?
+- Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier du fait de leur culture, et qui peut amener à les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image google map d'un verger de cerisier ci-dessous. 
 
 
 
