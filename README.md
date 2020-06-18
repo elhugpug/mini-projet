@@ -54,17 +54,23 @@ Après avoir créer une série temporelle de NDVI, nous allons lancé un Random 
 
 Derrière ces principes, se pose cependant quelques probèmes :
 
-- Plusieurs classes du fichier de vecteurs n'ont pas d'identité précise et indique plusieurs possibilités, tel que *"29-fallow land could be potato"* ou encore *"onion and potato before"*
-- Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier qui puisse les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image google map d'un verger de cerisier ci-dessous. 
+- Plusieurs classes du fichier de vecteurs n'ont pas d'identité précise et indiquent plusieurs possibilités, tel que *"fallow land could be potato"* ou encore *"onion and potato before"*.
+- Dans quels catégories seront classés les classes d'arbres fruitiers (pêcher, vigne, cerisier, pommier...) ?  En effet, ce sont des arbres (classe forêt) mais qui peuvent avoir un espacement particulier du fait de leur culture, et qui peut amener à les classer en sols nus ou sols agricoles comme nous pouvons le voir sur l'image google map d'un verger de cerisier ci-dessous. 
 
 <img src="images/verger_cerisier_GM.png" width="500">
 
+Afin de répondre à ces questions, nous avons décidé de classifier la région en 4 classes (eau, sols nus/artificialisés, sols agricoles, forêts) avec de nouveaux polygones non-issus du fichier shp de base. L'idée étant que la classifiaction issu de ces polygones nous donnera un bon apercus et une meilleur compréhension de la manière dont seront classés les différents ROI du fichier de base.  
+
+A l'aide d'image Sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts, sur Qgis (plus de 10 ROI par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
+Afin de vérifier que les ROI dessinés correspondent bien à la classe por laquelle nous l'avons dessiné, nous en avont dressé leur profil temporelle sur R. Le code se trouve ici. (mettre code) (mettre photo)
+
+Après quelques vérifications et suppressions de ROI qui ne correspondaient pas à la classe que nous pensions, il a été possible de passé aux essais de classification.  
  
 ###### Essaie 1
 Nous avons tenté tout d'abord de séparer les types d'occuation du sol par leurs potentielles évolutions temporelles au cours de l'année. Après avoir créer une série temporelle de NDVI, nous avons lancé ensuite un Random Forest (avec le package `randomForest`)qui prenait en compte le NDVI minimum, le NDVI maximum et l'amplitude min/max. Quatre types d'espaces pouvait ainsi être discriminés : 
 
 
-A l'aide d'image sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts sur Qgis (5 par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
+
 
 Cependant, cette méthode n'a pas porté ces preuves et ne séparait que partiellement ces espaces. L'erreur out of bag (OOB) s'élevait à 21% mais surtout la validation du Random Forest semblaient déterminé par les polygones tests, ce qui, après plusieurs essais pouvait déboucher à une classification avec 1% d'OOB alors que celle-ci n'était clairement pas satisfaisante... Il est fort probable qu'une donnée nous ai échappé dans la préparation de ce code.  
 Pour cette raison, le détail de la méthode ne sera pas détaillé plus que cela mais ![le code du test se trouve ici](optique_RF_1_1.R) (code : optique_RF_1_1)
