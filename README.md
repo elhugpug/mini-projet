@@ -193,7 +193,8 @@ Sur Qgis la classification a été importé et par statistique zonale, nous avon
 
 Ainsi comme on peut le voir sur le tableau ci-contre  <img align="right" src="images/table_attributaire_qgis.png" width="200">
 issu de la table attributaire, on peut comprendre dans quelle catégorie ont été classé chaque type (par exemple, les oignons et pommes de terre dans la classe 3 (agricole)). 
-Comme il a été soulevé dans le questionnement vu plus haut, la classification des arbres fruitiers est plus enclins aux doutes. En effet, dans le cas des pêches on peut voir que la moitié des polygones ont l'intégralité de leur pixels classé dans   la classe forêt (classe 4), mais que l'autre moitié a une partie de leur pixel classé dans une autre catégorie. 
+- Comme il a été soulevé dans le questionnement vu plus haut, la classification des arbres fruitiers est plus enclins aux doutes. En effet, dans le cas des pêches on peut voir que la moitié des polygones ont l'intégralité de leur pixels classé dans   la classe forêt (classe 4), mais que l'autre moitié a une partie de leur pixel classé dans une autre catégorie. 
+- Le cas est similaire pour les classes aux identités trouble comme *"fallow land could be potato"* à la différence que cela nous permet de statuer sur leur cas dans certaines situation. En effet, si tous les pixels d'un de ces polygones sont classés dans une catégorie, alors il y a de forte chance qu'il y appartienne. Il ne reste qu'a vérifier leur évolution temporelle sur l'année pour se l'assurer complétement. Dans l'exemple *"fallow land could be potato"*, ce dernier à été classé totalement dans la classe 3 et qui corrobore avec un NDVI évoluant comme une culture. On peut donc changer le nom de ce polygone en  *"potato"*. 
 
 
 
