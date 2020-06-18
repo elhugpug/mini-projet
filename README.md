@@ -95,7 +95,7 @@ On importe également les fichiers vecteurs des quatres types d'occupation du so
  entrainement <- readOGR(dsn = 'chemin ves le fichier shp',layer = 'nom du fichier')
 
 ```
-Après avoir séparer les différents type d'occupation du sols (![voir le code détaillé](graphique_grands_ensemble.R)) (code : graphique_grands_ensemble), on extrait les valeurs du stack. Il s'agit d'utiliser la fonction `$extract()` de `velox` qui va prendre la moyenne de chaque polygone et la fonction `mclapply` de `parallel` qui va agire colle la fonction `lapply` en exécutant cette extraction pour tous les polygones. 
+Après avoir séparer les différents type d'occupation du sols (![voir le code détaillé](graphique_grands_ensemble.R)) (code : graphique_grands_ensemble), on extrait les valeurs du stack. Il s'agit d'utiliser la fonction `$extract()` de `velox` qui va prendre la moyenne de chaque polygone et la fonction `mclapply` de `parallel` qui va agire comme la fonction `lapply` en exécutant cette extraction pour tous les polygones. 
 
 ```
 img <- velox(le_stack)
