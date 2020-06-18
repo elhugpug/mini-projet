@@ -198,7 +198,8 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 - De la même manière la classification des arbres fruitiers est délicate. En effet, dans le cas des arbres pêchers, la moitié des polygones ont l'intégralité de leur pixels classé dans la classe forêt (classe 4), mais l'autre moitié a une partie de leur pixel classé dans une autre catégorie. 
 
-
+<img src="images/RF_gene_polygone_1.png" width="300"><img src="images/googlemap_gene_polygone_1.png" width="300">
+<img src="images/RF_gene_polygone_2.png" width="300"><img src="images/googlemap_gene_polygone_2.png" width="300">
 
 
 1. **les sols nus et artificialisés** 
