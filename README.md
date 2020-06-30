@@ -232,11 +232,14 @@ La segmentation d'une image consiste à rassembler des pixels qui se ressemblent
 Après plusieurs recherche, nous sommes donc revenu vers la version normale de Qgis qui propose d'autres types de segmentation et c'est finalement l'outils i.segment de GRASS qui va apporter un résultat satisfaisant (la fonction Watershed Segmentation de SAGA avait bien été tenté auparavant mais sans résultats probants).
 On y indique les rasters d'entrées (ici le stack des 21 NDVI) la taille minimale des segments (ici 100 pixels) mais aussi le nombre d'itération et le seuil de différence. Le résultat généré est un fichier raster segmenté qui semble bien correspondre à la réalité de l'image. Les segments n'ont par contre pas de valeurs et sont juste numérotés. Afin d'obtenir les valeurs moyennes du NDVI sur lequelle est basé le segment, il faut tout d'abord vectoriser cette carte segmentée. Cette vectorisation à été faite également sur Qgis *(Raster > extraction > polygoniser)*. L'extraction peut être faite sur Qgis (via l'outils Zonal statistics) mais dans l'obtique de réaliser cette extraction sur chacun des 21 NDVI, mieux valait-il revenir sur R. 
 
-Pour ce faire, on importe les segmentations rasterisée et vectorisé ainsi que les images necessaires pour les NDVI. Dans une boucle on créer les NDVI desquels ont extraits les valeurs moyennes par segments en utilisant la fonction `$extract()` de `velox` vu plus haut (que l'ont applique à partir de la segmentation vectorisée sur le NDVI) . On transforme ensuite les résultats en vecteur (qui permet un gain de temps) et on remplace dans une bouclesfor les valeurs de la segmentation rasterisée par celles des résultats. Le code détaillé se trouve ici. 
-Les résultats obtenus semblent correspondre aux attentes. 
+Pour ce faire, on importe les segmentations rasterisée et vectorisé ainsi que les images necessaires pour les NDVI. Dans une boucle on créer les NDVI desquels ont extraits les valeurs moyennes par segments en utilisant la fonction `$extract()` de `velox` vu plus haut (que l'ont applique à partir de la segmentation vectorisée sur le NDVI) . On transforme ensuite les résultats en vecteur (qui permet un gain de temps) et on remplace dans une boucle for les valeurs de la segmentation rasterisée par celles des résultats. On obtient donc un meanshift segmentation dont le code détaillé se trouve ici. 
+Les résultats obtenus semblent correspondre aux attentes. Ci-dessous un exemple du meanshift segmentation d'un NDVI comparé à ce même NDVI. 
 <p align="center">
 <img src="images/ex_NDVI.png" height="250"> <img src="images/ex_segm.png" height="250">
 <p>
+     
+ 
+     
 
 
 
