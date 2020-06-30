@@ -238,6 +238,7 @@ Pour ce faire, on importe les segmentations rasterisée et vectorisé ainsi que 
 
 
 Les résultats obtenus semblent correspondre aux attentes. Ci-dessous un exemple du meanshift segmentation d'un NDVI comparé à ce même NDVI. 
+
 <p align="center">
 <img src="images/ex_NDVI.png" height="250"> <img src="images/ex_segm.png" height="250">
 <p>
