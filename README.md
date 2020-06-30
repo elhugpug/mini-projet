@@ -60,7 +60,7 @@ Derrière ces principes, se pose cependant quelques probèmes :
 
 <img src="images/verger_cerisier_GM.png" width="500">
 
-Afin d'éclaissir ces interrogations, nous avons décidé de classifier la région en 4 classes (eau, sols nus/artificialisés, sols agricoles, forêts) avec de nouveaux polygones non-issus du fichier shp de base. L'idée étant que la classifiaction issu de ces polygones nous donnera un bon apercus et une meilleur compréhension de la manière dont seront classés les différents ROI du fichier de base.  
+Afin d'éclaissir ces interrogations, nous avons décidé de classifier la région en 4 classes (eau, sols nus/artificialisés, sols agricoles, forêts) avec de nouveaux polygones non-issus du fichier shp de base (fichier shp de base désigne ici le fichier des relevé de terrain transmis au départ). L'idée étant que la classifiaction issu de ces polygones nous donnera un bon apercus et une meilleur compréhension de la manière dont seront classés les différents ROI du fichier de base.  
 
 A l'aide d'image Sentinel-2 et d'images très hautes résolutions de google map, nous avons dessiné des ROI correspondants à chacuns des types vu plus hauts, sur Qgis (plus de 10 ROI par types). Les NDVI ont été calculé pour toutes les dates ne comprennant pas de neige afin d'avoir le maximum de différence possible sans pour autant que les valeurs ne soit tronquées par la neige. 
 Afin de vérifier que les ROI créés correspondent bien à la classe por laquelle nous les avons dessinés, nous en avont dressé leur profil temporelle sur R. 
@@ -215,13 +215,32 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 A partir des trois constats vu au-dessus, il a été décidé de :
 
-- Procéder à une segentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
-- Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
+- 1) Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
+- 2) Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
-D'autres modifications utiles pour plus tard peuvent être faites :
-- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
-- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
-- Inclure certains de ces polygones à la classification 
+D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
+- 3) Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+- 4) Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+- 5) Inclure certains de ces polygones à la classification 
+
+1) La segmentation 
+
+La segmentation d'une image consiste à rassembler des pixels qui se ressemblent dans des groupes. Contrairement aux classifications habituelles, il s'agit ici de rassembler des pixels situés dans une continuité spatiale et non pas uniquement basé sur la valeur des pixels. Ce qui nous interesse dans notre cas est la **meanshift segmentation**, qui permet de créer des segments (ensemble de pixels) renseignants sur la moyenne de ces derniers. On peut utiliser ce modèle sur OTB de Qgis (ce que je n'ai pas pu faire, en raison des explication vu plus haut) et quelques plugings R s'y essayent également. Parmi eux msClustering, meanShiftR ou encore OpenImageR et sa fonction superpixels(). Bien que m'étant attardé longtemps sur ces packages et particulièrement le dernier, je n'ai pu obtenir de résultats probants avec soit des résultats décevants soit l'abscence de résultats.  Cela est probablement dû à une incompréhension de ma part à certaines étapes.
+
+Après plusieurs recherche, nous sommes donc revenu vers la version normale de Qgis. C'est finalement l'outils i.segment de GRASS qui va apporter un résultat satisfaisant (la fonction Watershed Segmentation de SAGA avait bien été tenté auparavant mais sans résultats probants).
+On y indique les rasters d'entrée (ici le stack des 21 NDVI)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
