@@ -20,6 +20,7 @@ je suis meilleur dans le premier, plus facile a comparer ensuite
 
 ## 2- Les données disponibles
 
+31 images sur 71 sont à garder sur la zone. 
 ### Les données de terrains
 ### Les images Sentinel-2
      - qu'est ce que l'imagerie optique 
