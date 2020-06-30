@@ -226,10 +226,16 @@ D'autres modifications utiles pour plus tard peuvent être faites sur les polygo
 1) La segmentation 
 
 L'objectif est ici de lisser chaque NDVI anvant la classification afin d'obtenir des résultats locaux homogènes.  
+
 La segmentation d'une image consiste à rassembler des pixels qui se ressemblent dans des groupes. Contrairement aux classifications habituelles, il s'agit ici de rassembler des pixels situés dans une continuité spatiale et non pas uniquement basé sur la valeur des pixels. Ce qui nous interesse dans notre cas est la **meanshift segmentation**, qui permet de créer des segments (ensemble de pixels) renseignants sur la moyenne de ces derniers. On peut utiliser ce modèle sur OTB de Qgis (ce que je n'ai pas pu faire, en raison des explication vu plus haut) et quelques plugings R s'y essayent également. Parmi eux msClustering, meanShiftR ou encore OpenImageR et sa fonction superpixels(). Bien que m'étant attardé longtemps sur ces packages et particulièrement le dernier, je n'ai pu obtenir de résultats probants avec soit des résultats décevants soit l'abscence de résultats.  Cela est probablement dû à une incompréhension de ma part à certaines étapes.
 
 Après plusieurs recherche, nous sommes donc revenu vers la version normale de Qgis qui propose d'autres types de segmentation et c'est finalement l'outils i.segment de GRASS qui va apporter un résultat satisfaisant (la fonction Watershed Segmentation de SAGA avait bien été tenté auparavant mais sans résultats probants).
-On y indique les rasters d'entrées (ici le stack des 21 NDVI) la taille minimale des segments (ici 100 pixels) mais aussi le nombre d'itération et le seuil de différence. Le résultat généré est un fichier raster segmenté qui semble bien correspondre à la réalité de l'image. Les segments n'ont par contre pas de valeurs et sont juste numérotés. Afin d'obtenir 
+On y indique les rasters d'entrées (ici le stack des 21 NDVI) la taille minimale des segments (ici 100 pixels) mais aussi le nombre d'itération et le seuil de différence. Le résultat généré est un fichier raster segmenté qui semble bien correspondre à la réalité de l'image. Les segments n'ont par contre pas de valeurs et sont juste numérotés. Afin d'obtenir les valeurs moyennes du NDVI sur lequelle est basé le segment, il faut tout d'abord vectoriser cette carte segmentée. Cette vectorisation à été faite également sur Qgis *(Raster > extraction > polygoniser)*. L'extraction peut être faite sur Qgis (via l'outils Zonal statistics) mais dans l'obtique de réaliser cette extraction sur chacun des 21 NDVI, mieux valait-il revenir sur R. 
+
+Pour ce faire, on importe les segmentations rasterisée et vectorisé ainsi que les images necessaires pour les NDVI. Dans une boucle on créer les NDVI desquels ont extraits les valeurs moyennes par segments. 
+```
+jvrkveo
+```
 
 
 
