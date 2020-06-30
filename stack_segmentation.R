@@ -58,7 +58,6 @@ for (dates in les_dates[11:31]){
   # on remplace les valeurs des numéros des segments par celles du NDVI moyen du segment. 
   for (poly in 1:nrow(tab)){
     segmvec2[segmvec %in% poly] <- jointure2[poly,1]
-    print(poly)
   }
   
   # on transforme le vecteur en une image raster. 
