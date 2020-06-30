@@ -234,9 +234,9 @@ On y indique les rasters d'entrées (ici le stack des 21 NDVI) la taille minimal
 
 Pour ce faire, on importe les segmentations rasterisée et vectorisé ainsi que les images necessaires pour les NDVI. Dans une boucle on créer les NDVI desquels ont extraits les valeurs moyennes par segments en utilisant la fonction `$extract()` de `velox` vu plus haut (que l'ont applique à partir de la segmentation vectorisée sur le NDVI) . On transforme ensuite les résultats en vecteur (qui permet un gain de temps) et on remplace dans une bouclesfor les valeurs de la segmentation rasterisée par celles des résultats. Le code détaillé se trouve ici. 
 Les résultats obtenus semblent correspondre aux attentes. 
-
+<p align="center">
 <img src="images/ex_NDVI.png" height="250"> <img src="images/ex_segm.png" height="250">
-
+<p>
 
 
 
