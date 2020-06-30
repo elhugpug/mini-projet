@@ -7,6 +7,7 @@ library(raster)
 library(velox)
 library(rgdal)
 library(parallel)
+library(dplyr)
 
 # Chargment de la segmentation rasterisée effectué sur Qgis
 setwd('/Users/hugotreuildussouet/Desktop/mini_projet/données_liban/OS_Liban/')
