@@ -244,7 +244,8 @@ Les résultats obtenus semblent correspondre aux attentes. Ci-dessous un exemple
 <p>
      
  
-     
+ 
+Une fois le stack réaliser, on peut de nouveau réaliser le Random Forest comme vu précédemment, avec la fonction `superClass()`.  
 
 
 
