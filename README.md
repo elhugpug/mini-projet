@@ -28,6 +28,14 @@ je suis meilleur dans le premier, plus facile a comparer ensuite
      - pourquoi sentinel-2 
      
      - préparation (téléchargement, prétraitement, difficultés (problème espace, nuage, prétraitement))
+     
+#### Téléchargement et préparation des données
+
+Les images Sentinel-2 sont disponibles sur plusieurs plateformes de téléchargements comme PEPS ou Sci-hub... Après les avoir télécharger en prenant en compte différents critères (le taux de nuage dans l'image...) il convient de prétraités les images et de les découpés à la taille voulut avant de les exploiter. 
+Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponible. Traités chacunes de ces images séparement semblent être particulièrement long. Cela pose cependant un autre problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et les traités ensuite. 
+Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque dates séparemment, de la traiter puis de ne garder que le produit finit et de passer à la date suivante.  
+Pour ce faire, 
+     
 ### Les images Sentinel-1
 
 
@@ -243,10 +251,24 @@ Les résultats obtenus semblent correspondre aux attentes. Ci-dessous un exemple
 <p align="center">
 <img src="images/ex_NDVI.png" height="250"> <img src="images/ex_segm.png" height="250">
 <p>
-     
+
+Une fois le stack réaliser, on peut de nouveau réaliser le Random Forest comme vu précédemment, avec la fonction `superClass()` (toujours avec le NDVI minimum, le NDVI maximum mais cette fois ci avec l'ecart-type plutôt que l'amplitude (ce qui apporte une information en plus)), le résultat semble convainquant. 
+En effet, l'overall acuracy est de 0,986 et l'indice de Kappa de 0,981.
+Quelques pixels forêt ont été classé en sols agricoles et une part plus conséquente de pixels de sols agricoles ont été classé en forêt comme on peut le voir sur la matrice de confusion ci-dessous. 
+
+```
+Confusion Matrix
+          Reference
+Prediction    1    2    3    4
+         1 1002    0    0    0
+         2    0 1002    0    0
+         3    0    0  957    3
+         4    0    0   46  487
+```   
  
+ Un autre élément peut
+
  
-Une fois le stack réaliser, on peut de nouveau réaliser le Random Forest comme vu précédemment, avec la fonction `superClass()`.  
 
 
 
