@@ -39,7 +39,7 @@ Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce r�
 
 Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques) , `GDAL`(pour les masques de nuages, les buffers...) et `aria2` (pour accélerer le téléchargement des fichier d'image SAFE *(aria2n'est pas indispensable)*. 
 
-Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se basera sur la version du code sans Sen2Cor (![le code détaillé se trouve ici](sen2r_sans_GDAL.R) (code : sen2r_sans_GDAL))
+Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se basera sur la version du code sans Sen2Cor (![le code détaillé se trouve ici](sen2r_sans_GDAL.R)) (code : sen2r_sans_GDAL)
 
 
 Les dépendances peuvent être télécharger de plusieurs manières. Voic celles qui ont fonctionné dans notre cas.
