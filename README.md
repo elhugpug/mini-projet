@@ -32,8 +32,9 @@ je suis meilleur dans le premier, plus facile a comparer ensuite
 #### Téléchargement et préparation des données
 
 Les images Sentinel-2 sont disponibles sur plusieurs plateformes de téléchargements comme PEPS ou Sci-hub... Après les avoir télécharger en prenant en compte différents critères (le taux de nuage dans l'image...) il convient de prétraités les images et de les découpés à la taille voulut avant de les exploiter. 
-Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponible. Traités chacunes de ces images séparement semblent être particulièrement long. Cela pose cependant un autre problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et les traités ensuite. 
-Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque dates séparemment, de la traiter puis de ne garder que le produit finit et de passer à la date suivante.  
+Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponible. Traités chacunes de ces images séparement semblent être particulièrement long. Cela pose cependant un problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et les traités ensuite. 
+Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque dates séparemment, de traiter les images correspondantes puis de ne garder que le produit finit et de passer à la date suivante.  
+
 Pour ce faire, 
      
 ### Les images Sentinel-1
