@@ -42,7 +42,7 @@ Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances 
 Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se basera sur la version du code sans Sen2Cor (![le code détaillé se trouve ici](sen2r_sans_GDAL.R)) (code : sen2r_sans_GDAL)
 
 
-Les dépendances peuvent être télécharger de plusieurs manières. Voic celles qui ont fonctionné dans notre cas.
+Les dépendances peuvent être télécharger de plusieurs manières. Voici celles qui ont fonctionné dans notre cas.
 
 Pour sen2cor : `install_sen2cor()`  
 
