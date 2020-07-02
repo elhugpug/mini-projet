@@ -44,23 +44,30 @@ Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon o
 Les dépendances peuvent être télécharger de plusieurs manières. Voic celles qui ont fonctionné dans notre cas.
 
 Pour sen2cor : `install_sen2cor()`  
+
 Pour aria2 : `brew install aria2` via python 
+
 Pour GDAL : le chargement du package `rgdal` a permis d'éviter une partie des messages d'erreur (tentative d'installation par wine sans succès).
 
+
 Chargement des packages necessaires : 
+
 `library(raster)` # permet le travail avec des données raster
+
 `library(rgdal)` # permet le travail avec des données vecteur
+
 `library(geojsonlint)` # permet de travailler sur des données GeoJSON 
+
 `library(sen2r)` # permet le téléchargement et le prétraitement des données
 
 
 Chargement des fichiers SHP et KML pour découper les images. 
 
-`
+```
 myextent_1 <- "/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban_sen2r.kml"
 
 zone_liban <- readOGR('/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban.shp')
-`
+```
 
 une zone légèrement plus grande est tracée pour que lorsque les bandes de 20 mètres seront ré-échantillonnées à 10m, il n'y ait pas de perte sur les bords (les images seront ensuite re-découpé à la bonne taille). 
 
