@@ -36,7 +36,22 @@ Dans notre cas, le téléchargement et la préparation des données doivent néc
 Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque dates séparemment, de traiter les images correspondantes puis de ne garder que le produit finit et de passer à la date suivante.  
 
 Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce rôle (il peut être télécharger sur le CRAN avec `install.packages("sen2r")`, voici sa page github : https://github.com/ranghetti/sen2r ). Après s'être connecté à la plateforme Sci-hub, Sen2r permet de sélectionner par code (ou par le GUI `sen2r()`) les images que l'on souhaite traitées. Le package s'appuie entre autre sur les fonctions `s2_download()` pour télécharger les données et ` sen2cor()` pour passer les images de luminance (niveau 1C) en réfléctance (niveau 2A) si besoins (sen2cor n'est pas activé lorsque les images sont téléchargeable directement au niveau 2A). 
-Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques) , `GDAL`(pour les buffer et le masque des nuages) et `aria2` (pour accélerer le téléchargement des fichier d'image SAFE *(aria2n'est pas indispensable)*. 
+
+Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques) , `GDAL`(pour les masques de nuages, les buffers...) et `aria2` (pour accélerer le téléchargement des fichier d'image SAFE *(aria2n'est pas indispensable)*. 
+
+Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se focalisera sur la version du code sans Sen2Cor (code détaillé ici) et non sur le premier code Sen2r "classique" (disponible en détail ici). 
+
+Les dépendances peuvent être télécharger de plusieurs manières. Voic celles qui ont fonctionné dans notre cas.
+Pour sen2cor : `install_sen2cor()`  
+Pour aria2 : `brew install aria2` via python 
+Pour GDAL : le chargement du package `rgdal` a permis d'éviter une partie des messages d'erreur (tentative d'installation par wine sans succès).
+
+
+`library(raster)` # permet le travail avec des données raster
+`library(rgdal)` # permet le travail avec des données vecteur
+`library(geojsonlint)` # permet de travailler sur des données GeoJSON 
+`library(sen2r)` # permet le téléchargement et le prétraitement des données
+
      
 ### Les images Sentinel-1
 
@@ -78,8 +93,8 @@ Afin de vérifier que les ROI créés correspondent bien à la classe por laquel
 
 On importe les bibliothèques nécessaire
 
-`library(raster)` # permet le travail avec des données raster
-`library(rgdal)` # permet le travail avec des données vecteur
+`library(raster)` 
+`library(rgdal)` 
 `library(ggplot2)` # permet de créer des graphiques 
 `library(reshape2)` # permet de travailler sur les dataframe et de les modifier
 `library(parallel)` # permet de paralléliser les processus pour en augmenter la vitesse
@@ -228,13 +243,13 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 A partir des trois constats vu au-dessus, il a été décidé de :
 
-- 1) Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
-- 2) Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
+1) Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
+2) Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
 D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
-- 3) Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
-- 4) Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
-- 5) Inclure certains de ces polygones à la classification 
+3) Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+4) Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+5) Inclure certains de ces polygones à la classification 
 
 1) La segmentation 
 
