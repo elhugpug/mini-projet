@@ -42,15 +42,30 @@ Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances 
 Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se focalisera sur la version du code sans Sen2Cor (code détaillé ici) et non sur le premier code Sen2r "classique" (disponible en détail ici). 
 
 Les dépendances peuvent être télécharger de plusieurs manières. Voic celles qui ont fonctionné dans notre cas.
+
 Pour sen2cor : `install_sen2cor()`  
 Pour aria2 : `brew install aria2` via python 
 Pour GDAL : le chargement du package `rgdal` a permis d'éviter une partie des messages d'erreur (tentative d'installation par wine sans succès).
 
-
+Chargement des packages necessaires : 
 `library(raster)` # permet le travail avec des données raster
 `library(rgdal)` # permet le travail avec des données vecteur
 `library(geojsonlint)` # permet de travailler sur des données GeoJSON 
 `library(sen2r)` # permet le téléchargement et le prétraitement des données
+
+
+Chargement des fichiers SHP et KML pour découper les images. 
+`
+myextent_1 <- "/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban_sen2r.kml"
+zone_liban <- readOGR('/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban.shp')
+`
+une zone légèrement plus grande est tracée pour que lorsque les bandes de 20 mètres seront ré-échantillonnées à 10m, il n'y ait pas de perte sur les bords (les images seront ensuite re-découpé à la bonne taille). 
+`zone_liban_large <- readOGR('/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban_large.shp')`
+
+
+Entrée des identifiants sci-hub pour permettre le téléchargment
+`write_scihub_login('hugpug', 'Janvier1996')`
+
 
      
 ### Les images Sentinel-1
