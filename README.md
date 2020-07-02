@@ -35,7 +35,8 @@ Les images Sentinel-2 sont disponibles sur plusieurs plateformes de télécharge
 Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponible. Traités chacunes de ces images séparement semblent être particulièrement long. Cela pose cependant un problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et les traités ensuite. 
 Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque dates séparemment, de traiter les images correspondantes puis de ne garder que le produit finit et de passer à la date suivante.  
 
-Pour ce faire, 
+Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce rôle (il peut être télécharger sur le CRAN avec `install.packages("sen2r")`, voici sa page github : https://github.com/ranghetti/sen2r ). Après s'être connecté à la plateforme Sci-hub, Sen2r permet de sélectionner par code (ou par le GUI `sen2r()`) les images que l'on souhaite traitées. Le package s'appuie entre autre sur les fonctions `s2_download()` pour télécharger les données et ` sen2cor()` pour passer les images de luminance (niveau 1C) en réfléctance (niveau 2A) si besoins (sen2cor n'est pas activé lorsque les images sont téléchargeable directement au niveau 2A). 
+Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques) , `GDAL`(pour les buffer et le masque des nuages) et `aria2` (pour accélerer le téléchargement des fichier d'image SAFE *(aria2n'est pas indispensable)*. 
      
 ### Les images Sentinel-1
 
