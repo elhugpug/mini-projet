@@ -39,7 +39,7 @@ Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce r�
 
 Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques) , `GDAL`(pour les masques de nuages, les buffers...) et `aria2` (pour accélerer le téléchargement des fichier d'image SAFE *(aria2n'est pas indispensable)*. 
 
-Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se focalisera sur la version du code sans Sen2Cor (code détaillé ici) et non sur le premier code Sen2r "classique" (disponible en détail ici). 
+Malgré de nombreux essais, il n'a pas été possible d'installer GDAL sur mon ordianteur (il y avait surement une solution mais il semble difficile de l'installer sur Mac). Sans cette dépendance, le code s'arrétait systématiquement sur une erreur et une solution a du être trouvé. Aussi, l'explication du code présenté ci-dessous se basera sur la version du code sans Sen2Cor (code détaillé ici). 
 
 Les dépendances peuvent être télécharger de plusieurs manières. Voic celles qui ont fonctionné dans notre cas.
 
@@ -69,16 +69,57 @@ myextent_1 <- "/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_
 zone_liban <- readOGR('/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban.shp')
 ```
 
-une zone légèrement plus grande est tracée pour que lorsque les bandes de 20 mètres seront ré-échantillonnées à 10m, il n'y ait pas de perte sur les bords (les images seront ensuite re-découpé à la bonne taille). 
+une zone légèrement plus grande est tracée pour que lorsque les bandes de 20 mètres seront ré-échantillonnées à 10m, il n'y ait pas de perte sur les bords (les images seront ensuite re-découpées à la bonne taille). 
 
 `zone_liban_large <- readOGR('/Users/hugotreuildussouet/Desktop/zone_liban/vecteur_decoup/zone_liban_large.shp')`
 
-Entrée des identifiants sci-hub pour permettre le téléchargment
+On peut ensuite passer au téléchargement et aux traitements des données. 
+Une boucle passe de jour en jour sur toute l'année 2019 et lance Sen2r lorsqu'il y a des images disponible sur une date. 
+Ci-dessous, on remarque l'utilisation de la fonction trycatch() à chaque utilisation de Sen2r(). On remarque également en début de code l'élaboration de la date issu de la boucle (non présente ici mais que l'on peut retrouvé dans le code détaillé). 
 
-`write_scihub_login('hugpug', 'Janvier1996')`
+Pour Sen2r, on renseigne entre autre les dates souhaitées (ici une date), le pourcentage de nuages tolérés, le format d'images voulut, l'endroit ou l'on souhaite entreposer les images... Nous avons remarqué qu'en l'abscence de GDAL, la détection des nuages et le découpage des images ne sont pas pris en compte (cette dernière tache sera donc effectué plus bas). 
+
+```
+ tryCatch({    
+    
+    date <- paste(annee, mois,jour, sep='-')
+    sen2r(
+      gui = FALSE,
+      apihub = NA,
+      downloader = "aria2", 
+      max_cloud_safe = 100,
+      timewindow = as.Date(date),
+      timeperiod = "full",
+      extent = myextent_1, 
+      extent_name = "sen2r",
+      list_prods = "BOA",
+      mask_type = "clear_sky",  #  or "cloud_and_shadow"
+      max_mask = 10,
+      clip_on_extent = TRUE,
+      extent_as_mask = TRUE,
+      outformat = "GTiff",
+      path_l2a = "/Users/hugotreuildussouet/Desktop/zone_liban/1",
+      processing_order = "by_groups",
+    )
+    }, error=function(e){})
+
+```
+
+Une fois le travail de Sen2r terminé, on découpe une première fois les images de cette date (on se base sur le shp "zone_liban" pour les bandes à 10m et le shp "zone_liban_large" pour les bandes à 20m). Les images à 20m sont ensuite reprojetées à 10m puis redécoupées selon le shp "zone_liban". Enfin, les données sont rangés dans un dossier par date. 
+
+Les découpages se font à l'aide de la fonction `crop()`
+
+`bande_coupé <- crop(la_bande,zone_liban)`
+
+Les reprojections des bandes à 20m se font avec la fonction `projectRaster()`
+
+`bande_reprojeté <-  projectRaster(b3,b2,res,crs,method="ngb",alignOnly = FALSE, over = FALSE)`
 
 
-     
+
+
+
+
 ### Les images Sentinel-1
 
 
