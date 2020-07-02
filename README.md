@@ -111,9 +111,9 @@ Les découpages se font à l'aide de la fonction `crop()`
 
 `bande_coupé <- crop(la_bande,zone_liban)`
 
-Les reprojections des bandes à 20m se font avec la fonction `projectRaster()`
+Les reprojections des bandes à 20m se font avec la fonction `projectRaster()` qui reprojetent les pixels à 10m et les font concorder spatialement avec ceux des bandes 2,3,4 et 8 par la méthode des plus proche voisin.
 
-`bande_reprojeté <-  projectRaster(b3,b2,res,crs,method="ngb",alignOnly = FALSE, over = FALSE)`
+`bande_reprojeté <-  projectRaster(bande_1,bande_2,res,crs,method="ngb",alignOnly = FALSE, over = FALSE)`
 
 
 
