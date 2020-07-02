@@ -311,13 +311,17 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 A partir des trois constats vu au-dessus, il a été décidé de :
 
-1) Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
-2) Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
+- Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
+- Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
 D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
-3) Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
-4) Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
-5) Inclure certains de ces polygones à la classification 
+- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+
+- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+
+- Inclure certains de ces polygones à la classification 
+
+
 
 1) La segmentation 
 
