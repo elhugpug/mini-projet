@@ -312,6 +312,7 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 A partir des trois constats vu au-dessus, il a été décidé de :
 
 - Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
+- Tester le Random Forest avec d'autres critères que NDVImin, NDVImax et amplitude pour essayer de coller de plus près à l'évolution du NDVI.  
 - Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
 D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
@@ -355,10 +356,47 @@ Prediction    1    2    3    4
          4    0    0   46  487
 ```   
  
- Un autre élément peut
 
  
+2) Mieux tirer partie des évolutions temporelles. 
 
+
+Jusqu'a présent la classification en Random Forest prenait en compte 3 parametres : le NDVI minimum, le NDVI maximum et l'amplitude. Cette combinaison est très efficace mais semble perdre une partie de l'information de la série temporelle. En effet, et comme il a déjà été dit, les types d'occupation du sol connaissent des évolutions de NDVI caractéristiques au fil du temps (celles des zones agricoles ressemblent à une cloches, celles des sols nus est plutôt stable et faible, celles des forêt stable et fort...) et il serait intéressant d'utiliser toute l'évolution et pas seulement les indices que sont le minimum, le maximum et l'amplitude. 
+
+Aussi un code a été élaboré pour classifier les zones agricoles en utilisant l'écart de la valeur moyenne des segments (créés avec la segmentation plus haut) par rapport à celles des zones agricoles. Pour que cela fonctionne, il faut dans un premier temps accorder les séries temporelles des espaces agricole de la même manière (hausse, pic et baisse du NDVI en même temps) car les cultures ne se développent pas au même moment dans l'année. Théoriquement plus l'ecart général est faible, plus le segment a une courbe qui se rapproche de celles des zones agricoles et peut être classé comme tel. 
+
+Dans un premier temps donc, il faut accorder les valeurs de NDVI ensemble pour que l'évolution de la végétation concorde. On doit le faire pour chaque segments ainsi que pour la courbe d'évolution temporelle 'type' de l'agriculture (issu de polygone qui ont été vérifié comme tel).
+
+On créé une fonction de roulement qui permet de décaler les valeurs tel une boucle (code trouvé sur internet) 
+ex : 'abcde' décalé de 2 vers la droite donne 'deabc'.
+```   
+shifter <- function(x, n = 1) {
+  if (n == 0) x else c(tail(x, -n), head(x, n))
+}
+```   
+
+On crée ensuite une fonction qui s'appuye sur shifter() pour recentrer les valeurs de la série temporelle de 21 images (ou 31 si on prend toutes les dates) autour de 11 (la moyenne). 
+
+```  
+fonction_centrage <- function(mon_vecteur){
+  num <- which(mon_vecteur==max(mon_vecteur))
+  med <- 16
+  diff <- (med - num)
+  col2 <- shifter(mon_vecteur, -diff)
+  return(col2)
+}
+```  
+
+Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. 
+
+<p align="center">
+<img src="images/googlemap_gene_polygone_1.png" height="250"> <img src="images/googlemap_gene_polygone_2.png" height="250">
+</p>
+
+
+
+
+Faire la même chose avec le spectrale
 
 
 
