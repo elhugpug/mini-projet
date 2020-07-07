@@ -408,8 +408,9 @@ La fonction `fasterize()` du package `fasterize` permet ensuite de rasteriser un
 
 
 Une fois chaque NDVI rasterisé et mis dans un stack, on en extrait le NDVI moyen. Théoriquement, cela nous donne une carte avec des valeur de 0 à 1 
-(0 = segments à l'évolution du NDVI très proche de celui des terres agricoles témoins, 1 = segments à l'évolution du NDVI très différente de celui des terres agricoles témoins). 
-Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgré plusieurs essaies et combinaison (l'ecart type, la moyenne, le minimum...) la piste a du être abandonné... ![Le code de cette tentative se trouve ici](tentative_1.R) (code : tentative_1)
+(0 = segments à l'évolution du NDVI très proche de celui des terres agricoles témoins, 1 = segments à l'évolution du NDVI très différente de celui des terres agricoles témoins), qui pourrait servir d'indicateur de zone agricoles. 
+Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgré plusieurs essaies et combinaison (l'ecart type, la moyenne, le minimum...) la piste a du être abandonné... ![Le code de cette tentative se trouve ici](tentative_1.R) (code : tentative_1). Il est possible que cet echec s'explique par la variété de type de champs qui n'évoluent pas aux même rythme (on pouvait déjà le voir sur le graphique plus haut). De plus à une date T, l'ecart entre les valeurs de NDVI témoins et ceux de l'image peut pour plusieurs raison diverger et augmenter significativement l'ecart moyen. La méthode des NDVI minimum, maximum et ecart-type est moins sensible à ce genre d'erreur. 
+
 
 
 
