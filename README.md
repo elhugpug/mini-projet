@@ -387,11 +387,30 @@ fonction_centrage <- function(mon_vecteur){
 }
 ```  
 
-Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. 
+Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. On en extrait ensuite la moyenne. Le rendu n'est pas optimum mais suffisament pour tenter de poursuivre 
 
 <p align="center">
 <img src="images/NDVI_agr_norm.jpeg" height="200"><img src="images/NDVI_agri_centre.jpeg" height="200"><img src="images/NDVI_agr_centr_mean.jpeg" height="200">
 </p>
+
+
+Pour extraire les valeurs des segments vecteur on utilise la fonction  `exact_extract()` du package `exactextractr`. Ce package a été découvert après les travaux précédent et s'avère fort utile. En effet, avec le package `velox`, on perd la spatialité dans le calcul et finalement, exactextractr est tout aussi rapide. 
+
+On convertit vec en objet sf puis pour chaque segment, on extrait la valeur moyenne
+```  
+vec <- readOGR(dsn = 'chemin_de_la_couche', "segments_ndvi")
+vec_sf <- st_as_sf(vec)
+vec_sf$valeurs <- exact_extract(stack_NDVI, vec_sf, 'mean')
+```  
+
+La fonction `fasterize()` du package `fasterize` permet ensuite de rasteriser un vecteur de manière rapide. 
+`nouveau_raster <- fasterize(vec_sff, NDVI, field = "valeurs")`
+
+
+Une fois chaque NDVI rasterisé et mis dans un stack, on en extrait le NDVI moyen. Théoriquement, cela nous donne une carte avec des valeur de 0 à 1 
+(0 = segments à l'évolution du NDVI très proche de celui des terres agricoles témoins, 1 = segments à l'évolution du NDVI très différente de celui des terres agricoles témoins). 
+Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgré plusieurs essaies et combinaison (l'ecart type, la moyenne, le minimum...) la piste a du être abandonné... ![Le code de cette tentative se trouve ici](stack_segmentation.R) (code : tentative_1)
+
 
 
 
