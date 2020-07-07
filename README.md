@@ -390,7 +390,7 @@ fonction_centrage <- function(mon_vecteur){
 Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. 
 
 <p align="center">
-<img src="images/NDVI_agr_norm.jpeg" height="300"><img src="images/NDVI_agri_centre.jpeg" height="300">
+<img src="images/NDVI_agr_norm.jpeg" height="200"><img src="images/NDVI_agri_centre.jpeg" height="200"><img src="images/NDVI_agr_centr_mean.jpeg" height="200">
 </p>
 
 
