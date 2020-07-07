@@ -375,7 +375,7 @@ shifter <- function(x, n = 1) {
 }
 ```   
 
-On crée ensuite une fonction qui s'appuye sur shifter() pour recentrer les valeurs de la série temporelle de 21 images (ou 31 si on prend toutes les dates) autour de 11 (la moyenne). 
+On crée ensuite une fonction qui s'appuye sur shifter() pour recentrer les valeurs de la série temporelle de 21 images (ou 31 si on prend toutes les dates) autour de 11 (la moyenne). A ce rang, on place les valeurs maximums de la série en supposant que les séries se supperposeront. 
 
 ```  
 fonction_centrage <- function(mon_vecteur){
@@ -390,7 +390,7 @@ fonction_centrage <- function(mon_vecteur){
 Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. 
 
 <p align="center">
-<img src="images/NDVI_agr_norm.jpeg" height="350"><img src="images/NDVI_agri_centre.jpeg" height="350">
+<img src="images/NDVI_agr_norm.jpeg" height="300"><img src="images/NDVI_agri_centre.jpeg" height="300">
 </p>
 
 
