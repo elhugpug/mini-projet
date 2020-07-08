@@ -283,7 +283,7 @@ Prediction    1    2    3    4
          3    0   24  910    0
          4    0   12   49  358
 ```
-Cette classification nous donne elle des résultats assez satisfaisant ? La partie la plus importante de ce travail consiste à discriminer les espaces agricoles. Or, avec 10% d'erreur dans cette catégorie, il serait dommage de s'ateller directement à une classification plus précise. Nous allons analyser cette classification pour en tirer des conclusions sur la marche à suivre. 
+Cette classification nous donne-elle des résultats assez satisfaisant ? La partie la plus importante de ce travail consiste à discriminer les espaces agricoles. Or, avec 10% d'erreur dans cette catégorie, il serait dommage de s'ateller directement à une classification plus précise. Nous allons analyser cette classification pour en tirer des conclusions sur la marche à suivre. 
 
 En effet, cette classification nous apporte des informations sur la manière dont ont été traités les pixels et les polygones de la classification de base (la vingtaine de classes). 
 Sur Qgis la classification a été importé et par statistique zonale, nous avons extrait la moyenne des polygones (Qgis étant un meilleur support que R pour la visualisation). 
@@ -312,7 +312,7 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 A partir des trois constats vu au-dessus, il a été décidé de :
 
 - Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
-- Tester le Random Forest avec d'autres critères que NDVImin, NDVImax et amplitude pour essayer de coller de plus près à l'évolution du NDVI.  
+- Tester le Random Forest avec d'autres critères que NDVImin, NDVImax et amplitude pour essayer de coller au plus près à l'évolution du NDVI.  
 - Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
 D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
@@ -320,7 +320,6 @@ D'autres modifications utiles pour plus tard peuvent être faites sur les polygo
 
 - Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
 
-- Inclure certains de ces polygones à la classification 
 
 
 
@@ -344,7 +343,7 @@ Les résultats obtenus semblent correspondre aux attentes. Ci-dessous un exemple
 
 Une fois le stack réaliser, on peut de nouveau réaliser le Random Forest comme vu précédemment, avec la fonction `superClass()` (toujours avec le NDVI minimum, le NDVI maximum mais cette fois ci avec l'ecart-type plutôt que l'amplitude (ce qui apporte une information en plus)), le résultat semble convainquant. 
 En effet, l'overall acuracy est de 0,986 et l'indice de Kappa de 0,981.
-Quelques pixels forêt ont été classé en sols agricoles et une part plus conséquente de pixels de sols agricoles ont été classé en forêt comme on peut le voir sur la matrice de confusion ci-dessous. 
+Quelques pixels forêt ont été classé en sols agricoles et une part plus conséquente de pixels de sols agricoles ont été classé en forêt comme on peut le voir sur la matrice de confusion ci-dessous. Ici, seul 4.8% des pixels agricoles ont été classé dans une autre catégorie. 
 
 ```
 Confusion Matrix
@@ -356,6 +355,8 @@ Prediction    1    2    3    4
          4    0    0   46  487
 ```   
  
+Ce résultat semble satisfaisant mais il était intéressant d'essayer d'abord de creuser une autre voie avant de passé à la suite.  
+
 
  
 2) Mieux tirer partie des évolutions temporelles. 
@@ -387,7 +388,7 @@ fonction_centrage <- function(mon_vecteur){
 }
 ```  
 
-Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. On en extrait ensuite la moyenne. Le rendu n'est pas optimum mais suffisament pour tenter de poursuivre 
+Ci-dessous, un exemple de recentrage de série temporelle des polygones agricoles témoins. On en extrait ensuite la moyenne. Le rendu n'est pas optimum mais suffisament pour tenter de poursuivre.
 
 <p align="center">
 <img src="images/NDVI_agr_norm.jpeg" height="200"><img src="images/NDVI_agri_centre.jpeg" height="200"><img src="images/NDVI_agr_centr_mean.jpeg" height="200">
@@ -409,14 +410,14 @@ La fonction `fasterize()` du package `fasterize` permet ensuite de rasteriser un
 
 Une fois chaque NDVI rasterisé et mis dans un stack, on en extrait le NDVI moyen. Théoriquement, cela nous donne une carte avec des valeur de 0 à 1 
 (0 = segments à l'évolution du NDVI très proche de celui des terres agricoles témoins, 1 = segments à l'évolution du NDVI très différente de celui des terres agricoles témoins), qui pourrait servir d'indicateur de zone agricoles. 
-Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgré plusieurs essaies et combinaison (l'ecart type, la moyenne, le minimum...) la piste a du être abandonné... ![Le code de cette tentative se trouve ici](tentative_1.R) (code : tentative_1). Il est possible que cet echec s'explique par la variété de type de champs qui n'évoluent pas aux même rythme (on pouvait déjà le voir sur le graphique plus haut). De plus à une date T, l'ecart entre les valeurs de NDVI témoins et ceux de l'image peut pour plusieurs raison diverger et augmenter significativement l'ecart moyen. La méthode des NDVI minimum, maximum et ecart-type est moins sensible à ce genre d'erreur. 
+Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgré plusieurs essaies et combinaison (l'ecart type, la moyenne, le minimum...) la piste a du être abandonné... ![Le code de cette tentative se trouve ici](tentative_1.R) (code : tentative_1). Il est possible que cet echec s'explique par la variété de type de champs qui n'évoluent pas aux même rythme (on pouvait déjà le voir sur le graphique plus haut). De plus à une date T, l'ecart entre les valeurs de NDVI témoins et ceux de l'image peut pour plusieurs raison diverger et augmenter significativement l'ecart moyen. La méthode des NDVI minimum, maximum et ecart-type est moins sensible à ce genre d'erreur. De ce fait, nous allons rester sur cette première méthode.
 
 
 
 
 
 
-Faire la même chose avec le spectrale
+
 
 
 
