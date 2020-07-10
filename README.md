@@ -316,6 +316,11 @@ A partir des trois constats vu au-dessus, il a été décidé de :
 - Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
 
+D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
+- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+
+- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+
 
 
 1) La segmentation 
@@ -356,6 +361,7 @@ Voici à quoi cette classification ressemble (en bleu l'eau, en jaune le sol nu/
 <p>
  
 Ce résultat semble satisfaisant mais il était intéressant d'essayer d'abord de creuser une autre voie avant de passé à la suite.  
+
 
 
  
@@ -417,14 +423,17 @@ Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgr
 
 ##### Etape 1
 
-A partir de la 
+A partir de la classification réalisée par segmentation des NDVI, on peut reproduire le test que l'on avait réalisé avant l'étape de segmentation : comparer le fichier de base avec la classification. 
 
-D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
-- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+On s'apercoit que la plupart des polygones sont classés correctement, mais ce n'est parfois pas le cas. L'analyse des courbes d'évolutions temporelles de ces polygones nous permet de classer ces erreurs en 4 types :
 
-- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+- **la période d'étude :** Comme on a pu le dire précédemment, afin d'éviter les zones enneigées, seul les dates allant du 31 mai à  fin décembre 2019ont été prise en compte à cette étape. Or, certaines cultures d'hiver connaissent leur pic de NDVI en début d'année avant de décroitre rapidemment et ressembler à un sol nu le reste de l'année ce qui engendre évidemment des erreurs (à cette étape, l'utilisation d'un masque issu d'un NDSI (indice de détéction de la neige) n'a pas pu améliorer la chose car cela fragilisait fortement les résultats).
 
+- **erreurs potentiels :** Comme il a déjà été détaillé, certains polygons serait mieux classés si leur contour étaient modifié. De plus, le contenu de certaines parcelles ne correspond pas à la catégorie dans laquelle elles sont classés. Les polygones de terres en jachères (ou *fallow*) par exemple montre en début d'année des NDVI très élevé proche de 0.8, ce qui semble très éloigné de  ce que l'on peut observer dans la littérature (excedent rarement les 0.3 point de NDVI).
 
+- **la segmentation :** Unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants.
+
+- **la nature est complexe :** Enfin, les territoires ne sont jamais identiques et composent avec une réelle diversité y compris au sein d'une même espèce. 
 
 
 
