@@ -433,7 +433,7 @@ On s'apercoit que la plupart des polygones sont classés correctement, mais ce n
 
 - **la segmentation :** Unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants.
 
-- **la nature est complexe :** Enfin, les territoires ne sont jamais identiques et composent avec une réelle diversité y compris au sein d'une même espèce. 
+- **la nature est complexe :** Les territoires ne sont jamais identiques et composent avec une réelle diversité y compris au sein d'une même espèce ce qui rend pardfois difficile une classification catégorique.  
 
 
 
