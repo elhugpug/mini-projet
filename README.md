@@ -352,7 +352,7 @@ Prediction    1    2    3    4
 
 Voici à quoi cette classification ressemble (en bleu l'eau, en jaune le sol nu/zone urbaine, en vert clair les zones agricoles et en vert foncé les forêts).
 <p align="center">
-<img src="images/.png" height="250">
+<img src="images/classif_RF_NDVI_segm.png" width="1500">
 <p>
  
 Ce résultat semble satisfaisant mais il était intéressant d'essayer d'abord de creuser une autre voie avant de passé à la suite.  
