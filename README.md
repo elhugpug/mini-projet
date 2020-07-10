@@ -315,11 +315,6 @@ A partir des trois constats vu au-dessus, il a été décidé de :
 - Tester le Random Forest avec d'autres critères que NDVImin, NDVImax et amplitude pour essayer de coller au plus près à l'évolution du NDVI.  
 - Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
 
-D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
-- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
-
-- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
-
 
 
 
@@ -354,6 +349,11 @@ Prediction    1    2    3    4
          3    0    0  957    3
          4    0    0   46  487
 ```   
+
+Voici à quoi cette classification ressemble (en bleu l'eau, en jaune le sol nu/zone urbaine, en vert clair les zones agricoles et en vert foncé les forêts).
+<p align="center">
+<img src="images/.png" height="250">
+<p>
  
 Ce résultat semble satisfaisant mais il était intéressant d'essayer d'abord de creuser une autre voie avant de passé à la suite.  
 
@@ -415,8 +415,14 @@ Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgr
 
 
 
+##### Etape 1
 
+A partir de la 
 
+D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
+- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
+
+- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
 
 
 
