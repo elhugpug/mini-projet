@@ -437,7 +437,7 @@ Dans le graphique ci-dessous, il est imédiatement possible de voir quelle courb
 <img src="images/serie_temp_fallow_ou_autre.jpeg" height="200"><img src="images/serie_temp_potato.jpeg" height="200"><img src="images/serie_temp_wheat.jpeg" height="200">
 </p>
 
-Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could be wheat"* sont en réalité des pommes de terres et *"fallow could be potato"* du blé... 
+Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could be wheat"* sont en réalité des pommes de terres et *"fallow could be potato"* du blé... Ci-dessous par exemple, seule une, voire deux courbes semblent être effectivement de la pommes de terre...
 
 <p align="center">
 <img src="images/fallow_could_be_potato.jpeg" height="300">
