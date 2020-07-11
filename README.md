@@ -444,7 +444,7 @@ Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could b
 </p>
 Les deux derniers éléments présents dans *"fallow could be..."* n'ont pas pu être classé dans aucune catégorie (y compris en observant la vingtaine d'autres). De ce fait, il a été décidé de les garder comme tel et peut être de les supprimer si ils posent problème ulterieurement. 
 
-D'autres éléments ont été supprimé notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes corrrespondent entre elle à l'exception d'une qui présente un pic en juin et non en début d'année. De ce fait, cette courbe à été déplacé dans la catégorie *"fallow could be..."* pour l'instant. 
+D'autres éléments ont parut suspect, notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes corrrespondent entre elle à l'exception d'une qui présente un pic en juin et non en début d'année. De ce fait, cette courbe à été déplacé dans la catégorie *"fallow could be..."* pour l'instant (la forme de la courbe en question ressemble à celle d'un des pêchers mais avec une valeur moins forte. Il semblerait cependant impossible de confondre les deux espèces lors du travail de terrain, prudence...).
 <p align="center">
 <img src="images/serie_temp_fallow.jpeg" height="300">
 </p>
@@ -454,6 +454,22 @@ Dans la catégorie *"grapes"*, un des polygones a une courbe qui s'approche beau
 <p align="center">
 <img src="images/vignes_&_sols_nus.jpeg" height="300">
 </p>
+
+
+
+
+
+
+La parcelle *"small forest"* n'a pas les caractéristiques d'une forêt. Son NDVI maximum est en deça de 0.8, son NDVI minimum de 0.3 et sa moyenne de 0.5. Il serait donc difficile de le placer dans la catégorie *"forest"* . Nous n'y touchons pas pour l'instant mais pourrait être éliminer à l'avenir.
+De même, les catégories *"cherry"*, *"vegetables in nets"* et *"small fruit tree"* en plus de n'avoir qu'un polygone chacun, n'ont pas de série temporelle représentative et il sera peut être nécessaire de les écarter également de la classification. Voici ci-dessous leurs séries temporelles dans leur ordres respectives.
+
+<p align="center">
+<img src="images/small_forest.jpeg" height="150"><img src="images/cherry.jpeg" height="150"><img src="images/vegetable_in_nets.jpeg" height="150"><img src="images/small_fruit_tree.jpeg" height="150">
+</p>
+
+
+
+
 
 5) Modifier les contours de polygones 
 
