@@ -430,10 +430,17 @@ L'idée consistait à incluant certains polygones issus du fichier de base qui p
 
 4) Renommer correctement les polygones de bases 
 
-Cela s'applique principalement aux polygones type *"fallow could be wheat"*. On observe les courbes de leurs évolutions temporelles et on compare à des poylgones de chaque type (dans l'exemple, *fallow* et *wheat*), ce qui permet ensuite de décider si il s'agit de l'une ou de l'autre.
+Cela s'applique principalement aux polygones type *"fallow could be wheat"*. On observe les courbes de leurs évolutions temporelles et on compare à des poylgones de chaque type (dans l'exemple, *fallow* et *wheat*), ce qui permet ensuite de décider si il s'agit de l'une ou de l'autre. 
+Dans le graphique ci-dessous, il est imédiatement possible de voir quelle courbe de *"fallow could be...* va dans telle ou telle catégorie. 
 
 <p align="center">
 <img src="images/serie_temp_fallow_ou_autre.jpeg" height="200"><img src="images/serie_temp_potato.jpeg" height="200"><img src="images/serie_temp_wheat.jpeg" height="200">
+</p>
+
+Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could be wheat"* sont en réalité des pommes de terres et *"fallow could be potato"* du blé... 
+
+<p align="center">
+<img src="images/fallow_could_be_potato.jpeg" height="300">
 </p>
 
 5) Modifier les contours de polygones 
