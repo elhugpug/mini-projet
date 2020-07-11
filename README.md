@@ -444,12 +444,16 @@ Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could b
 </p>
 Les deux derniers éléments présents dans *"fallow could be..."* n'ont pas pu être classé dans aucune catégorie (y compris en observant la vingtaine d'autres). De ce fait, il a été décidé de les garder comme tel et peut être de les supprimer si ils posent problème ulterieurement. 
 
-D'autres éléments ont été supprimé notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes corrrespondent entre elle à l'exception d'une qui présente un pic en milieu d'année. De ce fait, cette courbe à été déplacé dans la catégorie *"fallow could be..."* pour l'instant. 
+D'autres éléments ont été supprimé notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes corrrespondent entre elle à l'exception d'une qui présente un pic en juin et non en début d'année. De ce fait, cette courbe à été déplacé dans la catégorie *"fallow could be..."* pour l'instant. 
 <p align="center">
 <img src="images/serie_temp_fallow.jpeg" height="300">
 </p>
 
+Dans la catégorie *"grapes"*, un des polygones a une courbe qui s'approche beaucoup plus de celles des sols nus que de celles des vignes comme on peut le voir ci-dessous (en rouge : la moyenne des sols nus, en bleu : la moyenne des vignes, en vert : la vigne suspecte). Il pourrait réellement s'agir d'une parcelle de vigne (en mauvais état) comme nous l'indique l'analyse de la vue Googlemap, mais la confusion qu'elle apporterait lors de la claassification nous oblige à la supprimer pour l'instant (lors de l'analyse radar, peut-être pourrons nous la réintégrer).
 
+<p align="center">
+<img src="images/vignes_&_sols_nus.jpeg" height="300">
+</p>
 
 5) Modifier les contours de polygones 
 
