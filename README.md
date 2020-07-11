@@ -311,15 +311,18 @@ issu de la table attributaire, on peut comprendre dans quelle catégorie ont ét
 
 A partir des trois constats vu au-dessus, il a été décidé de :
 
-- Procéder à une segmentation des images à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
-- Tester le Random Forest avec d'autres critères que NDVImin, NDVImax et amplitude pour essayer de coller au plus près à l'évolution du NDVI.  
-- Essayer d'augmenter le nombre de polygones en y incluant certains polygones issus du fichier de base qui peuvent posé problème (ex : les polygones d'arbres fruitiers dans la catégorie "forêt". 
+- Procéder à une **segmentation des images** à classifier. Pour chaque segments, ont appliquera ensuite la moyenne du NDVI pour cette espace. Cela aurra pour conséquence de gommer les différences locales et ainsi de faciliter le travail de classification par la suite.
+
+- **Tester le Random Forest avec d'autres critères** que NDVImin, NDVImax et amplitude pour essayer de coller au plus près à l'évolution du NDVI.  
+
+- **Essayer d'augmenter le nombre de polygones** en y incluant certains polygones issus du fichier de base qui peuvent posé problème (en particulier les polygones d'arbres fruitiers dans la catégorie "forêt"). 
 
 
 D'autres modifications utiles pour plus tard peuvent être faites sur les polygones de bases:
-- Renommer correctement les polygones de bases qui peuvent l'être à partir de leur évolution temporelle. 
 
-- Modifier les contours des polygones de bases lorsque il semble évident que plusieurs types de sols se chevauchent.
+- **Renommer correctement les polygones** de bases qui peuvent l'être à partir de leur évolution temporelle. 
+
+- **Modifier les contours des polygones de bases** lorsque il semble évident que plusieurs types de sols se chevauchent.
 
 
 
@@ -420,18 +423,38 @@ Cependant, les résultats n'ont pas été à la hauteur de nos attentes et malgr
 
 
 
+3) Augmenter le nombre de polygones
+
+L'idée consistait à incluant certains polygones issus du fichier de base qui peuvent posé problème, en particulier les polygones d'arbres fruitiers comme les cerisier, les pêchers... Cependant, après avoir observer les séries temporelles de ces derniers, cela ne semble pas si judicieux. En effet, le NDVI moyen de ces arbres est assez variable et les utiliser comme polygones témoins apporterait surtout une confusion dans la classification.
+
+
+4) Renommer correctement les polygones de bases 
+
+Cela s'applique principalement aux polygones type *"fallow could be wheat"*. On observe les courbes de leurs évolutions temporelles et on compare à des poylgones de chaque type (dans l'exemple, *fallow* et *wheat*), ce qui permet ensuite de décider si il s'agit de l'une ou de l'autre.
+
+<p align="center">
+<img src="images/serie_temp_fallow_ou_autre.jpeg" height="200"><img src="images/seri_temp_potato.jpeg" height="200"><img src="images/NDVI_agr_centr_mean.jpeg" height="200">
+</p>
+
+5) Modifier les contours de polygones 
+
+On inspecte les polygones du fichiers de bases qui ne devrait pas normallement posé trop de problème mais qui donne des résultats imprécis. On modifie ensuite ces polygones.  
+
+
 ###### Essaie 4
 
 
 A partir de la classification réalisée par segmentation des NDVI, on peut reproduire le test que l'on avait réalisé avant l'étape de segmentation : comparer le fichier de base avec la classification et observer dans quelle catégorie ont été classé la vingtaine de types d'occupation du sol. 
 
-On s'apercoit que la plupart des polygones sont classés correctement, mais ce n'est parfois pas le cas. L'analyse des courbes d'évolutions temporelles de ces polygones nous permet de classer ces erreurs en 4 types :
+ Le nouveau constat que l'on peut dresser est le suivant : On s'apercoit que la plupart des polygones sont classés correctement, mais ce n'est pas toujours le cas. L'analyse des courbes d'évolutions temporelles de ces polygones nous permet de classer ces erreurs en 5 types :
 
 - **la période d'étude :** Comme on a pu le dire précédemment, afin d'éviter les zones enneigées, seul les dates allant du 31 mai à  fin décembre 2019ont été prise en compte à cette étape. Or, certaines cultures d'hiver connaissent leur pic de NDVI en début d'année avant de décroitre rapidemment et ressembler à un sol nu le reste de l'année ce qui engendre évidemment des erreurs (à cette étape, l'utilisation d'un masque issu d'un NDSI (indice de détéction de la neige) n'a pas pu améliorer la chose car cela fragilisait fortement les résultats).
 
-- **erreurs potentiels :** Comme il a déjà été détaillé, certains polygons du fichier de base seraient mieux classés si leurs contours étaient modifié. De plus, le contenu de certaines parcelles ne correspond pas à la catégorie dans laquelle elles sont classés. Les polygones de terres en jachères (ou *fallow*) par exemple montre en début d'année des NDVI très élevé proche de 0.8, ce qui semble très éloigné de  ce que l'on peut observer dans la littérature (excedent rarement les 0.3 point de NDVI).
+- **erreurs potentiels et :** Comme il a déjà été détaillé, certains polygons du fichier de base seraient mieux classés si leurs contours étaient modifié. De plus, le contenu de certaines parcelles ne correspond pas à la catégorie dans laquelle elles sont classés.
 
-- **la segmentation :** Unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants.
+- **la segmentation :** Unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants. 
+
+- **les arbres fruitiers :** Le problème est toujours là. La segmentation a permis de diminuer les erreurs qui restent cependant plus nombreuses que dans d'autres types d'occupation du sol. 
 
 - **la nature est complexe :** Les territoires ne sont jamais identiques et composent avec une réelle diversité y compris au sein d'une même espèce ce qui rend parfois difficile une classification catégorique.  
 
@@ -439,11 +462,17 @@ On s'apercoit que la plupart des polygones sont classés correctement, mais ce n
 
 De ces constats, voici ce qui a été décidé : 
 
-- Les problèmes liées à la **périodes d'études** nous montre la limite de la classification unique. Nous allons utiliser la classification existente et créés quatres masques correspondants aux quatre types d'occupation du sols. Nous reclassifierons ensuite spécifiquement les masques afin d'y détecter les "intrus" qui seront ensuite rediriger vers leur catégories. 
+- Les **erreurs potentiels** du fichier de base seront minutieusement analysées en fonction des caractéristiques des types d'occupation du sols. Elles seront ensuite maintenus dans leur classes, reclassifiées ou supprimées selon la conclusion qui sera faite. 
 
-- Les **erreurs potentiels** du fichier de base seront minutieusement analysées en fonction des caractéristiques des types d'occupation du sols. Elles seront ensuite maintenus dans leur classes, reclassifié ou supprimé selon la conclusion portée. 
+- Les problèmes liées à la **périodes d'études** nous montre la limite de la classification unique. Nous allons utiliser la classification existente et créés quatres masques correspondants aux quatre types d'occupation du sols. Nous reclassifierons ensuite spécifiquement les masques avec les images sur toute l'année (31 images) afin d'y détecter les "intrus" qui seront ensuite rediriger vers leur catégories. 
 
 - La **segmentation** ne sera pas modifier, car les quelques inconvénients qu'elle génère sont compensés par des bénéfices indéniables.
+
+
+
+
+1) Les erreurs potentiels
+
 
 
 
