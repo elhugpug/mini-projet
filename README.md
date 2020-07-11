@@ -493,12 +493,14 @@ De plus, on peu déplorer encore un manque de précision au niveau des zones agr
 
 ###### Essaie 4
 
-A partir des conclusions établient lors de l'essaie précédent, voici ce qui a été decidé : 
+A partir des conclusions établient lors de l'essaie précédent, et avant de passer à la classification détaillé, voici ce qui a été decidé :  
 
 
 - Les problèmes liées à la courte **périodes d'études** nous montre la limite de la classification unique. Nous allons utiliser la classification existente et créés quatres masques correspondants aux quatre types d'occupation du sols. Nous reclassifierons ensuite spécifiquement les masques avec les images sur toute l'année (31 images) afin d'y détecter les "intrus" qui seront ensuite rediriger vers leur catégories. 
 
 - La **segmentation** ne sera pas modifier, car les quelques inconvénients qu'elle génère sont compensés par des bénéfices indéniables.
+
+
 
 
 
