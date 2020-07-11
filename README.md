@@ -467,6 +467,13 @@ De même, les catégories *"cherry"*, *"vegetables in nets"* et *"small fruit tr
 <img src="images/small_forest.jpeg" height="170"><img src="images/cherry.jpeg" height="170"><img src="images/vegetable_in_nets.jpeg" height="170"><img src="images/small_fruit_tree.jpeg" height="170">
 </p>
 
+Deux parcelles de *"zuchini"* possèdent des caractéristiques plus proches du sols nus que de sols agricoles comme on peut le voir ci-dessous (en gras rouge : sol nu, autres : courgette). Il est préférable de les mettre de côté. 
+
+<p align="center">
+<img src="images/zuchini.jpeg" height="300">
+</p>
+
+Enfin, un commentaire peut être fait sur les parcelles *"potato"* et *"wheat"*. Ces catégories possèdent de nombreux polygones et bien que la plupart aient une évolution temporelle similaire, certains polygones connaissent des trajectoires assez singulière. Il a été décider de les conserver car il s'agit surement de culture de saison différentes, mais cela rend difficile d'établir une trajectoire type. 
 
 
 
