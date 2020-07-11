@@ -434,7 +434,7 @@ Cela s'applique principalement aux polygones type *"fallow could be wheat"*. On 
 Dans le graphique ci-dessous, il est imédiatement possible de voir quelle courbe de *"fallow could be...* va dans telle ou telle catégorie. 
 
 <p align="center">
-<img src="images/serie_temp_fallow_ou_autre.jpeg" height="250"><img src="images/serie_temp_potato.jpeg" height="250"><img src="images/serie_temp_wheat.jpeg" height="250">
+<img src="images/serie_temp_fallow_ou_autre.jpeg" height="230"><img src="images/serie_temp_potato.jpeg" height="230"><img src="images/serie_temp_wheat.jpeg" height="230">
 </p>
 
 Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could be wheat"* sont en réalité des pommes de terres et *"fallow could be potato"* du blé... Ci-dessous par exemple, seule une, voire deux courbes semblent être effectivement de la pommes de terre...
