@@ -433,7 +433,7 @@ L'idée consistait à incluant certains polygones issus du fichier de base qui p
 Cela s'applique principalement aux polygones type *"fallow could be wheat"*. On observe les courbes de leurs évolutions temporelles et on compare à des poylgones de chaque type (dans l'exemple, *fallow* et *wheat*), ce qui permet ensuite de décider si il s'agit de l'une ou de l'autre.
 
 <p align="center">
-<img src="images/serie_temp_fallow_ou_autre.jpeg" height="200"><img src="images/seri_temp_potato.jpeg" height="200"><img src="images/NDVI_agr_centr_mean.jpeg" height="200">
+<img src="images/serie_temp_fallow_ou_autre.jpeg" height="200"><img src="images/serie_temp_potato.jpeg" height="200"><img src="images/serie_temp_wheat.jpeg" height="200">
 </p>
 
 5) Modifier les contours de polygones 
