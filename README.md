@@ -431,17 +431,25 @@ L'idée consistait à incluant certains polygones issus du fichier de base qui p
 4) Renommer correctement les polygones de bases 
 
 Cela s'applique principalement aux polygones type *"fallow could be wheat"*. On observe les courbes de leurs évolutions temporelles et on compare à des poylgones de chaque type (dans l'exemple, *fallow* et *wheat*), ce qui permet ensuite de décider si il s'agit de l'une ou de l'autre. 
-Dans le graphique ci-dessous, il est imédiatement possible de voir quelle courbe de *"fallow could be...* va dans telle ou telle catégorie. 
+Dans le graphique ci-dessous (de gauche à droite : *fallow could be...*, *"potato"*, *"wheat"*) il est imédiatement possible de voir quelle courbe de *"fallow could be..."* va dans telle ou telle catégorie (pour la plupart des polygones).
 
 <p align="center">
 <img src="images/serie_temp_fallow_ou_autre.jpeg" height="220"><img src="images/serie_temp_potato.jpeg" height="220"><img src="images/serie_temp_wheat.jpeg" height="220">
 </p>
 
-Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could be wheat"* sont en réalité des pommes de terres et *"fallow could be potato"* du blé... Ci-dessous par exemple, seule une, voire deux courbes semblent être effectivement de la pommes de terre...
+Ce qui est par contre étrange, c'est que de nombreux polygones *"fallow could be wheat"* sont en réalité des pommes de terres et *"fallow could be potato"* du blé... Ci-dessous par exemple, seule une, voire deux courbes semblent être effectivement de la pommes de terre... 
 
 <p align="center">
 <img src="images/fallow_could_be_potato.jpeg" height="300">
 </p>
+Les deux derniers éléments présents dans *"fallow could be..."* n'ont pas pu être classé dans aucune catégorie (y compris en observant la vingtaine d'autres). De ce fait, il a été décidé de les garder comme tel et peut être de les supprimer si ils posent problème ulterieurement. 
+
+D'autres éléments ont été supprimé notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes corrrespondent entre elle à l'exception d'une qui présente un pic en milieu d'année. De ce fait, cette courbe à été déplacé dans la catégorie *"fallow could be..."* pour l'instant. 
+<p align="center">
+<img src="images/serie_temp_fallow.jpeg" height="300">
+</p>
+
+
 
 5) Modifier les contours de polygones 
 
