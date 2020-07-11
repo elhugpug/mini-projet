@@ -464,7 +464,7 @@ La parcelle *"small forest"* n'a pas les caractéristiques d'une forêt. Son NDV
 De même, les catégories *"cherry"*, *"vegetables in nets"* et *"small fruit tree"* en plus de n'avoir qu'un polygone chacun, n'ont pas de série temporelle représentative et il sera peut être nécessaire de les écarter également de la classification. Voici ci-dessous leurs séries temporelles dans leur ordres respectives.
 
 <p align="center">
-<img src="images/small_forest.jpeg" height="150"><img src="images/cherry.jpeg" height="150"><img src="images/vegetable_in_nets.jpeg" height="150"><img src="images/small_fruit_tree.jpeg" height="150">
+<img src="images/small_forest.jpeg" height="100"><img src="images/cherry.jpeg" height="100"><img src="images/vegetable_in_nets.jpeg" height="100"><img src="images/small_fruit_tree.jpeg" height="100">
 </p>
 
 
