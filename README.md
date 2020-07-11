@@ -467,7 +467,7 @@ De même, les catégories *"cherry"*, *"vegetables in nets"* et *"small fruit tr
 <img src="images/small_forest.jpeg" height="170"><img src="images/cherry.jpeg" height="170"><img src="images/vegetable_in_nets.jpeg" height="170"><img src="images/small_fruit_tree.jpeg" height="170">
 </p>
 
-Deux parcelles de *"zuchini"* possèdent des caractéristiques plus proches du sols nus que de sols agricoles comme on peut le voir ci-dessous (en gras rouge : sol nu, autres : courgette). Il est préférable de les mettre de côté. 
+Deux parcelles de *"zuchini"* possèdent des caractéristiques plus proches du sols nus que de sols agricoles comme on peut le voir ci-dessous (en gras rouge : moyenne des sols nus, autres : polygones des courgettes dont deux en bleu et violet ressemble au sol nu). Il est préférable de les mettre également de côté. 
 
 <p align="center">
 <img src="images/zuchini.jpeg" height="300">
@@ -477,43 +477,29 @@ Enfin, un commentaire peut être fait sur les parcelles *"potato"* et *"wheat"*.
 
 
 
-
 5) Modifier les contours de polygones 
 
 On inspecte les polygones du fichiers de bases qui ne devrait pas normallement posé trop de problème mais qui donne des résultats imprécis. On modifie ensuite ces polygones.  
 
 
+Conclusion :
+
+Le travail réaliser sur ces cinq étapes ont permis d'améliorer significativement les résultats et la plupart des polygones de bases sont bien classé dans les quatres catégories que sont les espaces en eaux, les sols nus, les sols agricoles et les forêts. La segmentation a jouer un grand rôle dans cette amélioration.  
+Cependant, et cela représente l'unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants. 
+
+De plus, on peu déplorer encore un manque de précision au niveau des zones agricoles. En effet, et comme on a pu le dire précédemment, afin d'éviter les zones enneigées seul les dates allant du 31 mai à fin décembre 2019 ont été prise en compte à cette étape. Or, certaines cultures d'hiver connaissent leur pic de NDVI en début d'année avant de décroitre rapidemment et ressembler à un sol nu le reste de l'année ce qui engendre évidemment des erreurs (à cette étape, l'utilisation d'un masque issu d'un NDSI (indice de détéction de la neige) n'a pas pu améliorer la chose car cela fragilisait fortement les résultats).
+
+
+
 ###### Essaie 4
 
-
-A partir de la classification réalisée par segmentation des NDVI, on peut reproduire le test que l'on avait réalisé avant l'étape de segmentation : comparer le fichier de base avec la classification et observer dans quelle catégorie ont été classé la vingtaine de types d'occupation du sol. 
-
- Le nouveau constat que l'on peut dresser est le suivant : On s'apercoit que la plupart des polygones sont classés correctement, mais ce n'est pas toujours le cas. L'analyse des courbes d'évolutions temporelles de ces polygones nous permet de classer ces erreurs en 5 types :
-
-- **la période d'étude :** Comme on a pu le dire précédemment, afin d'éviter les zones enneigées, seul les dates allant du 31 mai à  fin décembre 2019ont été prise en compte à cette étape. Or, certaines cultures d'hiver connaissent leur pic de NDVI en début d'année avant de décroitre rapidemment et ressembler à un sol nu le reste de l'année ce qui engendre évidemment des erreurs (à cette étape, l'utilisation d'un masque issu d'un NDSI (indice de détéction de la neige) n'a pas pu améliorer la chose car cela fragilisait fortement les résultats).
-
-- **erreurs potentiels et :** Comme il a déjà été détaillé, certains polygons du fichier de base seraient mieux classés si leurs contours étaient modifié. De plus, le contenu de certaines parcelles ne correspond pas à la catégorie dans laquelle elles sont classés.
-
-- **la segmentation :** Unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants. 
-
-- **les arbres fruitiers :** Le problème est toujours là. La segmentation a permis de diminuer les erreurs qui restent cependant plus nombreuses que dans d'autres types d'occupation du sol. 
-
-- **la nature est complexe :** Les territoires ne sont jamais identiques et composent avec une réelle diversité y compris au sein d'une même espèce ce qui rend parfois difficile une classification catégorique.  
+A partir des conclusions établient lors de l'essaie précédent, voici ce qui a été decidé : 
 
 
-
-De ces constats, voici ce qui a été décidé : 
-
-- Les **erreurs potentiels** du fichier de base seront minutieusement analysées en fonction des caractéristiques des types d'occupation du sols. Elles seront ensuite maintenus dans leur classes, reclassifiées ou supprimées selon la conclusion qui sera faite. 
-
-- Les problèmes liées à la **périodes d'études** nous montre la limite de la classification unique. Nous allons utiliser la classification existente et créés quatres masques correspondants aux quatre types d'occupation du sols. Nous reclassifierons ensuite spécifiquement les masques avec les images sur toute l'année (31 images) afin d'y détecter les "intrus" qui seront ensuite rediriger vers leur catégories. 
+- Les problèmes liées à la courte **périodes d'études** nous montre la limite de la classification unique. Nous allons utiliser la classification existente et créés quatres masques correspondants aux quatre types d'occupation du sols. Nous reclassifierons ensuite spécifiquement les masques avec les images sur toute l'année (31 images) afin d'y détecter les "intrus" qui seront ensuite rediriger vers leur catégories. 
 
 - La **segmentation** ne sera pas modifier, car les quelques inconvénients qu'elle génère sont compensés par des bénéfices indéniables.
 
-
-
-
-1) Les erreurs potentiels
 
 
 
