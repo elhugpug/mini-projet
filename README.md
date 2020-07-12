@@ -443,14 +443,14 @@ En revanche, il est surprenant de constater que de nombreux polygones *"fallow c
 <p align="center">
 <img src="images/fallow_could_be_potato.jpeg" height="300">
 </p>
-Les deux derniers éléments présents dans *"fallow could be..."* n'ont pas pu être classé dans aucune catégorie (y compris en observant la vingtaine d'autres). De ce fait, il a été décidé de les garder comme tel et peut être de les supprimer si ils posent problème ulterieurement. 
+Les deux derniers éléments présents dans *"fallow could be..."* n'ont pu être classés dans aucune catégorie (y compris en observant la vingtaine d'autres). De ce fait, il a été décidé de les garder comme tels et éventuellement de les supprimer s'ils posent problème ultérieurement. 
 
-D'autres éléments ont parut suspect, notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes corrrespondent entre elle à l'exception d'une qui présente un pic en juin et non en début d'année. De ce fait, cette courbe à été déplacé dans la catégorie *"fallow could be..."* pour l'instant (la forme de la courbe en question ressemble à celle d'un des pêchers mais avec une valeur moins forte. Il semblerait cependant impossible de confondre les deux espèces lors du travail de terrain, prudence...).
+D'autres éléments ont paru suspect, notamment dans la catégorie *"fallow"*. En effet comme on peut le voir sur le graphique ci-dessous, les courbes se ressemblent à l'exception d'une qui présente un pic en juin et non en début d'année. De ce fait, cette courbe a été déplacée dans la catégorie *"fallow could be..."* pour l'instant (la forme de la courbe en question ressemble à celle d'un des pêchers mais avec une valeur moins forte. Il semblerait cependant impossible de confondre les deux espèces lors du travail de terrain, prudence...).
 <p align="center">
 <img src="images/serie_temp_fallow.jpeg" height="300">
 </p>
 
-Dans la catégorie *"grapes"*, un des polygones a une courbe qui s'approche beaucoup plus de celles des sols nus que de celles des vignes comme on peut le voir ci-dessous (en rouge : la moyenne des sols nus, en bleu : la moyenne des vignes, en vert : la vigne suspecte). Il pourrait réellement s'agir d'une parcelle de vigne (en mauvais état) comme nous l'indique l'analyse de la vue Googlemap, mais la confusion qu'elle apporterait lors de la claassification nous oblige à la supprimer pour l'instant (lors de l'analyse radar, peut-être pourrons nous la réintégrer).
+Dans la catégorie *"grapes"*, un des polygones a une courbe qui s'approche beaucoup plus de celles des sols nus que de celles des vignes comme on peut le voir ci-dessous (en rouge : la moyenne des sols nus, en bleu : la moyenne des vignes, en vert : la vigne suspecte). Il pourrait réellement s'agir d'une parcelle de vigne (en mauvais état) comme nous l'indique l'analyse de la vue Googlemap, mais la confusion qu'elle apporterait lors de la classification nous oblige à la supprimer pour l'instant (lors de l'analyse radar, peut-être pourrons nous la réintégrer).
 
 <p align="center">
 <img src="images/vignes_&_sols_nus.jpeg" height="300">
@@ -459,36 +459,34 @@ Dans la catégorie *"grapes"*, un des polygones a une courbe qui s'approche beau
 
 
 
-
-
-La parcelle *"small forest"* n'a pas les caractéristiques d'une forêt. Son NDVI maximum est en deça de 0.8, son NDVI minimum de 0.3 et sa moyenne de 0.5. Il serait donc difficile de le placer dans la catégorie *"forest"* . Nous n'y touchons pas pour l'instant mais pourrait être éliminer à l'avenir.
-De même, les catégories *"cherry"*, *"vegetables in nets"* et *"small fruit tree"* en plus de n'avoir qu'un polygone chacun, n'ont pas de série temporelle représentative et il sera peut être nécessaire de les écarter également de la classification. Voici ci-dessous leurs séries temporelles dans leur ordres respectives.
+La parcelle *"small forest"* n'a pas les caractéristiques d'une forêt. Son NDVI maximum est en deçà de 0.8, son NDVI minimum de 0.3 et sa moyenne de 0.5. Il serait donc difficile de le placer dans la catégorie *"forest"*. Nous n'y touchons pas pour l'instant mais cette catégorie pourrait être éliminée à l'avenir.
+De même, les catégories *"cherry"*, *"vegetables in nets"* et *"small fruit tree"* en plus de n'avoir qu'un polygone chacun, n'ont pas de série temporelle représentative, et il sera peut-être nécessaire de les écarter également de la classification. Voici ci-dessous leurs séries temporelles dans leur ordre respectif.
 
 <p align="center">
 <img src="images/small_forest.jpeg" height="170"><img src="images/cherry.jpeg" height="170"><img src="images/vegetable_in_nets.jpeg" height="170"><img src="images/small_fruit_tree.jpeg" height="170">
 </p>
 
-Deux parcelles de *"zuchini"* possèdent des caractéristiques plus proches du sols nus que de sols agricoles comme on peut le voir ci-dessous (en gras rouge : moyenne des sols nus, autres : polygones des courgettes dont deux en bleu et violet ressemble au sol nu). Il est préférable de les mettre également de côté. 
+Deux parcelles de *"zuchini"* possèdent des caractéristiques plus proches du sols nus que de sols agricoles comme on peut le voir ci-dessous (en gras rouge : moyenne des sols nus, autres : polygones des courgettes dont deux en bleu et violet ressemblent au sol nu). Il est préférable de les mettre également de côté. 
 
 <p align="center">
 <img src="images/zuchini.jpeg" height="300">
 </p>
 
-Enfin, un commentaire peut être fait sur les parcelles *"potato"* et *"wheat"*. Ces catégories possèdent de nombreux polygones et bien que la plupart aient une évolution temporelle similaire, certains polygones connaissent des trajectoires assez singulière. Il a été décider de les conserver car il s'agit surement de culture de saison différentes, mais cela rend difficile d'établir une trajectoire type. 
+Enfin, un commentaire peut être fait sur les parcelles *"potato"* et *"wheat"*. Ces catégories possèdent de nombreux polygones et bien que la plupart aient une évolution temporelle similaire, certains polygones connaissent des trajectoires assez singulières. Il a été décidé de les conserver car il s'agit surement de culture de saison différente, mais cela rend difficile d'établir une trajectoire type. 
 
 
 
 5) Modifier les contours de polygones 
 
-On inspecte les polygones du fichiers de bases qui ne devrait pas normallement posé trop de problème mais qui donne des résultats imprécis. On modifie ensuite ces polygones.  
+Nous inspecterons les polygones du fichier de base qui ne devraient pas normalement poser trop de problème mais dont les résultats sont imprécis. Nous modifierons ensuite ces polygones.  
 
 
 Conclusion :
 
-Le travail réaliser sur ces cinq étapes ont permis d'améliorer significativement les résultats et la plupart des polygones de bases sont bien classé dans les quatres catégories que sont les espaces en eaux, les sols nus, les sols agricoles et les forêts. La segmentation a jouer un grand rôle dans cette amélioration.  
-Cependant, et cela représente l'unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classé comme sols nus sur la classification segmenté mais comme terres agricoles sur la classification non segmenté. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants. 
+Le travail réaliser sur ces cinq étapes a permis d'améliorer significativement les résultats et la plupart des polygones de base sont bien classés dans les quatres catégories que sont les espaces en eaux, les sols nus, les sols agricoles et les forêts. La segmentation a joué un grand rôle dans cette amélioration.  
+Cependant, et cela représente l'unique cas dans lequel la segmentation a tronqué une information : deux polygones représentant des choux ont été classés comme sols nus sur la classification segmentée mais comme terres agricoles sur la classification non segmentée. Le segment dans lequel sont présents ces deux polygones a été constitué en majorité par les sols nus avoisinants. 
 
-De plus, on peu déplorer encore un manque de précision au niveau des zones agricoles. En effet, et comme on a pu le dire précédemment, afin d'éviter les zones enneigées seul les dates allant du 31 mai à fin décembre 2019 ont été prise en compte à cette étape. Or, certaines cultures d'hiver connaissent leur pic de NDVI en début d'année avant de décroitre rapidemment et ressembler à un sol nu le reste de l'année ce qui engendre évidemment des erreurs (à cette étape, l'utilisation d'un masque issu d'un NDSI (indice de détéction de la neige) n'a pas pu améliorer la chose car cela fragilisait fortement les résultats).
+De plus, on peut déplorer encore un manque de précision au niveau des zones agricoles. En effet, et comme nous l'avons dit précédemment, afin d'éviter les zones enneigéees, seules les dates allant du 31 mai à fin décembre 2019 ont été prises en compte à cette étape. Or, certaines cultures d'hiver connaissent leur pic de NDVI en début d'année avant de décroitre rapidement et ressembler à un sol nu le reste de l'année, ce qui engendre évidemment des erreurs (à cette étape, l'utilisation d'un masque issu d'un NDSI (indice de détection de la neige) n'a pas pu améliorer la classification car cela fragilisait fortement les résultats).
 
 
 
