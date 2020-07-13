@@ -524,6 +524,8 @@ Cependant, cette méthode est robuste et un des éléments ne trompe pas : En ef
  
  Ci-dessous, la statistique zonale des valeurs moyennes des polygones effectuée sur la classification finale (réalisée sous Qgis): la plupart des ROIs des mêmes catégories sont classés ensembles.
  
+
+ 
  
  
  
