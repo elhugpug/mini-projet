@@ -542,7 +542,7 @@ Cela est dû à la grande variabilité des séries temporelles de vignes comme o
 
 
 
-Quoi qu'il en soit, voici la classification finale des grands ensembles de types d'occupation du sol. Il est maintenant possible de réaliser une classification plus pointue. 
+Quoi qu'il en soit, voici la classification finale des grands ensembles de types d'occupation du sol. Il est maintenant possible de réaliser une classification plus pointue (l'image occupe trop de place pour être hébergée directement sur Github, mais il ne faut hésiter à demander par mail les données).
  
 <p align="center">
 <img src="images/classif_RF_NDVI_grands_ensembles.png" width="1500">
