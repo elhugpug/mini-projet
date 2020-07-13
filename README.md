@@ -527,7 +527,7 @@ Cependant, cette méthode est robuste et un des éléments ne trompe pas : En ef
 <p align="center">
 <img src="images/stat_zon_1.png" height="340">  <img src="images/stat_zon_2.png" height="340">  <img src="images/stat_zon_3.png" height="340">  <img src="images/stat_zon_4.png" height="340">
 
-
+<p align="center">
 <img src="images/stat_zon_5.png" height="340">  <img src="images/stat_zon_6.png" height="340">  <img src="images/stat_zon_7.png" height="170">
 </p>
  
