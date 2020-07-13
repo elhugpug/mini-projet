@@ -493,12 +493,12 @@ Il est important de préciser que pour la classification détaillé, il n'est pa
 
 ###### Essaie 4
 
-A partir des conclusions établient lors de l'essai précédent, et avant de passer à la classification détaillée, voici ce qui a été decidé :  
+A partir des conclusions établies lors de l'essai précédent, et avant de passer à la classification détaillée, voici ce qui a été décidé :  
 
-Les problèmes liées à la courte **périodes d'études** nous montre la limite de la classification unique. Nous allons utiliser la classification existente et créés quatres masques correspondants aux quatre types d'occupation du sols. Nous reclassifierons ensuite spécifiquement chacune des catégories avec les images en jouant sur les différents lapse de temps (tantôt les 21 images,tantôt 31...) afin d'y détecter les "intrus" qui seront ensuite rediriger vers leur catégories. 
-La **ségmentation** pourra être modifiée elle aussi lors de cette étape. Cela permettra aux polygones mals classés en raison de la segmentation d'être reclassés différement si besoin.
+Les problèmes liés à la courte **période d'étude** nous montrent la limite de la classification unique. Nous allons utiliser la classification existante et créés quatre masques correspondants aux quatre types d'occupation du sol. Nous reclassifierons ensuite spécifiquement chacune des catégories avec les images en jouant sur les différents lapses de temps (tantôt les 21 images,tantôt 31...) afin d'y détecter les "intrus" qui seront ensuite rediriger vers leurs catégories. 
+La **segmentation** pourra être modifiée elle aussi lors de cette étape. Cela permettra aux polygones mal classés en raison de la segmentation d'être reclassés différemment si besoin.
 
-Concrêtement, à partir de la première classification on créé un masque de sols nus, un autre de terres agricoles et un dernier de forêts (l'eau ayant été très bien classé lors de la première classification n'a pas à l'être de nouveau). On multiplie ensuite ces masques par le stack de NDVI. 
+Concrêtement, à partir de la première classification nous avons créé un masque de sols nus, un autre de terres agricoles et un dernier de forêts (l'eau ayant été très bien classée lors de la première classification n'a pas à l'être de nouveau). Nous multiplierons ensuite ces masques par le stack de NDVI. 
 
 
 `setwd('/Volumes/Treuil Data/reclassif/')`  #on importe le raster des classification
@@ -506,23 +506,23 @@ Concrêtement, à partir de la première classification on créé un masque de s
 
 ` agri <- classif==3 `  # création d'un masque binaire des zones agricoles et non agricoles (3 étant ici le numéro des zones agricoles).
 ` agri[agri==0] <- NA`  # On modifie la valeur *0* des zones non agricoles en valeur *NA*
-`agri_stack <- agri*stack_NDVI` # on multiplie le stack avec le masque
+`agri_stack <- agri*stack_NDVI` # on multiplie le stack avec le masque.
 
 
-Pour chacuns des types d'occupation du sols,nous créons ensuite un fichier vecteur shp ou l'on renseigne les segments mal classés. Cela se fait par une analyse visuelle de la zone. Il faut essayer de comprendre pourquoi les erreurs ont lieu. On s'aperçoit par exemple que tel sol nu a un NDVI fort en début d'année et que si on souahaite pouvoir le distinguer des terres agricoles (qui en soit ont donc les mêmes valeurs minimum et maximum) il faut supprimer les x premières dates du stack servant à la classification. De même, pour permettre aux parcelles de choux d'être bien classées en zones agricoles (ce qui n'est pas le cas en raison de la segmentation), on peut par exemple réaliser une seconde classification en utilisant le stack des NDVI non segmenté. On peut alors assigner les valeurs de cette nouvelle classification à l'ancienne classification.  
+Pour chacun des types d'occupation du sol,nous créons ensuite un fichier vecteur shp ou l'on renseigne les segments mal classés. Cela se fait par une analyse visuelle de la zone. Il faut essayer de comprendre pourquoi les erreurs surviennent. On s'aperçoit par exemple que tel sol nu a un NDVI fort en début d'année et que si on souhaite pouvoir le distinguer des terres agricoles (qui en soit ont donc les mêmes valeurs minimales et maximales) il faut supprimer les x premières dates du stack servant à la classification. De même, pour permettre aux parcelles de choux d'être bien classées en zones agricoles (ce qui n'est pas le cas en raison de la segmentation), on peut par exemple réaliser une seconde classification en utilisant le stack des NDVI non segmenté. On peut alors assigner les valeurs de cette nouvelle classification à l'ancienne classification.  
 
-Prenons un exemple : la première classification des zones agricoles issu du stack de NDVI segmentés ne convient pas parce qu'elle ne prend pas en compte les choux. On recréé alors un stack de NDVI non segmenté uniquement à partir de la catégorie agricole de la première classification. On lance le Random Forest (qui s'appuie sur des polygones dessiné à partir des erreurs dans la zone du masque) et tout les nouveaux pixels agricoles sont ajoutés à ceux de la première classification de cette manière :
+Prenons un exemple : la première classification des zones agricoles issue du stack de NDVI segmentés ne convient pas parce qu'elle ne prend pas en compte les choux. Il est possible alors de recréé un stack de NDVI non segmenté uniquement à partir de la catégorie agricole de la première classification. Nous lançons le Random Forest (qui s'appuie sur des polygones dessinés à partir des erreurs dans la zone du masque) et tous les nouveaux pixels agricoles sont ajoutés à ceux de la première classification de cette manière :
 
 `classif_agri[classif_2 == 3] <- 3`
 
-On passe ensuite à la détection des "intrus" de l'occupation du sol suivante. Pour avoir un maximum de précision, plusieurs roulement de re-classifiaction ont été effectué. 
+Nous passons ensuite à la détection des "intrus" de l'occupation du sol suivante. Pour avoir un maximum de précision, plusieurs roulements de re-classifiaction ont été effectués. 
 
 
-On pourrait repprocher à cette méthode de multiplier les calculs et classifactions, ce qui risquerait de diminuer la précision de ces derniers (en effet, l'indice de Kappa qui mesure le "degré de chance" pour que cette classifiction soit correctement classée est toujours bas ce qui signifie qu'il est scientifiquement difficile de jugée de sa qualité). 
+On pourrait reprocher à cette méthode de multiplier les calculs et classifications, ce qui risquerait de diminuer la précision de ces derniers (en effet, l'indice de Kappa qui mesure le "degré de chance" pour que cette classifiction soit correctement classée est toujours bas ce qui signifie qu'il est scientifiquement difficile de juger de sa qualité). 
 
-Cependant, cette méthode est robuste et un des éléments ne trompe pas : En effet, alors qu'aucuns des fichiers de polygones utilisés dans ces classifications n'aient été confronté aux polygones de bases (la couche avec la vingtaine de type d'occupation du sol), on peut constater que la classification finale réunit parfaitement bien les polygones des mêmes types d'occupation du sols. 
+Cependant, cette méthode est robuste et un des éléments ne trompe pas : En effet, alors qu'aucun des fichiers de polygones utilisés dans ces classifications n'a été confronté aux polygones de bases (la couche avec la vingtaine de types d'occupation du sol), on peut constater que la classification finale réunit parfaitement bien les polygones des mêmes types d'occupation du sol. 
  
- Ci-dessous, la statistique zonale des valeurs moyennes des polygones effectuée sur la classification finale (réalisée sous Qgis): la plupart des ROIs des mêmes catégories sont classés ensembles. Il y a parfois quelques pixels mals classés (et deux polygones de blé classé en sols nus) mais l'ensemble est très accéptable. 
+ Ci-dessous, la statistique zonale des valeurs moyennes des polygones, effectuée sur la classification finale (réalisée sous Qgis) : la plupart des ROIs des mêmes catégories sont classés ensemble. Il y a parfois quelques pixels mal classés (et deux polygones de blé classés en sols nus) mais l'ensemble est très acceptable. 
  
 <p align="center">
 <img src="images/stat_zon_1.png" height="340">  <img src="images/stat_zon_2.png" height="340">  <img src="images/stat_zon_3.png" height="340">  <img src="images/stat_zon_4.png" height="340">
@@ -532,9 +532,9 @@ Cependant, cette méthode est robuste et un des éléments ne trompe pas : En ef
 </p>
  
  
-Une exception existe tout de même : comme on peut le voir, les vignes sont difficilement classables. Tantôt classées comme de la forêt, tantôt comme du sol nu. 
+Une exception subsiste tout de même : comme on peut le voir, les vignes sont difficilement classables. Elles apparaissent tantôt comme de la forêt, tantôt comme du sol nu.
  
-Cela est dû à la grande variabilité des séries temporelles de vignes comme on peut le voir sur la série temporelle ci-dessous, où certaines parcelles vont avoir des amplitudes de 0.2 point de NDVI et d'autre 0.5, avec des extrèmes également très diverse. Si ce n'est pas avec leur valeurs qu'il sera possible de les distinguer, certaines autres idées basées notamment sur la forme des courbes, pourront être évoquées dans la partie suivante.
+Cela est dû à la grande variabilité des séries temporelles de vignes comme on peut le voir sur la série temporelle ci-dessous, où certaines parcelles vont avoir des amplitudes de 0.2 point de NDVI et d'autre 0.5, avec des extrêmes également très divers. Si ce n'est pas avec leurs valeurs qu'il sera possible de les distinguer, certaines autres idées basées notamment sur la forme des courbes, pourront être évoquées dans la partie suivante.
 
 <p align="center">
 <img src="images/evolution_vignes.png" height="400"> 
@@ -542,7 +542,7 @@ Cela est dû à la grande variabilité des séries temporelles de vignes comme o
 
 
 
-Quoi qu'il en soit, voici la classification finale des grands ensembles de types d'occupations du sol. Il est maintenant possible de réaliser une classification plus pointue. 
+Quoi qu'il en soit, voici la classification finale des grands ensembles de types d'occupation du sol. Il est maintenant possible de réaliser une classification plus pointue. 
  
 <p align="center">
 <img src="images/classif_RF_NDVI_grands_ensembles.png" width="1500">
