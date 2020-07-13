@@ -553,9 +553,13 @@ Quoi qu'il en soit, voici la classification finale des grands ensembles de types
 
 ##### Etape 2
 
-Dans cette étape, nous allons affiner la classification établi avec la segmentation des NDVI sous Random Forest. Avant cela, une petite analyse s'impose.
+
+Dans cette étape, nous allons affiner la classification établi avec la segmentation des NDVI sous Random Forest. Nous avons réussit avec succès à créer quatres sous-groupes pou distinguer plus facilement la vingtaines d'occupation du sols existente. Pour obtenir une classification de ces sous groupes, nous allons toujours tenté dans un premier temps de les identifié en classifiant par Random Forest tout le sous-groupe. Cependant, et comme cela est déjà arrivé, cette méthode peut ne pas porter ces fruits et nous nous appuyerons alors sur les particilarités des courbes temporelles des milieux, et du nombre de polygones disponible à chaque fois. Les types d'occupation du sols seront alors trouvés un par un. 
 
 
+###### Les espaces en eaux
+
+De loin le type d'occupation du sol le plus facile à dicerner puisqu'il est 
 
 
 
