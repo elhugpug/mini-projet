@@ -522,7 +522,7 @@ On pourrait repprocher à cette méthode de multiplier les calculs et classifact
 
 Cependant, cette méthode est robuste et un des éléments ne trompe pas : En effet, alors qu'aucuns des fichiers de polygones utilisés dans ces classifications n'aient été confronté aux polygones de bases (la couche avec la vingtaine de type d'occupation du sol), on peut constater que la classification finale réunit parfaitement bien les polygones des mêmes types d'occupation du sols. 
  
- Ci-dessous, la statistique zonale des valeurs moyennes des polygones effectuée sur la classification finale (réalisée sous Qgis): la plupart des ROIs des mêmes catégories sont classés ensembles.
+ Ci-dessous, la statistique zonale des valeurs moyennes des polygones effectuée sur la classification finale (réalisée sous Qgis): la plupart des ROIs des mêmes catégories sont classés ensembles. Il y a parfois quelques pixels mals classés (et deux polygones de blé classé en sols nus) mais l'ensemble est très accéptable. 
  
 <p align="center">
 <img src="images/stat_zon_1.png" height="340">  <img src="images/stat_zon_2.png" height="340">  <img src="images/stat_zon_3.png" height="340">  <img src="images/stat_zon_4.png" height="340">
@@ -532,10 +532,21 @@ Cependant, cette méthode est robuste et un des éléments ne trompe pas : En ef
 </p>
  
  
+Une exception existe tout de même : comme on peut le voir, les vignes sont difficilement classables. Tantôt classées comme de la forêt, tantôt comme du sol nu. 
  
+Cela est dû à la grande variabilité des séries temporelles de vignes comme on peut le voir sur la série temporelle ci-dessous, où certaines parcelles vont avoir des amplitudes de 0.2 point de NDVI et d'autre 0.5, avec des extrèmes également très diverse. Si ce n'est pas avec leur valeurs qu'il sera possible de les distinguer, certaines autres idées basées notamment sur la forme des courbes, pourront être évoquées dans la partie suivante.
+
+<p align="center">
+<img src="images/evolution_vignes.png" height="400"> 
+</p>
+
+
+
+Quoi qu'il en soit, voici la classification finale des grands ensembles de types d'occupations du sol. Il est maintenant possible de réaliser une classification plus pointue. 
  
- 
- 
+<p align="center">
+<img src="images/classif_RF_NDVI_grands_ensembles.png" width="1500">
+<p>
 
 
 
