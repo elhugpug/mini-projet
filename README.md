@@ -551,32 +551,6 @@ Quoi qu'il en soit, voici la classification finale des grands ensembles de types
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ##### Etape 2
 
 Dans cette étape, nous allons affiner la classification établi avec la segmentation des NDVI sous Random Forest. Avant cela, une petite analyse s'impose.
