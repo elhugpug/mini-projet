@@ -525,9 +525,9 @@ Cependant, cette méthode est robuste et un des éléments ne trompe pas : En ef
  Ci-dessous, la statistique zonale des valeurs moyennes des polygones effectuée sur la classification finale (réalisée sous Qgis): la plupart des ROIs des mêmes catégories sont classés ensembles.
  
 <p align="center">
-<img src="images/stat_zon_1.png" height="340"> <br /> <img src="images/stat_zon_2.png" height="340"> <br /> <img src="images/stat_zon_3.png" height="340"> <br /> <img src="images/stat_zon_4.png" height="340">
+<img src="images/stat_zon_1.png" height="340">  <img src="images/stat_zon_2.png" height="340">  <img src="images/stat_zon_3.png" height="340">  <img src="images/stat_zon_4.png" height="340">
 </p>  
-<img src="images/stat_zon_5.png" height="340"> <br /> <img src="images/stat_zon_6.png" height="340"> <br /> <img src="images/stat_zon_7.png" height="340">
+<img src="images/stat_zon_5.png" height="340">  <img src="images/stat_zon_6.png" height="340">  <img src="images/stat_zon_7.png" height="340">
 </p>
  
  
