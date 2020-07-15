@@ -590,7 +590,7 @@ Par exemple, ce qui distingue le mieux les parcelles de vignes de celles des cou
 
 
 <p align="center">
-<img src="images/classif_sans_morphomath.png" height="340">  <img src="images/classif_avec_morphomath.png" height="340"> 
+<img src="images/classif_sans_morphomath.png" height="300">  <img src="images/classif_avec_morphomath.png" height="300"> 
 <p>
 
 
