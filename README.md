@@ -572,7 +572,13 @@ Paradoxalement, aucuns polygones de sols nus n'a été dessiné dans ce jeu de d
 Il est nécessaire de modifier la méthode de classification par Random Forest. En effet, le NDVI minimum, maximum et l'amplitude étaient de très bons indices pour trouver les grandes catégories mais ne suffisent plus au stade actuel. Afin de trouver la bonne méthode de classification, les séries temporelles de chaque type d'occupation du sol ont été dressés. Les voici : 
 
 <p align="center">
-<img src="images/stat_zon_1.png" height="340">  <img src="images/stat_zon_2.png" height="340">  <img src="images/stat_zon_3.png" height="340">  <img src="images/stat_zon_4.png" height="340">
+<img src="images/grapes_ns.jpeg" height="340">  <img src="images/wheat_ns.jpeg" height="340">  <img src="images/fallow_ns.jpeg" height="340">  <img src="images/desert_ns.jpeg" height="340">
+     
+<p align="center">
+<img src="images/onion_ns.jpeg" height="340">  <img src="images/zuchini_ns.jpeg" height="340">  <img src="images/olives_ns.jpeg" height="340">  <img src="images/urban_ns.jpeg" height="340">
+     
+<p align="center">
+<img src="images/small fruit_ns.jpeg" height="340">  
 <p>
 
 Avant de chercher la meilleure manière d'utiliser le Random Forest, il faut résoudre trois problèmes qui risquerait de tronqué la classification : 
@@ -583,6 +589,9 @@ Voici comme cela fonctionne : pour chaque particularité, on crée un masque cor
 Par exemple, ce qui distingue le mieux les parcelles de vignes de celles des courgettes est la différence dans l'amplitude des valeurs entre la 14ème date et la 25ème date. Cette particularité des vignes par rapport aux courgettes peut donc permettre de crée un masque qui représente *tous les pixels dont l'amplitude entre la 14ème et la 25ème date ne dépasse pas 0.20 point de NDVI*. Afin de lisser le résultat, on utilise un calcul de morpho-mathématique de dilatation érosion avec une fenêtre coulissante de 9 pixels. 
 
 
+<p align="center">
+<img src="images/classif_sans_morphomath.png" height="340">  <img src="images/classif_avec_morphomath.png" height="340"> 
+<p>
 
 
 
