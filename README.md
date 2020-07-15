@@ -32,7 +32,7 @@ je suis meilleur dans le premier, plus facile a comparer ensuite
      
 #### Téléchargement et préparation des données
 
-Les images Sentinel-2 sont disponibles sur plusieurs plateformes de téléchargements comme PEPS ou Sci-hub... Après les avoir téléchargées en prenant en compte différents critères (le taux de nuage dans l'image...) il convient de prétraiter les images et de les découper à la taille voulue avant de les exploiter. 
+Les images Sentinel-2 sont disponibles sur plusieurs plateformes de téléchargements comme PEPS ou Sci-hub... Après les avoir téléchargées en prenant en compte différents critères (le taux de nuage dans l'image...) il convient de prétraiter les images et de les découper à la taille voulue avant de les exploiter.
 Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponibles. Traiter chacune de ces images séparément semblent être particulièrement long. Cela pose cependant un problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et de les traiter ensuite. 
 Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque date séparément, de traiter les images correspondantes puis de ne garder que le produit fini et de passer à la date suivante.  
 
@@ -534,7 +534,8 @@ Cependant, cette méthode est robuste et un des éléments ne trompe pas : En ef
  
 Une exception subsiste tout de même : comme on peut le voir, les vignes sont difficilement classables. Elles apparaissent tantôt comme de la forêt, tantôt comme du sol nu.
  
-Cela est dû à la grande variabilité des séries temporelles de vignes comme on peut le voir sur la série temporelle ci-dessous, où certaines parcelles vont avoir des amplitudes de 0.2 point de NDVI et d'autre 0.5, avec des extrêmes également très divers. Si ce n'est pas avec leurs valeurs qu'il sera possible de les distinguer, certaines autres idées basées notamment sur la forme des courbes, pourront être évoquées dans la partie suivante.
+Cela est dû à la grande variabilité des séries temporelles de vignes comme on peut le voir sur la série temporelle ci-dessous, où certaines parcelles vont avoir des amplitudes de 0.2 point de NDVI et d'autre 0.5, avec des extrêmes également très divers. Il est préférable de ne pas s'entêter. Pour la prochaine partie, l'idée est que les vignes seront classé deux fois (dans forêt et dans sols nus) puis regroupé
+Si ce n'est pas avec leurs valeurs qu'il sera possible de les distinguer, certaines autres idées basées notamment sur la forme des courbes, pourront être évoquées dans la partie suivante.
 
 <p align="center">
 <img src="images/evolution_vignes.png" height="400"> 
@@ -559,7 +560,32 @@ Dans cette étape, nous allons affiner la classification établi avec la segment
 
 ###### Les espaces en eaux
 
-De loin le type d'occupation du sol le plus facile à dicerner puisqu'il est 
+De loin le type d'occupation du sol le plus facile à extraire. Les espaces en eaux sont en effet seul dans leur sous-catégories.
+
+
+
+###### Les sols nus 
+
+Dans la catégorie sols nus nous retrouveons déjà plus d'éléments : *fallow land*, *grapes*, *olives*, *onions*, *urban*, *wheat*, *zuchini* et  *small fruit tree*
+Paradoxalement, aucuns polygones de sols nus n'a été dessiné dans ce jeu de donnée, ce qui s'en rapproche le plus étant les jachères. Il a été jugé utile de rajouter cette catégorie. 
+
+Il est nécessaire de modifier la méthode de classification par Random Forest. En effet, le NDVI minimum, maximum et l'amplitude étaient de très bons indices pour trouver les grandes catégories mais ne suffisent plus au stade actuel. Afin de trouver la bonne méthode de classification, les séries temporelles de chaque type d'occupation du sol ont été dressés. Les voici : 
+
+<p align="center">
+<img src="images/stat_zon_1.png" height="340">  <img src="images/stat_zon_2.png" height="340">  <img src="images/stat_zon_3.png" height="340">  <img src="images/stat_zon_4.png" height="340">
+<p>
+
+Avant de chercher la meilleure manière d'utiliser le Random Forest, il faut résoudre trois problèmes qui risquerait de tronqué la classification : 
+
+- Comme on peut le voir sur le graphique des vignes, et contrairement aux autres éléments, il est très compliqué d'en tirer un profil temporel type. En effet, l'amplitude des courbes est grande et suivent à certaines périodes des trajectoires très hétérogènes. Cela pose problème car aucune classification ne pourrait classer ensemble toutes ces courbes et l'abscence de classification risque de fausser les résultats suivants. Pour cette raison, il a été décidé de comparer ces courbes de vignes à tous les autres types de sols afin de trouver à chaque fois une spécificité propre aux vignes. Nous avons conscience que cette méthode n'est pas optimale mais semble être la seule solution dans notre cas (se dessine déjà l'apport des images RADAR qui pourrait peut être permettre de travailler sur la texture de l'image, fort utile pour les vignes). 
+
+Voici comme cela fonctionne : pour chaque particularité, on crée un masque correspondant et tous les masques sont multiplié ensemble à la fin. 
+Par exemple, ce qui distingue le mieux les parcelles de vignes de celles des courgettes est la différence dans l'amplitude des valeurs entre la 14ème date et la 25ème date. Cette particularité des vignes par rapport aux courgettes peut donc permettre de crée un masque qui représente *tous les pixels dont l'amplitude entre la 14ème et la 25ème date ne dépasse pas 0.20 point de NDVI*. Afin de lisser le résultat, on utilise un calcul de morpho-mathématique de dilatation érosion avec une fenêtre coulissante de 9 pixels. 
+
+
+
+
+
 
 
 
