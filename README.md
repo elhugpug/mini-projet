@@ -586,12 +586,17 @@ Avant de chercher la meilleure manière d'utiliser le Random Forest, il faut ré
 - Comme on peut le voir sur le graphique des vignes, et contrairement aux autres éléments, il est très compliqué d'en tirer un profil temporel type. En effet, l'amplitude des courbes est grande et suivent à certaines périodes des trajectoires très hétérogènes. Cela pose problème car aucune classification ne pourrait classer ensemble toutes ces courbes et l'abscence de classification risque de fausser les résultats suivants. Pour cette raison, il a été décidé de comparer ces courbes de vignes à tous les autres types de sols afin de trouver à chaque fois une spécificité propre aux vignes. Nous avons conscience que cette méthode n'est pas optimale mais semble être la seule solution dans notre cas (se dessine déjà l'apport des images RADAR qui pourrait peut être permettre de travailler sur la texture de l'image, fort utile pour les vignes). 
 
 Voici comme cela fonctionne : pour chaque particularité, on crée un masque correspondant et tous les masques sont multiplié ensemble à la fin. 
-Par exemple, ce qui distingue le mieux les parcelles de vignes de celles des courgettes est la différence dans l'amplitude des valeurs entre la 14ème date et la 25ème date. Cette particularité des vignes par rapport aux courgettes peut donc permettre de crée un masque qui représente *tous les pixels dont l'amplitude entre la 14ème et la 25ème date ne dépasse pas 0.20 point de NDVI*. Afin de lisser le résultat, on utilise un calcul de morpho-mathématique de dilatation érosion avec une fenêtre coulissante de 9 pixels. 
+Par exemple, ce qui distingue le mieux les parcelles de vignes de celles des courgettes est la différence dans l'amplitude des valeurs entre la 14ème date et la 25ème date. Cette particularité des vignes par rapport aux courgettes peut donc permettre de crée un masque qui représente *tous les pixels dont l'amplitude entre la 14ème et la 25ème date ne dépasse pas 0.20 point de NDVI*. Afin de lisser le résultat, on utilise un calcul de morpho-mathématique de dilatation érosion avec une fenêtre coulissante de 9 pixels (à gauche avant le morpho-math, à droite après le morpho-math).
 
 
 <p align="center">
 <img src="images/classif_sans_morphomath.png" height="300">  <img src="images/classif_avec_morphomath.png" height="300"> 
 <p>
+
+
+Les résultats sont très satisfaisants. Sur les 10 polygones de vignes, 7 ont été parfaitement classé et les trois autres oscillent entre 60 et 80% de pixels bien classés. Sur le rendu final, certaines parcelles classées comme vigne ont été vérifiées sur Google map et dans la grande majorité des cas l'image correspondait aux rangées de vignes. Certains autres polygones ont eut des pixels classés également en vigne mais dans de faible proportion (4 polygones précisément, avec 0,07 à 0,18% des pixels classés comme vigne). 
+
+
 
 
 
