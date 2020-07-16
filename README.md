@@ -345,7 +345,7 @@ Les résultats obtenus semblent correspondre aux attentes. Ci-dessous un exemple
 <img src="images/ex_NDVI.png" height="250"> <img src="images/ex_segm.png" height="250">
 <p>
 
-Une fois le stack réaliser, nous pouvons de nouveau développer le Random Forest comme vu précédemment, avec la fonction `superClass()` (toujours avec le NDVI minimum, le NDVI maximum mais cette fois-ci avec l'écart-type plutôt que l'amplitude (ce qui apporte une information supplémentaire)), le résultat semble convainquant. 
+Une fois le stack réaliser, nous pouvons de nouveau développer le Random Forest comme vu précédemment, avec la fonction `superClass()` (toujours avec le NDVI minimum, le NDVI maximum mais cette fois-ci avec l'écart-type plutôt que l'amplitude (ce qui apporte une information supplémentaire) avec la ligne de code : `NDVIsd <- calc(sols_nus, sd))`, le résultat semble convainquant. 
 En effet, l'overall acuracy est de 0,986 et l'indice de Kappa de 0,981.
 Quelques pixels forêt ont été classés en sols agricoles et une part plus conséquente de pixels de sols agricoles ont été classés en forêt comme nous pouvons le voir sur la matrice de confusion ci-dessous. Ici, seuls 4.8% des pixels agricoles ont été classés dans une autre catégorie. 
 
