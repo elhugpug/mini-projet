@@ -575,7 +575,7 @@ Il est nécessaire de modifier la méthode de classification par Random Forest. 
 <img src="images/grapes_ns.jpeg" height="250">  <img src="images/wheat_ns.jpeg" height="250">  <img src="images/fallow_ns.jpeg" height="250"> <img src="images/small fruit_ns.jpeg" height="250">  
      
 <p align="center">
-<img src="images/onion_ns.jpeg" height="250  <img src="images/zuchini_ns.jpeg" height="250">  <img src="images/olives_ns.jpeg" height="250">  <img src="images/urban_ns.jpeg" height="250">
+<img src="images/onion_ns.jpeg" height="250"> <img src="images/zuchini_ns.jpeg" height="250">  <img src="images/olives_ns.jpeg" height="250">  <img src="images/urban_ns.jpeg" height="250">
      
 
 Avant de chercher la meilleure manière d'utiliser le Random Forest, il faut résoudre trois problèmes qui risquerait de tronqué la classification : 
