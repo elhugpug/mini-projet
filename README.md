@@ -555,7 +555,7 @@ Quoi qu'il en soit, voici la classification finale des grands ensembles de types
 ##### Etape 2
 
 
-Dans cette étape, nous allons affiner la classification établi avec la segmentation des NDVI sous Random Forest. Nous avons réussit avec succès à créer quatres sous-groupes pou distinguer plus facilement la vingtaines d'occupation du sols existente. Pour obtenir une classification de ces sous groupes, nous allons toujours tenté dans un premier temps de les identifié en classifiant par Random Forest tout le sous-groupe. Cependant, et comme cela est déjà arrivé, cette méthode peut ne pas porter ces fruits et nous nous appuyerons alors sur les particilarités des courbes temporelles des milieux, et du nombre de polygones disponible à chaque fois. Les types d'occupation du sols seront alors trouvés un par un. 
+Dans cette étape, nous allons affiner la classification établi avec la segmentation des NDVI sous Random Forest. Nous avons réussit avec succès à créer quatres sous-groupes pour distinguer plus facilement la vingtaines d'occupation du sols existente. Pour obtenir une classification de ces sous groupes, nous allons toujours tenté dans un premier temps de les identifié en classifiant par Random Forest tout le sous-groupe. Cependant, et comme cela est déjà arrivé, cette méthode peut ne pas porter ces fruits et nous nous appuyerons alors sur les particilarités des courbes temporelles des milieux, et du nombre de polygones disponible à chaque fois. Les types d'occupation du sols seront alors trouvés un par un. 
 
 
 ###### Les espaces en eaux
@@ -566,20 +566,17 @@ De loin le type d'occupation du sol le plus facile à extraire. Les espaces en e
 
 ###### Les sols nus 
 
-Dans la catégorie sols nus nous retrouveons déjà plus d'éléments : *fallow land*, *grapes*, *olives*, *onions*, *urban*, *wheat*, *zuchini* et  *small fruit tree*
-Paradoxalement, aucuns polygones de sols nus n'a été dessiné dans ce jeu de donnée, ce qui s'en rapproche le plus étant les jachères. Il a été jugé utile de rajouter cette catégorie. 
+Dans la catégorie sols nus nous retrouveons déjà plus d'éléments : *fallow land*, *grapes*, *olives*, *onions*, *urban*, *wheat*, *zuchini* et  *small fruit tree*.
+
 
 Il est nécessaire de modifier la méthode de classification par Random Forest. En effet, le NDVI minimum, maximum et l'amplitude étaient de très bons indices pour trouver les grandes catégories mais ne suffisent plus au stade actuel. Afin de trouver la bonne méthode de classification, les séries temporelles de chaque type d'occupation du sol ont été dressés. Les voici : 
 
 <p align="center">
-<img src="images/grapes_ns.jpeg" height="340">  <img src="images/wheat_ns.jpeg" height="340">  <img src="images/fallow_ns.jpeg" height="340">  <img src="images/desert_ns.jpeg" height="340">
+<img src="images/grapes_ns.jpeg" height="340">  <img src="images/wheat_ns.jpeg" height="340">  <img src="images/fallow_ns.jpeg" height="340"> <img src="images/small fruit_ns.jpeg" height="340">  
      
 <p align="center">
 <img src="images/onion_ns.jpeg" height="340">  <img src="images/zuchini_ns.jpeg" height="340">  <img src="images/olives_ns.jpeg" height="340">  <img src="images/urban_ns.jpeg" height="340">
      
-<p align="center">
-<img src="images/small fruit_ns.jpeg" height="340">  
-<p>
 
 Avant de chercher la meilleure manière d'utiliser le Random Forest, il faut résoudre trois problèmes qui risquerait de tronqué la classification : 
 
@@ -605,21 +602,17 @@ Après essai, il s'est avéré non pertinent de classifier le polygone *small fr
 3 - Comme on peut le voir sur le graphique plus haut, la classe *oinion* est composée de trois champs dont un a une évolution temporelle très différente des deux autres. Cela s'explique surement par le fait que l'on a affaire à une culture d'été et d'hiver. Il est impossible donc de distinguer une évolution type de cette catégorie. On procédera donc à deux classification qui seront ensuite réunit (on peut remarquer également deux types de cultures de courgettes mais elles possèdent de nombreux points communs, ce qui explique qu'on ne les traite pas séparement). Pour ce faire nous allons employé la même méthode que celle utilisé pour les quatres premières catégories. 
 
 
-Avec les quatres catégories restantes (*fallow*, *desert*, *urban*, *zuchini*), et après avoir examiné leur courbes d'évolution, il a été décidé de tenté un Random Forest basé sur le NDVI minimum, le NDVI maximum et l'écart type. 
+Avec les trois catégories restantes (*fallow*, *urban*, *zuchini*),un random forest a effectué. Cependant, au vu des caractéristiques propes à ces catégories, il était impossible d'utilisé seulement le NDVI minimum,le NDVI maximum et l'amplitude. Après avoirtenté plusieurs méthodes, il a été convenus qu'il était plus judicieux d'utiliser le stack segmenté. Avec ce dernier, on été utilisé plusieurs indices créer pour permettre de différencier certains sols de jachères (et sols nus comme on le verra juste après) des sols urbains (la classe zuchini ne posant pas de problème). Par exemple, contrairement au sols de jachères, les sols urbains ont un NDVI qui diminuent dans l'ensemble des ROIs alors qu'ils augmentent pour les terres en jachères entre la 5ème et la 7ème date. L'indice *5ème date - 7ème date* a donc été créé pour l'occasion. Une série d'autres indices permettant de séparer délimiter concrêtement les deux enssembles ont été ainsi développé et ont servit de base au stack() utilisé pour le random forest. Les résultats étaient très satisfaisant : un accuracy de 0.96 et un indice de kappa de 0.83 (ce dernier chiffre s'explique par le fait que comparé aux deux autres, la classe zuchini représentent très peu de pixels. Il est donc plus difficile de savoir ce qui relève de la chance ou non). 
+
+
+La classification des sols nus aurait pu être terminé mais un détail à attiré à ce moment notre attention : la catégorie *fallow* est sensé montrer les jachères, soit des terres agricoles inutilisées pendant une à plusieurs années. Or, il semble clair que la majorité des pixels classés comme *fallow* soient en réalité des sols nus. Une nouvelle couche vecteur a été créé avec deux catégories : les jachères et les sols nus (ROIs tracés à l'aide de Goooglemap). On a ensuite utilisé le Randnom Forest avec les données : NDVI minimum,  NDVI maximum et écart-type.  Cela nous a donné des résultats convainquants avec un accuracy de 0.98, et un indice de kappa de 0.93. Concrêtement, la plupart des terres en jachère sont sur les pourtours de la zone agricole régionale. 
+
+
+Nous voila donc avec la catégorie des sols nus classée. Nous pouvons passer à la suivante.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+###### Les espaces forestiers
 
 
 
