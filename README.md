@@ -615,7 +615,7 @@ Nous voila donc avec la catégorie des sols nus classée. Nous pouvons passer à
 
 ###### Les espaces forestiers
 
-Pour les espaces forestiers, nous allons globalement procéder de la même manière que pour les sols nus. Dans cette catégorie, nous avons huit types d'occupation du sols : *forest*, *peach*, *grapes*, *small forest trees*, *vegetables in nets*, *apple tree*, *cherry*, *fallow could be...*. Voici leurs évolutions temporelles : 
+Pour les espaces forestiers, nous allons globalement procéder de la même manière que pour les sols nus. Dans cette catégorie, nous avons huit types d'occupation du sols : *forest*, *peach*, *grapes*, *small forest trees*, *vegetables in nets* (qui possède une autre prcelle que l'on a tentéde classé précédemment dans les sols nus), *apple tree*, *cherry*, *fallow could be...*. Voici leurs évolutions temporelles : 
 
 <p align="center">
 <img src="images/foret.jpeg" height="250">  <img src="images/peach.jpeg" height="250">  <img src="images/grapes.jpeg" height="250"> <img src="images/fallow could be.jpeg" height="250">  
@@ -625,9 +625,11 @@ Pour les espaces forestiers, nous allons globalement procéder de la même mani�
     
     
     
-
-
 Les cinq derniers ne possèdent qu'un seul polygone dans leurs catégories et pour les dicerner, on va donc procéder de la même manière que pour les sols nus : comparer chaque courbe à toutes les autres et trouvé leur spécificité quand cela est possible. 
+
+Cependant, après plusieurs essais, seul la catégorie *fallow could be* a pu donner des résultats satisfaits. La classification des autres catégories, faute de posséder d'autres echantillons, ne parvenait pas à détecter autre chose que le champs de départ. Pour cette raison, ces catégories ont été laissé de côté. 
+
+
 
 
 
