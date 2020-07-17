@@ -612,9 +612,22 @@ Nous voila donc avec la catégorie des sols nus classée. Nous pouvons passer à
 
 
 
+
 ###### Les espaces forestiers
 
+Pour les espaces forestiers, nous allons globalement procéder de la même manière que pour les sols nus. Dans cette catégorie, nous avons huit types d'occupation du sols : *forest*, *peach*, *grapes*, *small forest trees*, *vegetables in nets*, *apple tree*, *cherry*, *fallow could be...*. Voici leurs évolutions temporelles : 
 
+<p align="center">
+<img src="images/grapes_ns.jpeg" height="340">  <img src="images/wheat_ns.jpeg" height="340">  <img src="images/fallow_ns.jpeg" height="340"> <img src="images/small fruit_ns.jpeg" height="340">  
+     
+<p align="center">
+<img src="images/onion_ns.jpeg" height="340">  <img src="images/zuchini_ns.jpeg" height="340">  <img src="images/olives_ns.jpeg" height="340">  <img src="images/urban_ns.jpeg" height="340">
+    
+    
+    
+
+
+Les cinq derniers ne possèdent qu'un seul polygone dans leurs catégories et pour les dicerner, on va donc procéder de la même manière que pour les sols nus : comparer chaque courbe à toutes les autres et trouvé leur spécificité quand cela est possible. 
 
 
 
