@@ -625,11 +625,32 @@ Pour les espaces forestiers, nous allons globalement procéder de la même mani�
     
     
     
-Les cinq derniers ne possèdent qu'un seul polygone dans leurs catégories et pour les dicerner, on va donc procéder de la même manière que pour les sols nus : comparer chaque courbe à toutes les autres et trouvé leur spécificité quand cela est possible. 
+Les cinq derniers ne possèdent qu'un seul polygone dans leurs catégories et pour les dicerner, nous avons donc procédé de la même manière que pour les sols nus : comparer chaque courbe à toutes les autres et trouvé leur spécificité quand cela est possible. 
 
 Cependant, après plusieurs essais, seul la catégorie *fallow could be* a pu donner des résultats satisfaits. La classification des autres catégories, faute de posséder d'autres echantillons, ne parvenait pas à détecter autre chose que le champs de départ. Pour cette raison, ces catégories ont été laissé de côté. 
 
 
+Les trois dernières catégories (*forest*, *peach*, *grapes*) ont été classifier par Random Forest. Tout comme pour les sols nus, il a été difficile de séparer ces espèces avec le NDVI minimum, maximum et écart-type et une fois de plus, on a joué sur leur spécificités : une baisse de NDVI particulière pour l'un entre telle et telle date, une amplitude quasi nul pour les pêches et les raisins et plus forte pour les forêts entre deux autres dates... Les résultats sont cohérants puisque l'on atteint un accuracy de 0.97 et un indice kappa de 0.91. Dans le détail, la matrice de confusion nous indique que la classification a été plus difficile entre les pêchers et les vignes. 
+
+
+La catégorie forêts et maintenant classé, nous pouvons passer à la dernière catégorie. 
+
+
+
+
+###### Les espaces agricoles
+
+Cette catégorie contient le plus grands nombre de type d'occupation du sols : *wheat*, *potato*, *cabbage*, *cauliflower*, *fallow could be...*, *onion & potato before*, *beans*, *lettuce*, *alfalfa*, *tomato*, *bare land*, *grapes*. Voici leur évolution temporelle : 
+
+<p align="center">
+<img src="images/wheat.jpeg" height="250">  <img src="images/potato.jpeg" height="250">  <img src="images/cabbage.jpeg" height="250"> <img src="images/cauliflower.jpeg" height="250">  
+     
+<p align="center">
+<img src="images/fallow land could be.jpeg" height="250">  <img src="images/onion & potato before.jpeg" height="250">  <img src="images/beans.jpeg" height="250">  <img src="images/lettuce.jpeg" height="250">
+     
+<p align="center">
+<img src="images/alfalfa.jpeg" height="250">  <img src="images/tomato.jpeg" height="250">  <img src="images/bare land.jpeg" height="250">  <img src="images/grapes.jpeg" height="250">   
+     
 
 
 
@@ -638,6 +659,16 @@ Cependant, après plusieurs essais, seul la catégorie *fallow could be* a pu do
 
 
 
+
+
+
+
+
+
+
+
+
+Pour l'utlisation des deux : on pourrait imaginer de les mettre ensemble dans un random forest
 
 
 
