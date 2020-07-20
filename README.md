@@ -128,6 +128,24 @@ Nous n'avons finalement pas pu traiter la partie sur le RADAR dans ce mini-proje
 
 La bibliothèque `getSpatialData` (dont voici la page github : https://github.com/16EAGLE/getSpatialData) permet de télécharger rapidement les images Sentinels à partir de la plateforme Copernicus. Comme on peut le ![voir sur ce code](code_getspatialdata_Sen1.R) (code : code_getspatialdata_Sen1), le package est simple d'utilisation : on choisit uniquement le type d'image et les dates qui nous intéresse. 
 
+Pour utiliser les images Sentinel-1, il faut dans un premier temps les prétraitées. 
+
+ On procède d'abord à une **recalibration radiométrique** de l'image. Il s’agit de passer du compte numérique du pixel à la valeur en coefficient de rétrodiffusion. Cela permet de corriger l’image en prenant en compte des facteurs externes (et variables) altérant le résultat. Les données permettant cette recalibration sont généralement incluses dans le fichier des données. 
+Le second prétraitement concerne la **réduction du chatoiement** (ou *speckle*) qui permet de mieux percevoir le détail de l'image. En effet, le chatoiement résulte d'une interférence aléatoire qui provient d'une diffusion multiple. Pour le dminuer, il est nécessaire d'opérer un filtrage spectral pour "lisser" les valeurs par l'utilisation d'une fenêtre glissante 
+
+
+ 
+
+
+
+Nous n'avons pas effectué ce travail de prétraitement, mais il peut être fait rapidement via *Qgis Remote Sensing*. Le logiciel SentiNel Application Platform (SNAP) s'acquitte également de cette tâche, plutôt lentement et avec une automatisation relativement fonctionnelle.
+
+
+
+
+
+
+
 
 ## 3- Classification de la Bekaa par images optiques
   
@@ -695,7 +713,8 @@ Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa p
 
 La classification par images RADAR et la complémentarité du RADAR et de l'optique ne pourra pas être abordée ici malheureusement, en raison de la mauvaise gestion du temps de l'auteur. Malgré cela, quelques idées et conclusions peuvent être faites. 
 
-Le RADAR apporterait une aide importante dans la détéction et la séparation des grands ensembles (eau, forêts, sols nus, sols agricoles), mais l'interprétation du RADAR seul, parait plus difficile (distinguer un champs de courgette de celui d'un onion). Il ne faut pas cependant oublier que la région de la Bekaa est ensoleillée une bonne partie de l'année ce qui nous permet d'avoir une série temporelle de qualité en optique. Ce ne serait pas forcément le cas ailleur.
+Le RADAR apporterait une aide importante dans la détéction et la séparation des grands ensembles (eau, forêts, sols nus, sols agricoles). L'informations  texturales et radiométrique permet aussi d'identifier les zones urbaines ou encore humide. En revanche, il est certain que l'interprétation du RADAR seul rendrait plus difficile la distinction de quelques éléments (séparer par exemple un champ de courgette d'un champ onion). 
+Il ne faut pas cependant oublier que la région de la Bekaa est ensoleillée une bonne partie de l'année ce qui nous permet d'avoir une série temporelle de qualité en optique. Ce ne serait pas forcément le cas ailleur.
 
 Certains éléments difficiles à classifier en optiques seraient très intéressants à observer en RADAR.  On pourrait imaginer des classifications par Random Forest se basants sur ces deux types de télédétection. Il est certain que les résultats seraient améliorés. 
 
