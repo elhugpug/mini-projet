@@ -583,6 +583,7 @@ Avant de chercher la meilleure manière d'utiliser le Random Forest, il faut ré
 Voici comme cela fonctionne : pour chaque particularité, on crée un masque correspondant et tous les masques sont multiplié ensemble à la fin. 
 Par exemple, ce qui distingue le mieux les parcelles de vignes de celles des courgettes est la différence dans l'amplitude des valeurs entre la 14ème date et la 25ème date. Cette particularité des vignes par rapport aux courgettes peut donc permettre de crée un masque qui représente *tous les pixels dont l'amplitude entre la 14ème et la 25ème date ne dépasse pas 0.20 point de NDVI*. Afin de lisser le résultat, on utilise un calcul de morpho-mathématique de dilatation érosion avec une fenêtre coulissante de 9 pixels (à gauche avant le morpho-math, à droite après le morpho-math).
 
+> Petite observation : Classifier les courbes séparemment augmente le risque de se tromper (surtout lorsqu'il n'y a qu'une courbe qui n'est pas forcément représentative de la classe). Aussi, lorsque l'on procède de cette manière, nous ne laisserons que très peu de place à la flexibilité des critères afin de prendre le moins de risque possible. Il faut être certains que les parcelles collent à la courbe de référence.  
 
 <p align="center">
 <img src="images/classif_sans_morphomath.png" height="300">  <img src="images/classif_avec_morphomath.png" height="300"> 
@@ -672,49 +673,20 @@ Après avoir assemblé les différentes classifications, cela nous donne une car
 
 
 
+Voici dans le détail la composition de cette classification : 
 
 
 
-Nous sommes arrivez au therme de cette classification de la bekaa par images optiques
-
-
-
-
-
+Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa par images optiques. Il est certains que cette classification reste une approximation de la réalité (il est fort possible notamment que les types d'occupation du sols ne possédant qu'un polygone ont vu leur surface sous-estimées), mais semble tout de même correspondre à une certaine vérité. 
 
 
 
 
+## 4- Conclusion générale
 
+La classification par images RADAR et la complémentarité du RADAR et de l'optique ne pourra pas être abordée ici malheureusement, en raison de la mauvaise gestion du temps de l'auteur. Malgré cela, quelques idées et conclusions peuvent être faites. 
 
+Le RADAR apporterait une aide importante dans la détéction et la séparation des grands ensembles (eau, forêts, sols nus, sols agricoles), mais l'interprétation du RADAR seul, parait plus difficile (distinguer un champs de courgette de celui d'un onion). Il ne faut pas cependant oublier que la région de la Bekaa est ensoleillée une bonne partie de l'année ce qui nous permet d'avoir une série temporelle de qualité en optique. Ce ne serait pas forcément le cas ailleur.
 
-quand y en a qu'un, la politique est de dire qu'il vaut mieux queca soirtlui qui ait tord. 
-
-
-
-
-Pour l'utlisation des deux : on pourrait imaginer de les mettre ensemble dans un random forest
-
-
-
-1. **les sols nus et artificialisés** 
-2. **les sols agricoles** (blé, alfalfa, choux, chou-fleur, haricot, oignon, laitue, courgette, tomate, pomme de terre, jachères)
-3. **les forêts** 
-4. **les espaces artificialisés** (zones urbaine, serres)
-5. **les espaces en eau** 
-
-> Selon Hale Hage Hassan & all (Les changements d’occupation des sols dans la Béqaa Ouest (Liban) : le rôle des actions anthropiques, 2019) d'autres éléments tel que les broussailles sont présents dans la région mais il semble que cela puisse être confondus avec les espaces en jachères.
-
-
-
-
-
-
-
-
-
-
-
-
-
+Certains éléments difficiles à classifier en optiques seraient très intéressants à observer en RADAR.  On pourrait imaginer des classifications par Random Forest se basants sur ces deux types de télédétection. Il est certain que les résultats seraient améliorés. 
 
