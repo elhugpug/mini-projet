@@ -131,17 +131,12 @@ La bibliothèque `getSpatialData` (dont voici la page github : https://github.co
 Pour utiliser les images Sentinel-1, il faut dans un premier temps les prétraitées. 
 
  On procède d'abord à une **recalibration radiométrique** de l'image. Il s’agit de passer du compte numérique du pixel à la valeur en coefficient de rétrodiffusion. Cela permet de corriger l’image en prenant en compte des facteurs externes (et variables) altérant le résultat. Les données permettant cette recalibration sont généralement incluses dans le fichier des données. 
-Le second prétraitement concerne la **réduction du chatoiement** (ou *speckle*) qui permet de mieux percevoir le détail de l'image. En effet, le chatoiement résulte d'une interférence aléatoire qui provient d'une diffusion multiple. Pour le dminuer, il est nécessaire d'opérer un filtrage spectral pour "lisser" les valeurs par l'utilisation d'une fenêtre glissante 
-
-
- 
-
+Le second prétraitement concerne la **réduction du chatoiement** (ou *speckle*) qui permet de mieux percevoir le détail de l'image. En effet, le chatoiement résulte d'une interférence aléatoire qui provient d'une diffusion multiple. Pour le diminuer, il est nécessaire d'opérer un filtrage (spectral ou multi-temporel) afin de "lisser" les valeurs, au moyen d'une fenêtre glissante.
+La dernière étape consiste à régler les déformations dû au relief. En effet, plus une surface est perpendiculaire à l’angle du soleil (la face d’une montagne, d’une colline...) plus elle va recevoir de lumière du soleil, et à l’inverse plus la surface est parallèle au soleil moins elle recevra de lumière. Cela fonctionne de la même manière avec la rétrodiffusion du RADAR.
+A cet effet, il convient d’utiliser un Modèle numérique de terrain (MNT) qui représente la topographie d’un espace. L’algorithme se servira ensuite de cet MNT pour corriger les valeurs de l’image.
 
 
 Nous n'avons pas effectué ce travail de prétraitement, mais il peut être fait rapidement via *Qgis Remote Sensing*. Le logiciel SentiNel Application Platform (SNAP) s'acquitte également de cette tâche, plutôt lentement et avec une automatisation relativement fonctionnelle.
-
-
-
 
 
 
