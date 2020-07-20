@@ -675,7 +675,6 @@ Après avoir assemblé les différentes classifications, cela nous donne une car
 
 
 
-
 Nous sommes arrivez au therme de cette classification de la bekaa par images optiques
 
 
