@@ -10,6 +10,8 @@ Au-delà de la recherche de résultats nous nous attacherons à présenter un ch
 La région de la Bekaa est une zone agricole de première importante pour le Liban. Il semble donc primordial de connaitre l'occupation du sol de la région pour quantifier et prévoir les productions et les changements auxquels pourrait être soumis la région. En complément du travail de terrain et de recherches classiques,la télédétection est un outil précieux dans la mesure où elle permet d’analyser le territoire sur de large surface et à une échelle multi-temporelle. Vaste champ, la télédétection peut également s’aborder par différentes composantes comme l’optique et le RADAR ce qui permet de recouper les résultats et d’enrichir l’analyse. 
 C’est dans ce contexte que s’inscrit ce mini-projet qui a pour objectif la réalisation de cartes de l’occupation du sol de la région de Bekaa en 2019 à l’aide d’images optiques (Sentinel-2) et RADAR (Sentinel-1). On tachera d'analyser et de comparer les résultats des deux types d'images séparement mais également dans leur complémentarité.
 
+La zone d'étude est située dans la région de Bekaa et s'étend sur 692 km2 (26,3 km x 26,3 km) . On y perçoit une zone agricole entourée de sols nus mais également un lac au sud-est et des forêts éparpillées à l'est. 
+
 <p align="center">
 <img src="images/rgb_zone.png" width="1500">
 <p>
