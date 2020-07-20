@@ -21,24 +21,33 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 * Données disponiblesn téléchargement et pré-traitement
 * Classification des images optiques
-* Classification des images RADAR    <finalement non effectué
-* Complémentarité des deux méthodes  >finalement non effectué
+* Classification des images RADAR       *(non effectué)*
+* Complémentarité des deux méthodes     *(non effectué)*
 
 
 
 ## Données disponibles, téléchargement et pré-traitement
 
+Les données de bases sont les fichiers vecteurs fournis par M. Frison. Les données RADAR et optiques sont à télécharger. 
 
-31 images sur 71 sont à garder sur la zone. 
 ### Les données de terrains
+
+Le fichier vecteur (shp) de base est composé de 150 polygones répartis dans 23 catégories d'occupation du sols : *zuchini*,*wheat*,*urban*,*tomato*,*small fruit trees*,*potato*,*peach*,*onion*,*olives*,*lettuce*,*grapes*,*forest*,*fallow land*,*cherry*,*cauliflower*,*cabbage*,*bare land*,*small forest trees*,*apple trees*,*vegetable in nets*,*beans*,*water*,*alfalfa*,*fallow land could be...* (cette catégorie regroupe des polygones aux identités indécis). Le nombre de polygone par catégorie est très variée, allant de 40 polygones pour le blé à 1 polygone pour une dizaine de catégories. 
 
 
 ### Les images satellites 
-     - qu'est-ce que l'imagerie optique 
-     - (point positif, négatif)
-     - pourquoi sentinel-2 
-     
-     - préparation (téléchargement, prétraitement, difficultés (problème espace, nuage, prétraitement))
+
+Dans ce projet, nous allons travailler avec des images optiques et RADAR. Nous allons rapidement présenter ces deux types de télédétection. 
+
+
+La **télédétéction optiques** est le produit de l'enregistrement d'un rayonnement de la Terre (issu de la réfléction du soleil) dans certaines longueurs d'ondes.
+Combinées entre elles et à différentes dates, ces bandes transmettent de nombreuses informations sur un lieu d'étude et s'avèrent être un outils essentiel dans un travail de classification. Dans ce dossier nous travaillerons avec des images Sentinel-2. Elles possèdent la meilleure résolution spatiale de toute les images optiques disponible gratuitement (10m) et ce dans une période de revisite assez courte (5 jours à l'équateur).
+
+La **télédétection RADAR** fonctionne totalement différemment. Le capteur envoie un *pulse* vers la cible à observer, et c'est la rétrodiffusion (notamment le temps et la forme de l'onde) qui va être analyser. Le RADAR est sensible principalement à la texture et à l'humidité de l'objet d'étude. Les données Sentinel-1 utilisées ici sont gratuite et facilement accessible. 
+
+Ces deux types de télédéction sont complémentaire. Au-dela des avantages de la combianison de l'anayse texturale radiométrique, l'optique à le désavantage d'être sensible à la couverture nuageuse, ce qui n'est pas le cas pour le RADAR qui peut alors prendre le relais.
+
+    
      
 #### Téléchargement et préparation des images optiques Sentinel-2
 
@@ -46,7 +55,7 @@ Les images Sentinel-2 sont disponibles sur plusieurs plateformes de télécharge
 Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponibles. Traiter chacune de ces images séparément semblent être particulièrement long. Cela pose cependant un problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et de les traiter ensuite. 
 Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque date séparément, de traiter les images correspondantes puis de ne garder que le produit fini et de passer à la date suivante.  
 
-Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce rôle (il peut être téléchargé sur le CRAN avec `install.packages("sen2r")`, voici sa page github : https://github.com/ranghetti/sen2r ). Après s'être connecté à la plateforme Sci-hub, Sen2r permet de sélectionner par code (ou par le GUI `sen2r()`) les images que l'on souhaite traiter. Le package s'appuie entre autre sur les fonctions `s2_download()` pour télécharger les données et ` sen2cor()` pour passer les images de luminance (niveau 1C) en réfléctance (niveau 2A) si besoin (sen2cor n'est pas activé lorsque les images sont téléchargeable directement au niveau 2A). 
+Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce rôle (il peut être téléchargé sur le CRAN avec `install.packages("sen2r")`, voici sa page github : https://github.com/ranghetti/sen2r ). Après s'être connecté à la plateforme Sci-hub, Sen2r permet de sélectionner par code (ou par le GUI `sen2r()`) les images que l'on souhaite traiter. Le package s'appuie entre autre sur les fonctions `s2_download()` pour télécharger les données et ` sen2cor()` pour passer les images de luminance (niveau 1C) en réfléctance (niveau 2A) si besoin (sen2cor n'est pas activé lorsque les images sont téléchargeable directement au niveau 2A). Passé les images en reflectance est très important car cela corrige les images des effets athmosphériques (impossible de réaliser des comparaisons entre images non corrigées car les effets athmosphériques ne sont pas constants).
 
 Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques), `GDAL` (pour les masques de nuages, les buffers...) et `aria2` (pour accélerer le téléchargement des fichiers d'images SAFE *(aria2n'est pas indispensable)*. 
 
@@ -128,6 +137,7 @@ Les reprojections des bandes à 20m se font avec la fonction `projectRaster()` q
 `bande_reprojeté <-  projectRaster(bande_1,bande_2,res,crs,method="ngb",alignOnly = FALSE, over = FALSE)`
 
 
+Nous nous retrouvons au final avec 31 dates d'images (sur 71 disponible) sans nuages. Pour chacune de ces dates nous avons 10 bandes différentes, ce qui porte le nombre d'image disponible à 310. 
 
 
 
@@ -707,9 +717,13 @@ Voici dans le détail la composition de cette classification :
 <img src="images/tableau.png" width="500">
 <p>
 
+Voici les 6 catégories qui n'ont pas pu être classées (toute ne possédait qu'un polygone) : *small fruit trees*,*cherry*,*bare land*,*small forest trees*,*apple trees*,*vegetable in nets*.
 
 
-Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa par images optiques. Il est certains que cette classification reste une approximation de la réalité (il est fort possible notamment que les types d'occupation du sols ne possédant qu'un polygone ont vu leur surface sous-estimées), mais semble tout de même correspondre à une certaine vérité. 
+Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa par images optiques. Nous avons utilisé la plupart du temps l'indice NDVI pour cette classification. Il aurait été interessant de tirer partie des 8 autres bandes mais nous n'avons pas trouvé le moyen de le faire judicieusement. 
+Il est certains que cette classification reste une approximation de la réalité (il est fort possible notamment que les types d'occupation du sols ne possédants qu'un polygone ont vu leur surface sous-estimées), mais semble tout de même correspondre à une certaine vérité. 
+
+
 
 
 
