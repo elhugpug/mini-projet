@@ -686,6 +686,9 @@ Pour l'utlisation des deux : on pourrait imaginer de les mettre ensemble dans un
 
 
 
+
+
+
 library(raster)
 
 ################
@@ -715,49 +718,49 @@ setwd('/Volumes/Treuil Data/os_détaille/sols_nus')
 courgette <- raster('courgette.envi')
 courgette2 <- courgette
 courgette2[,]<- 0
-courgette2[courgette==1] <- 1
+courgette2[courgette==1] <- 10
 
 
 fallow <- raster('fallow.envi')
 fallow2 <- fallow
 fallow2[,]<- 0
-fallow2[fallow==1] <- 1
+fallow2[fallow==1] <- 4
 
 
 grapes <- raster('grapes_morpho.envi')
 grapes2 <- grapes
 grapes2[,]<- 0
-grapes2[grapes==2] <- 1
+grapes2[grapes==2] <- 18
 
 
 olivier <- raster('olivier.envi')
 olivier2 <- olivier
 olivier2[,]<- 0
-olivier2[olivier==1] <- 1
+olivier2[olivier==1] <- 16
 
 
 onion <- raster('onion.envi')
 onion2 <- onion
 onion2[,]<- 0
-onion2[onion==1] <- 1
+onion2[onion==1] <- 6
 
 
 sols_nus <- raster('sols_nus.envi')
 sols_nus2 <- sols_nus
 sols_nus2[,]<- 0
-sols_nus2[sols_nus==1] <- 1
+sols_nus2[sols_nus==1] <- 3
 
 
 urbain <- raster('urbain.envi')
 urbain2 <- urbain
 urbain2[,]<- 0
-urbain2[urbain==1] <- 1
+urbain2[urbain==1] <- 2
 
 
 wheat <- raster('wheat_morpho.envi')
 wheat2 <- wheat
 wheat2[,]<- 0
-wheat2[wheat==1] <- 1
+wheat2[wheat==1] <- 7
 
 plot(wheat2+urbain2+sols_nus2+onion2+olivier2+grapes2+fallow2+courgette2)
 
@@ -771,64 +774,64 @@ setwd('/Volumes/Treuil Data/os_détaille/agri')
 alfalfa <- raster('alfalfa.envi')
 alfalfa2 <- alfalfa
 alfalfa2[,]<- 0
-alfalfa2[alfalfa==1] <- 1
+alfalfa2[alfalfa==1] <- 9
 
 
 beans<- raster('beans.envi')
 beans2 <- beans
 beans2[,]<- 0
-beans2[beans==1] <- 1
+beans2[beans==1] <- 11
 
 
 cabbage_1<- raster('cabbage_1.envi')
 cabbage_2 <- cabbage_1
 cabbage_2[,]<- 0
-cabbage_2[cabbage_1==1] <- 1
+cabbage_2[cabbage_1==1] <- 12
 
 
 grapesb<- raster('grapes.envi')
 grapes2b <- grapesb
 grapes2b[,]<- 0
-grapes2b[grapesb==1] <- 1
+grapes2b[grapesb==1] <- 18
 
 
 lettuce<- raster('lettuce.envi')
 lettuce2 <- lettuce
 lettuce2[,]<- 0
-lettuce2[lettuce==1] <- 1
+lettuce2[lettuce==1] <- 14
 plot(lettuce2)
 
 onionb<- raster('onion.envi')
 onion2b <- onionb
 onion2b[,]<- 0
-onion2b[onionb==1] <- 1
+onion2b[onionb==1] <- 6
 
 
 tomate2<- raster('tomate2.envi')
 tomate3 <- tomate2
 tomate3[,]<- 0
-tomate3[tomate2==1] <- 1
+tomate3[tomate2==1] <- 15
 
 
 ble<- raster('ble.envi')
 ble2 <- ble
 ble2[,]<- 0
-ble2[ble==1] <- 1
+ble2[ble==1] <- 7
 
 
 cauliflower<- raster('cauliflower.envi')
 cauliflower2 <- cauliflower
 cauliflower2[,]<- 0
-cauliflower2[cauliflower==1] <- 1
+cauliflower2[cauliflower==1] <- 13
 
 
 potato<- raster('potato.envi')
 potato2 <- potato
 potato2[,]<- 0
-potato2[potato==1] <- 1
+potato2[potato==1] <- 8
 
 
-plot(potato2+cauliflower2+ble2+tomate3+onion2b+lettuce2+grapes2b+cabbage_2+beans2+alfalfa2+fallow_could_be2)
+plot(potato2+cauliflower2+ble2+tomate3+onion2b+lettuce2+grapes2b+cabbage_2+beans2+alfalfa2)
 
 
 #################
@@ -841,37 +844,41 @@ setwd('/Volumes/Treuil Data/os_détaille/forets')
 fallow_could_be<- raster('fallow_could_be.envi')
 fallow_could_be2 <- fallow_could_be
 fallow_could_be2[,]<- 0
-fallow_could_be2[fallow_could_be==1] <- 1
+fallow_could_be2[fallow_could_be==1] <- 5
 
 forets<- raster('forets.envi')
 forets2 <- forets
 forets2[,]<- 0
-forets2[forets==1] <- 1
+forets2[forets==1] <- 19
 
 
 
 grapesc <- raster('grapes.envi')
 grapes2c <- grapesc
 grapes2c[,]<- 0
-grapes2c[grapesc==1] <- 1
+grapes2c[grapesc==1] <- 18
 
 
 peach <- raster('peach.envi')
 peach2 <- peach
 peach2[,]<- 0
-peach2[peach==1] <- 1
+peach2[peach==1] <- 17
 
 plot(fallow_could_be2+forets2+grapes2c+peach2)
 
-ensemble <- (eau_2  +  wheat2+urbain2+sols_nus2+onion2+olivier2+grapes2+fallow2+courgette2  +  potato2+cauliflower2+ble2+tomate3+onion2b+lettuce2+grapes2b+cabbage_2+beans2+alfalfa2+fallow_could_be2  +  fallow_could_be2+forets2+grapes2c+peach2)
 
-ensemble2 <- (wheat2+urbain2+sols_nus2+onion2+olivier2+grapes2+fallow2+courgette2  +  fallow_could_be2+forets2+grapes2c+peach2)
 
-plot(ensemble2)
+
+ensemble <- eau_2 + wheat2+urbain2+sols_nus2+onion2+olivier2+grapes2+fallow2+courgette2 + potato2+cauliflower2+ble2+tomate3+onion2b+lettuce2+grapes2b+cabbage_2+beans2+alfalfa2 + fallow_could_be2+forets2+grapes2c+peach2
+
+plot(ensemble)
+ensemble[ensemble==] <- 16
+
 
 setwd('/Users/hugotreuildussouet/Desktop/')
-nomfichier <- "les_erreurs"
+nomfichier <- "ensemble_classif"
 rf <- writeRaster(ensemble, filename=nomfichier, format="ENVI", overwrite=TRUE)
+
 
 
 
