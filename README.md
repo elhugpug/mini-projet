@@ -669,7 +669,9 @@ Après avoir assemblé les différentes classifications, cela nous donne une car
 <img src="images/classif_terminer.png" width="1500">
 <p>
 
-
+<p align="center">
+<img src="images/legende_cart.png" width="1500">
+<p>
 
 
 
