@@ -126,7 +126,7 @@ Les reprojections des bandes à 20m se font avec la fonction `projectRaster()` q
 
 Nous n'avons finalement pas pu traiter la partie sur le RADAR dans ce mini-projet, mais voici comment ont été télchargées les données :
 
-La bibliothèque `getSpatialData` (dont voici la page github : https://github.com/16EAGLE/getSpatialData) permet de télécharger rapidement les images Sentinels à partir de la plateforme Copernicus. Comme on peut le (![voir sur ce code](code_getspatialdata_Sen1.R)) (code : code_getspatialdata_Sen1), le package est simple d'utilisation : on choisit uniquement le type d'image et les dates qui nous intéresse. 
+La bibliothèque `getSpatialData` (dont voici la page github : https://github.com/16EAGLE/getSpatialData) permet de télécharger rapidement les images Sentinels à partir de la plateforme Copernicus. Comme on peut le ![voir sur ce code](code_getspatialdata_Sen1.R) (code : code_getspatialdata_Sen1), le package est simple d'utilisation : on choisit uniquement le type d'image et les dates qui nous intéresse. 
 
 
 ## 3- Classification de la Bekaa par images optiques
