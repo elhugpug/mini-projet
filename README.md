@@ -670,7 +670,7 @@ Après avoir assemblé les différentes classifications, cela nous donne une car
 <p>
 
 <p align="center">
-<img src="images/legende_cart.png" width="1500">
+<img src="images/legende_carte.png" width="1500">
 <p>
 
 
