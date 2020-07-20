@@ -19,24 +19,28 @@ La zone d'étude est située dans la région de Bekaa et s'étend sur 692 km2 (2
 
 Voici le plan suivi tout au long de ce mini-projet :
 
-je suis meilleur dans le premier, plus facile a comparer ensuite
-* Données disponibles et
+* Données disponiblesn téléchargement et pré-traitement
 * Classification des images optiques
-* Classification des images RADAR
-* Complémentarité des deux méthodes
+* Classification des images RADAR    <finalement non effectué
+* Complémentarité des deux méthodes  >finalement non effectué
 
-## 2- Données disponibles, téléchargement et pré-traitement
+
+
+## Données disponibles, téléchargement et pré-traitement
+
 
 31 images sur 71 sont à garder sur la zone. 
 ### Les données de terrains
-### Les images Sentinel-2
+
+
+### Les images satellites 
      - qu'est-ce que l'imagerie optique 
      - (point positif, négatif)
      - pourquoi sentinel-2 
      
      - préparation (téléchargement, prétraitement, difficultés (problème espace, nuage, prétraitement))
      
-#### Téléchargement et préparation des données
+#### Téléchargement et préparation des images optiques Sentinel-2
 
 Les images Sentinel-2 sont disponibles sur plusieurs plateformes de téléchargements comme PEPS ou Sci-hub... Après les avoir téléchargées en prenant en compte différents critères (le taux de nuage dans l'image...) il convient de prétraiter les images et de les découper à la taille voulue avant de les exploiter.
 Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponibles. Traiter chacune de ces images séparément semblent être particulièrement long. Cela pose cependant un problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et de les traiter ensuite. 
@@ -128,7 +132,7 @@ Les reprojections des bandes à 20m se font avec la fonction `projectRaster()` q
 
 
 
-### Les images Sentinel-1
+#### Téléchargement et préparation des images RADAR Sentinel-1
 
 Nous n'avons finalement pas pu traiter la partie sur le RADAR dans ce mini-projet, mais voici comment ont été télchargées les données :
 
@@ -148,7 +152,7 @@ Nous n'avons pas effectué ce travail de prétraitement, mais il peut être fait
 
 
 
-## 3- Classification de la Bekaa par images optiques
+## Classification de la Bekaa par images optiques
   
 
 #### Random Forest
@@ -710,7 +714,7 @@ Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa p
 
 
 
-## 4- Conclusion générale
+## Conclusion générale
 
 La classification par images RADAR et la complémentarité du RADAR et de l'optique ne pourra pas être abordée ici malheureusement, en raison de la mauvaise gestion du temps de l'auteur. Malgré cela, quelques idées et conclusions peuvent être faites. 
 
