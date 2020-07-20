@@ -677,6 +677,10 @@ Après avoir assemblé les différentes classifications, cela nous donne une car
 
 Voici dans le détail la composition de cette classification : 
 
+<p align="center">
+<img src="images/tableau.png" width="500">
+<p>
+
 
 
 Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa par images optiques. Il est certains que cette classification reste une approximation de la réalité (il est fort possible notamment que les types d'occupation du sols ne possédant qu'un polygone ont vu leur surface sous-estimées), mais semble tout de même correspondre à une certaine vérité. 
