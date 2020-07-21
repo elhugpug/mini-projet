@@ -656,7 +656,7 @@ Nous voila donc avec la catégorie des sols nus classée. Nous pouvons passer à
 Pour les espaces forestiers, nous allons globalement procéder de la même manière que pour les sols nus. Dans cette catégorie, nous avons huit types d'occupation du sols : *forest*, *peach*, *grapes*, *small forest trees*, *vegetables in nets* (qui possède une autre prcelle que l'on a tentéde classé précédemment dans les sols nus), *apple tree*, *cherry*, *fallow could be...*. Voici leurs évolutions temporelles : 
 
 <p align="center">
-<img src="images/foret.jpeg" height="250">  <img src="images/peach.jpeg" height="250">  <img src="images/grapes0.jpeg" height="250"> <img src="images/fallow could be.jpeg" height="250">  
+<img src="images/foret.jpeg" height="250">  <img src="images/peach.jpeg" height="250">  <img src="images/Grapes0.jpeg" height="250"> <img src="images/fallow could be.jpeg" height="250">  
      
 <p align="center">
 <img src="images/small forest tree.jpeg" height="250">  <img src="images/cherry.jpeg" height="250">  <img src="images/vegetable in nets.jpeg" height="250">  <img src="images/apple tree.jpeg" height="250">
