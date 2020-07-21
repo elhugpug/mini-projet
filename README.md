@@ -19,7 +19,7 @@ La zone d'étude est située dans la région de Bekaa et s'étend sur 692 km2 (2
 
 Voici le plan suivi tout au long de ce mini-projet :
 
-* Données disponiblesn téléchargement et pré-traitement
+* Données disponibles, téléchargement et pré-traitement
 * Classification des images optiques
 * Classification des images RADAR       *(non effectué)*
 * Complémentarité des deux méthodes     *(non effectué)*
@@ -28,24 +28,24 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 ## Données disponibles, téléchargement et pré-traitement
 
-Les données de bases sont les fichiers vecteurs fournis par M. Frison. Les données RADAR et optiques sont à télécharger. 
+Les données de bases sont les fichiers vecteurs fournis par M. Frison. Les données RADAR et optiques sont à télécharger sur internet. 
 
 ### Les données de terrains
 
-Le fichier vecteur (shp) de base est composé de 150 polygones répartis dans 23 catégories d'occupation du sols : *zuchini*,*wheat*,*urban*,*tomato*,*small fruit trees*,*potato*,*peach*,*onion*,*olives*,*lettuce*,*grapes*,*forest*,*fallow land*,*cherry*,*cauliflower*,*cabbage*,*bare land*,*small forest trees*,*apple trees*,*vegetable in nets*,*beans*,*water*,*alfalfa*,*fallow land could be...* (cette catégorie regroupe des polygones aux identités indécis). Le nombre de polygone par catégorie est très variée, allant de 40 polygones pour le blé à 1 polygone pour une dizaine de catégories. 
+Le fichier vecteur (shp) de base est composé de 150 polygones répartis dans 23 catégories d'occupation du sols : *zuchini*,*wheat*,*urban*,*tomato*,*small fruit trees*,*potato*,*peach*,*onion*,*olives*,*lettuce*,*grapes*,*forest*,*fallow land*,*cherry*,*cauliflower*,*cabbage*,*bare land*,*small forest trees*,*apple trees*,*vegetable in nets*,*beans*,*water*,*alfalfa*,*fallow land could be...* (cette catégorie regroupe des polygones aux identités indécises). Le nombre de polygone par catégorie est très varié, allant de 40 polygones pour le blé à 1 polygone pour une dizaine de catégories. 
 
 
 ### Les images satellites 
 
-Dans ce projet, nous allons travailler avec des images optiques et RADAR. Nous allons rapidement présenter ces deux types de télédétection. 
+Dans ce projet, nous allons travailler avec des images optiques et RADAR. Nous allons rapidement présenter ces deux types de télédétection puis expliquer la manière dont nous les avons télécharger et pré-traitées
 
 
 La **télédétéction optiques** est le produit de l'enregistrement d'un rayonnement de la Terre (issu de la réfléction du soleil) dans certaines longueurs d'ondes.
-Combinées entre elles et à différentes dates, ces bandes transmettent de nombreuses informations sur un lieu d'étude et s'avèrent être un outils essentiel dans un travail de classification. Dans ce dossier nous travaillerons avec des images Sentinel-2. Elles possèdent la meilleure résolution spatiale de toute les images optiques disponible gratuitement (10m) et ce dans une période de revisite assez courte (5 jours à l'équateur).
+Combinées entre elles et à différentes dates, ces bandes révelent de nombreuses informations sur un lieu d'étude et s'avèrent être un outil essentiel dans un travail de classification. Dans ce dossier nous travaillerons avec des images Sentinel-2. Elles possèdent la meilleure résolution spatiale de toute les images optiques disponible gratuitement (10m) et ce dans une période de revisite assez courte (5 jours à l'équateur).
 
 La **télédétection RADAR** fonctionne totalement différemment. Le capteur envoie un *pulse* vers la cible à observer, et c'est la rétrodiffusion (notamment le temps et la forme de l'onde) qui va être analyser. Le RADAR est sensible principalement à la texture et à l'humidité de l'objet d'étude. Les données Sentinel-1 utilisées ici sont gratuite et facilement accessible. 
 
-Ces deux types de télédéction sont complémentaire. Au-dela des avantages de la combianison de l'anayse texturale radiométrique, l'optique à le désavantage d'être sensible à la couverture nuageuse, ce qui n'est pas le cas pour le RADAR qui peut alors prendre le relais.
+Ces deux types de télédéction sont complémentaire. Au-dela des avantages de la combinaison de l'anayse texturale radiométrique, l'optique à le désavantage d'être sensible à la couverture nuageuse, ce qui n'est pas le cas pour le RADAR qui peut obtenir des images à n'importe quel moment de l'année.
 
     
      
@@ -55,7 +55,10 @@ Les images Sentinel-2 sont disponibles sur plusieurs plateformes de télécharge
 Dans notre cas, le téléchargement et la préparation des données doivent nécessairement être automatisés. En effet, sur l'année 2019, 71 images de Sentinel-2 sur la zone d'étude étaient disponibles. Traiter chacune de ces images séparément semblent être particulièrement long. Cela pose cependant un problème : la plupart des méthodes d'automatisation proposent de télécharger toutes les images et de les traiter ensuite. 
 Or, cette entreprise s'avère particulièrement couteuse en espace disque et ne permet pas à mon ordinateur de procéder ainsi. Il a donc été décidé de télécharger chaque date séparément, de traiter les images correspondantes puis de ne garder que le produit fini et de passer à la date suivante.  
 
-Nous nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce rôle (il peut être téléchargé sur le CRAN avec `install.packages("sen2r")`, voici sa page github : https://github.com/ranghetti/sen2r ). Après s'être connecté à la plateforme Sci-hub, Sen2r permet de sélectionner par code (ou par le GUI `sen2r()`) les images que l'on souhaite traiter. Le package s'appuie entre autre sur les fonctions `s2_download()` pour télécharger les données et ` sen2cor()` pour passer les images de luminance (niveau 1C) en réfléctance (niveau 2A) si besoin (sen2cor n'est pas activé lorsque les images sont téléchargeable directement au niveau 2A). Passé les images en reflectance est très important car cela corrige les images des effets athmosphériques (impossible de réaliser des comparaisons entre images non corrigées car les effets athmosphériques ne sont pas constants).
+Dans un premier temps, nous avons tenté de nous tourné vers le logiciel *Qgis Remote Sensing* (dont voici le lien : http://remotesensing4all.net/index.php/en/2018/09/20/qgis-remote-sensing-kit-2/) pour le pré-traitement des images. Ce kit propose des opérations de pré-traitement très efficace. Cependant, le logiciel ne fonctionne que sur un ordinateur *windows*, ce qui, en cette période de confinement, nous a été impossible à trouver. Dès lors, nous avons tenté divers solution pour adapter le kit et le rendre viable sur *mac* (en utilisant le logiciel *Wine* par exemple), mais sans succès. Nous nous sommes alors tourné vers le logiciel *R* qui a permis de réaliser un grand nombre d'étapes de ce travail. 
+
+
+Sous R, donc, nous sommes tournés vers le package `Sen2r` qui remplit parfaitement ce rôle (il peut être téléchargé sur le CRAN avec `install.packages("sen2r")`, voici sa page github : https://github.com/ranghetti/sen2r ). Après s'être connecté à la plateforme Sci-hub, Sen2r permet de sélectionner par code (ou par le GUI `sen2r()`) les images que l'on souhaite traiter. Le package s'appuie entre autre sur les fonctions `s2_download()` pour télécharger les données et ` sen2cor()` pour passer les images de luminance (niveau 1C) en réfléctance (niveau 2A) si besoin (sen2cor n'est pas activé lorsque les images sont téléchargeable directement au niveau 2A). Passé les images en reflectance est très important car cela corrige les images des effets athmosphériques (impossible de réaliser des comparaisons entre images non corrigées car les effets athmosphériques ne sont pas constants).
 
 Le package Sen2r nécessite que l'on installe sur l'ordinateur les dépendances `Sen2cor` (pour les corrections atmosphériques), `GDAL` (pour les masques de nuages, les buffers...) et `aria2` (pour accélerer le téléchargement des fichiers d'images SAFE *(aria2n'est pas indispensable)*. 
 
@@ -730,10 +733,9 @@ Il est certains que cette classification reste une approximation de la réalité
 
 ## Conclusion générale
 
-La classification par images RADAR et la complémentarité du RADAR et de l'optique ne pourra pas être abordée ici malheureusement, en raison de la mauvaise gestion du temps de l'auteur. Malgré cela, quelques idées et conclusions peuvent être faites. 
+La classification par images RADAR et la complémentarité du RADAR et de l'optique ne pourra pas être abordée ici malheureusement, en raison de la mauvaise organisation de travail de l'auteur. Malgré cela, quelques idées et conclusions peuvent être faites. 
 
-Le RADAR apporterait une aide importante dans la détéction et la séparation des grands ensembles (eau, forêts, sols nus, sols agricoles). L'informations  texturales et radiométrique permet aussi d'identifier les zones urbaines ou encore humide. En revanche, il est certain que l'interprétation du RADAR seul rendrait plus difficile la distinction de quelques éléments (séparer par exemple un champ de courgette d'un champ onion). 
+Le RADAR apporterait une aide importante dans la détéction et la séparation des grands ensembles (eau, forêts, sols nus, sols agricoles). L'information  texturale et radiométrique permet aussi d'identifier les zones urbaines ou encore humide. En revanche, il est probable que l'interprétation du RADAR seul rendrait plus difficile la distinction de certains éléments (séparer par exemple un champ de courgette d'un champ onion). 
 Il ne faut pas cependant oublier que la région de la Bekaa est ensoleillée une bonne partie de l'année ce qui nous permet d'avoir une série temporelle de qualité en optique. Ce ne serait pas forcément le cas ailleur.
 
-Certains éléments difficiles à classifier en optiques seraient très intéressants à observer en RADAR.  On pourrait imaginer des classifications par Random Forest se basants sur ces deux types de télédétection. Il est certain que les résultats seraient améliorés. 
-
+Certains éléments difficiles à classifier en optiques seraient très intéressants à observer en RADAR.  On pourrait imaginer des classifications par Random Forest se basant sur ces deux types de télédétection, et il serait très intéressant d'en observer les résultats.  
