@@ -720,7 +720,8 @@ Voici dans le détail la composition de cette classification :
 <img src="images/tableau.png" width="500">
 <p>
 
-Voici les 6 catégories qui n'ont pas pu être classées (toute ne possédait qu'un polygone) : *small fruit trees*,*cherry*,*bare land*,*small forest trees*,*apple trees*,*vegetable in nets*.
+
+Voici les 6 catégories qui n'ont pas pu être classées (toutes ne possédaient qu'un polygone) : *small fruit trees*,*cherry*,*bare land*,*small forest trees*,*apple trees*,*vegetable in nets*.
 
 
 Nous sommes arrivé au terme de cette classification de la vallée de la Bekaa par images optiques. Nous avons utilisé la plupart du temps l'indice NDVI pour cette classification. Il aurait été interessant de tirer partie des 8 autres bandes mais nous n'avons pas trouvé le moyen de le faire judicieusement. 
