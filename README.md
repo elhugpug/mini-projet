@@ -1,16 +1,17 @@
 # Classification de l'occupation du sol 
 
-Ce mini-projet a pour but d'explorer quelques possibilités de classification d'occupation du sol de la zone de Bekaa au Liban avec des images optiques et RADAR. Dans ce fichier README, seront expliquées les démarches suivies, avec quelques explications de codes présents dans les liens au-dessus.
+Ce mini-projet a pour but d'explorer quelques possibilités de classification d'occupation du sol de la zone de Bekaa au Liban avec des images optiques. Dans ce fichier README, seront expliquées les démarches suivies, avec quelques explications de codes présents dans les liens au-dessus.
 
 Au-delà de la recherche de résultats nous nous attacherons à présenter un cheminement de pensée : les méthodes utilisées, les résultats obtenus, mais aussi les pistes infructueuses et les difficultés rencontrées. 
 
 
 ## 1- Introduction
 
-La région de la Bekaa est une zone agricole de première importante pour le Liban. Il semble donc primordial de connaitre l'occupation du sol de la région pour quantifier et prévoir les productions et les changements auxquels pourrait être soumis la région. En complément du travail de terrain et de recherches classiques,la télédétection est un outil précieux dans la mesure où elle permet d’analyser le territoire sur de large surface et à une échelle multi-temporelle. Vaste champ, la télédétection peut également s’aborder par différentes composantes comme l’optique et le RADAR ce qui permet de recouper les résultats et d’enrichir l’analyse. 
-C’est dans ce contexte que s’inscrit ce mini-projet qui a pour objectif la réalisation de cartes de l’occupation du sol de la région de Bekaa en 2019 à l’aide d’images optiques (Sentinel-2) et RADAR (Sentinel-1). On tachera d'analyser et de comparer les résultats des deux types d'images séparement mais également dans leur complémentarité.
+La région de la Bekaa est une zone agricole de première importante pour le Liban. Il semble donc primordial de connaitre l'occupation du sol de la région pour quantifier et prévoir les productions et les changements auxquels pourrait être soumis la région. En complément du travail de terrain et de recherches classiques,la télédétection est un outil précieux dans la mesure où elle permet d’analyser le territoire sur de large surface et à une échelle multi-temporelle. 
 
-La zone d'étude est située dans la région de Bekaa et s'étend sur 692 km2 (26,3 km x 26,3 km) . On y perçoit une zone agricole entourée de sols nus mais également un lac au sud-est et des forêts éparpillées à l'est. 
+C’est dans ce contexte que s’inscrit ce mini-projet qui a pour objectif la réalisation de cartes de l’occupation du sol de la région de Bekaa en 2019 à l’aide d’images optiques (Sentinel-2). On tachera d'analyser et de comparer les résultats des deux types d'images séparement mais également dans leur complémentarité.
+
+La zone d'étude est située dans la région de Bekaa et s'étend sur 692 km2 (26,3 km x 26,3 km). On y perçoit une zone agricole entourée de sols nus mais également un lac au sud-est et des forêts éparpillées à l'est. 
 
 <p align="center">
 <img src="images/rgb_zone.png" width="1500">
@@ -21,14 +22,13 @@ Voici le plan suivi tout au long de ce mini-projet :
 
 * Données disponibles, téléchargement et pré-traitement
 * Classification des images optiques
-* Classification des images RADAR       *(non effectué)*
-* Complémentarité des deux méthodes     *(non effectué)*
+
 
 
 
 ## Données disponibles, téléchargement et pré-traitement
 
-Les données de bases sont les fichiers vecteurs fournis par M. Frison. Les données RADAR et optiques sont à télécharger sur internet. 
+Les données de bases sont les fichiers vecteurs fournis par M. Frison. Les données optiques sont à télécharger sur internet. 
 
 ### Les données de terrains
 
@@ -37,15 +37,11 @@ Le fichier vecteur (shp) de base est composé de 150 polygones répartis dans 23
 
 ### Les images satellites 
 
-Dans ce projet, nous allons travailler avec des images optiques et RADAR. Nous allons rapidement présenter ces deux types de télédétection puis expliquer la manière dont nous les avons télécharger et pré-traitées
+Dans ce projet, nous allons travailler avec des images optiques. Nous allons rapidement présenter ces deux types de télédétection puis expliquer la manière dont nous les avons télécharger et pré-traitées
 
 
 La **télédétéction optiques** est le produit de l'enregistrement d'un rayonnement de la Terre (issu de la réfléction du soleil) dans certaines longueurs d'ondes.
 Combinées entre elles et à différentes dates, ces bandes révelent de nombreuses informations sur un lieu d'étude et s'avèrent être un outil essentiel dans un travail de classification. Dans ce dossier nous travaillerons avec des images Sentinel-2. Elles possèdent la meilleure résolution spatiale de toute les images optiques disponible gratuitement (10m) et ce dans une période de revisite assez courte (5 jours à l'équateur).
-
-La **télédétection RADAR** fonctionne totalement différemment. Le capteur envoie un *pulse* vers la cible à observer, et c'est la rétrodiffusion (notamment le temps et la forme de l'onde) qui va être analyser. Le RADAR est sensible principalement à la texture et à l'humidité de l'objet d'étude. Les données Sentinel-1 utilisées ici sont gratuite et facilement accessible. 
-
-Ces deux types de télédéction sont complémentaire. Au-dela des avantages de la combinaison de l'anayse texturale radiométrique, l'optique à le désavantage d'être sensible à la couverture nuageuse, ce qui n'est pas le cas pour le RADAR qui peut obtenir des images à n'importe quel moment de l'année.
 
     
      
@@ -142,24 +138,6 @@ Les reprojections des bandes à 20m se font avec la fonction `projectRaster()` q
 
 Nous nous retrouvons au final avec 31 dates d'images (sur 71 disponible) sans nuages. Pour chacune de ces dates nous avons 10 bandes différentes, ce qui porte le nombre d'image disponible à 310. 
 
-
-
-
-#### Téléchargement et préparation des images RADAR Sentinel-1
-
-Nous n'avons finalement pas pu traiter la partie sur le RADAR dans ce mini-projet, mais voici comment ont été télchargées les données :
-
-La bibliothèque `getSpatialData` (dont voici la page github : https://github.com/16EAGLE/getSpatialData) permet de télécharger rapidement les images Sentinels à partir de la plateforme Copernicus. Comme on peut le ![voir sur ce code](code_getspatialdata_Sen1.R) (code : code_getspatialdata_Sen1), le package est simple d'utilisation : on choisit uniquement le type d'image et les dates qui nous intéresse. 
-
-Pour utiliser les images Sentinel-1, il faut dans un premier temps les prétraitées. 
-
- On procède d'abord à une **recalibration radiométrique** de l'image. Il s’agit de passer du compte numérique du pixel à la valeur en coefficient de rétrodiffusion. Cela permet de corriger l’image en prenant en compte des facteurs externes (et variables) altérant le résultat. Les données permettant cette recalibration sont généralement incluses dans le fichier des données. 
-Le second prétraitement concerne la **réduction du chatoiement** (ou *speckle*) qui permet de mieux percevoir le détail de l'image. En effet, le chatoiement résulte d'une interférence aléatoire qui provient d'une diffusion multiple. Pour le diminuer, il est nécessaire d'opérer un filtrage (spectral ou multi-temporel) afin de "lisser" les valeurs, au moyen d'une fenêtre glissante.
-La dernière étape consiste à régler les déformations dû au relief. En effet, plus une surface est perpendiculaire à l’angle du soleil (la face d’une montagne, d’une colline...) plus elle va recevoir de lumière du soleil, et à l’inverse plus la surface est parallèle au soleil moins elle recevra de lumière. Cela fonctionne de la même manière avec la rétrodiffusion du RADAR.
-A cet effet, il convient d’utiliser un Modèle numérique de terrain (MNT) qui représente la topographie d’un espace. L’algorithme se servira ensuite de cet MNT pour corriger les valeurs de l’image.
-
-
-Nous n'avons pas effectué ce travail de prétraitement, mais il peut être fait rapidement via *Qgis Remote Sensing*. Le logiciel SentiNel Application Platform (SNAP) s'acquitte également de cette tâche, plutôt lentement et avec une automatisation relativement fonctionnelle.
 
 
 
@@ -734,9 +712,7 @@ Il est certains que cette classification reste une approximation de la réalité
 
 ## Conclusion générale
 
-La classification par images RADAR et la complémentarité du RADAR et de l'optique ne pourra pas être abordée ici malheureusement, en raison de la mauvaise organisation de travail de l'auteur. Malgré cela, quelques idées et conclusions peuvent être faites. 
 
-Le RADAR apporterait une aide importante dans la détéction et la séparation des grands ensembles (eau, forêts, sols nus, sols agricoles). L'information  texturale et radiométrique permet aussi d'identifier les zones urbaines ou encore humide. En revanche, il est probable que l'interprétation du RADAR seul rendrait plus difficile la distinction de certains éléments (séparer par exemple un champ de courgette d'un champ onion). 
-Il ne faut pas cependant oublier que la région de la Bekaa est ensoleillée une bonne partie de l'année ce qui nous permet d'avoir une série temporelle de qualité en optique. Ce ne serait pas forcément le cas ailleur.
+Il ne faut pas oublier que la région de la Bekaa est ensoleillée une bonne partie de l'année ce qui nous permet d'avoir une série temporelle de qualité en optique. Ce ne serait pas forcément le cas ailleur et l'utilisation d'image RADAR pourrait largement avoir leur utilité. 
 
 Certains éléments difficiles à classifier en optiques seraient très intéressants à observer en RADAR.  On pourrait imaginer des classifications par Random Forest se basant sur ces deux types de télédétection, et il serait très intéressant d'en observer les résultats.  
